@@ -166,12 +166,13 @@ public class ClientGame implements Runnable
 		mInputManager = new InputManager(mClientWindow);
 
 		mRenderer     = new Renderer(
-			mClientWindow.getGraphics(),
 			0,
 			0,
 			mClientWindow.getWidth(),
 			mClientWindow.getHeight()
 		);
+
+		mClientWindow.add(mRenderer);
 
 		mClientWindow.show();
 	}
@@ -190,16 +191,15 @@ public class ClientGame implements Runnable
 			startTime = System.currentTimeMillis();
 			long deltaTime = startTime - priorTime;
 
-			// draw renderTargets
-			mRenderer.renderTargets();
-
 			// update logicTargets
-			mLogicTargets.parallelStream().forEachOrdered(i -> i.update(deltaTime) );
+			for(ILogicTarget t : mLogicTargets)
+			{
+				t.update(deltaTime);
+			}
 
 			// TODO: framesync
 			mIsCloseRequested = mClientWindow.isCloseRequested();
-
-			Thread.sleep(1);
+			Thread.sleep(0,100);
 		}
 		while (!mIsCloseRequested);
 
