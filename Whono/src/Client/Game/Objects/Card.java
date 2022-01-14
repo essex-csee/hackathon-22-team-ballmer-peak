@@ -1,5 +1,6 @@
 package Client.Game.Objects;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -28,7 +29,7 @@ public class Card implements Comparable<Card>
 		4 x 14
 	 */
 
-	public Card
+	public Card()
 	{
 	}
 
@@ -95,7 +96,55 @@ public class Card implements Comparable<Card>
 	}
 	*/
 
+	public List<Card> createDeck()
+	{
+		List<Card> deck = new ArrayList<Card>();
+		int id = 0;
+		// Create Wildcards
+		for(int i = 0; i < 4; i++)
+		{
+			Card c = new Card();
+			c.CardColour = Colour.BLACK;
 
+			c.CardID = id;
+			c.CardType = Type.WILD;
+			deck.add(c);
+			id++;
+
+			c.CardID = id;
+			c.CardType = Type.WILD4;
+			deck.add(c);
+			id++;
+		}
+		// Create 'Regular' Cards
+		for(int i = 1; i < 13; i++)
+		{
+			Card c = new Card();
+			c.CardID = id;
+			c.CardType = Type.values()[i];
+
+			c.CardColour = Colour.RED;
+			deck.add(c);
+			id++;
+
+			c.CardID = id;
+			c.CardColour = Colour.GREEN;
+			deck.add(c);
+			id++;
+
+			c.CardID = id;
+			c.CardColour = Colour.BLUE;
+			deck.add(c);
+			id++;
+
+			c.CardID = id;
+			c.CardColour = Colour.YELLOW;
+			deck.add(c);
+			id++;
+		}
+
+		return deck;
+	}
 
 	@Override
 	public int compareTo(Card other)
@@ -117,7 +166,7 @@ public class Card implements Comparable<Card>
 	@Override
 	public String toString()
 	{
-		return "Client.Game.Objects.Card [CardID:'" + CardID +"',CardType:'" +  CardType + "',CardColour:'" + CardColour + "'];
+		return "Client.Game.Objects.Card [CardID:'" + CardID +"',CardType:'" +  CardType + "',CardColour:'" + CardColour + ']';
 	}
 
 }
