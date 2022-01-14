@@ -8,5 +8,6 @@
 --- ---
 ### running 
 --- ---
-### show to play
+### how to play
 --- ---
+### documentation 
