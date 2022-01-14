@@ -16,7 +16,9 @@ public class Deck
 	@Override
 	public String toString()
 	{
-		return "Client.Game.Objects.Deck";
+		String out;
+		out += "Client.Game.Objects.Deck";
+		return out;
 	}
 
 }

@@ -22,6 +22,12 @@ public class Card implements Comparable<Card>
 
 	*/
 
+	/*
+		1-12 Red/Green/Blue/Yellow
+		4 x 13
+		4 x 14
+	 */
+
 	public Card
 	{
 	}
@@ -64,6 +70,33 @@ public class Card implements Comparable<Card>
 		Collections.shuffle(cards);
 	}
 
+	/*
+
+	Create a basic deck of cards using Suits and Numbers
+
+	public List<Card> createDeck()
+	{
+		List<Card> out = new ArrayList<Card>();
+
+		int id = 0;
+		for(Number n : Number.values())
+		{
+			for(Suit s : Suit.values())
+			{
+				Card c = new Card();
+				c.CardID = id;
+				c.CardType = n;
+				c.CardColour = s;
+				out.add(c);
+				i++;
+			}
+		}
+		return out;
+	}
+	*/
+
+
+
 	@Override
 	public int compareTo(Card other)
 	{
@@ -84,7 +117,7 @@ public class Card implements Comparable<Card>
 	@Override
 	public String toString()
 	{
-		return "Client.Game.Objects.Card";
+		return "Client.Game.Objects.Card [CardID:'" + CardID +"',CardType:'" +  CardType + "',CardColour:'" + CardColour + "'];
 	}
 
 }
