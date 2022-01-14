@@ -2,6 +2,7 @@ package Client.Game;
 
 import Client.Render.Renderer;
 import Client.Window.ClientWindow;
+import Client.Window.InputManager;
 import Util.ILogicTarget;
 import Util.IRenderTarget2D;
 
@@ -25,7 +26,7 @@ public class ClientGame implements Runnable
 	}
 
 	//=====================================================================
-	// Public Methods
+	// Static Methods
 	//---------------------------------------------------------------------
 
 	/***
@@ -119,6 +120,15 @@ public class ClientGame implements Runnable
 
 	}
 
+	public static InputManager getInput()
+	{
+		return sClientGame.mInputManager;
+	}
+
+	//=====================================================================
+	// Public Methods
+	//---------------------------------------------------------------------
+
 	/***
 	 * Run the ClientGame
 	 */
@@ -152,6 +162,9 @@ public class ClientGame implements Runnable
 		mIsCloseRequested = false;
 
 		mClientWindow = new ClientWindow();
+
+		mInputManager = new InputManager(mClientWindow);
+
 		mRenderer     = new Renderer(
 			mClientWindow.getGraphics(),
 			0,
@@ -159,7 +172,6 @@ public class ClientGame implements Runnable
 			mClientWindow.getWidth(),
 			mClientWindow.getHeight()
 		);
-
 
 		mClientWindow.show();
 	}
@@ -210,6 +222,7 @@ public class ClientGame implements Runnable
 	protected boolean                       mIsCloseRequested;
 	protected Renderer                      mRenderer;
 	protected ClientWindow                  mClientWindow;
+	protected InputManager                  mInputManager;
 
 	//=====================================================================
 	// Private variables

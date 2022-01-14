@@ -1,6 +1,5 @@
 package Client.Window;
 
-import Client.Window.ClientWindow;
 import Util.ISubscriber;
 
 import java.awt.event.*;
@@ -25,12 +24,60 @@ public class InputManager implements MouseListener, MouseMotionListener, KeyList
 	}
 
 	//=====================================================================
+	// Methods
+	//---------------------------------------------------------------------
+	public boolean getMouseLeftPressed()
+	{
+		return mMouseLeftButtonPressed;
+	}
+
+	public boolean getMouseRightPressed()
+	{
+		return mMouseRightButtonPressed;
+	}
+
+	public boolean getMouseLeftHeld()
+	{
+		return mMouseLeftButtonHeld;
+	}
+
+	public boolean getMouseRightHeld()
+	{
+		return mMouseRightButtonHeld;
+	}
+
+	public boolean getMouseLeftReleased()
+	{
+		return mMouseLeftButtonReleased;
+	}
+
+	public boolean getMouseRightReleased()
+	{
+		return mMouseRightButtonReleased;
+	}
+
+	public boolean getKeyPressed(char c)
+	{
+		return mPressedKeys.contains(c);
+	}
+
+	public boolean getKeyHeld(char c)
+	{
+		return mHeldKeys.contains(c);
+	}
+
+	public boolean getKeyReleased(char c)
+	{
+		return mReleasedKeys.contains(c);
+	}
+
+	//=====================================================================
 	// Mouse listener methods
 	//---------------------------------------------------------------------
 	@Override
 	public void mouseClicked(MouseEvent e)
 	{
-		System.out.printf("clicked\n");
+
 	}
 
 	@Override
@@ -39,10 +86,25 @@ public class InputManager implements MouseListener, MouseMotionListener, KeyList
 		switch (e.getButton())
 		{
 			case MouseEvent.BUTTON1:
-				mMouseLeftButtonPressed = true;
+				if(mMouseRightButtonPressed)
+				{
+					mMouseLeftButtonHeld = true;
+				}
+				else
+				{
+					mMouseLeftButtonPressed = true;
+				}
 				break;
 			case MouseEvent.BUTTON2:
-				mMouseRightButtonPressed = true;
+
+				if(mMouseRightButtonPressed)
+				{
+					mMouseRightButtonHeld = true;
+				}
+				else
+				{
+					mMouseRightButtonPressed = true;
+				}
 				break;
 		}
 	}
@@ -53,10 +115,12 @@ public class InputManager implements MouseListener, MouseMotionListener, KeyList
 		switch (e.getButton())
 		{
 			case MouseEvent.BUTTON1:
-				mMouseLeftButtonRelease  = true;
+				mMouseLeftButtonHeld    = false;
+				mMouseLeftButtonReleased = true;
 				break;
 			case MouseEvent.BUTTON2:
-				mMouseRightButtonRelease = true;
+				mMouseRightButtonHeld    = false;
+				mMouseRightButtonReleased = true;
 				break;
 		}
 	}
@@ -78,6 +142,9 @@ public class InputManager implements MouseListener, MouseMotionListener, KeyList
 	{
 		mMouseX = e.getX();
 		mMouseY = e.getY();
+
+		mMouseLeftButtonReleased = false;
+		mMouseRightButtonReleased = false;
 	}
 
 	@Override
@@ -85,6 +152,9 @@ public class InputManager implements MouseListener, MouseMotionListener, KeyList
 	{
 		mMouseX = e.getX();
 		mMouseY = e.getY();
+
+		mMouseLeftButtonReleased = false;
+		mMouseRightButtonReleased = false;
 	}
 
 	//=====================================================================
@@ -99,20 +169,29 @@ public class InputManager implements MouseListener, MouseMotionListener, KeyList
 	@Override
 	public void keyPressed(KeyEvent e)
 	{
+		if(mPressedKeys.contains(e.getKeyChar()))
+		{
+			mHeldKeys.add(e.getKeyChar());
+		}
+		else
+		{
+			mPressedKeys.add(e.getKeyChar());
+		}
 
+		mReleasedKeys.clear();
 	}
 
 	@Override
 	public void keyReleased(KeyEvent e)
 	{
-
+		mPressedKeys.remove(e);
+		mHeldKeys.remove(e);
 	}
 
 	//=====================================================================
 	// Protected variables
 	//---------------------------------------------------------------------
 	protected final ArrayList<ISubscriber> mSubscribers;
-
 	protected final ArrayList<Character>   mPressedKeys;  // are pressed this frame
 	protected final ArrayList<Character>   mHeldKeys;     // are pressed this frame and last frame
 	protected final ArrayList<Character>   mReleasedKeys; // where pressed last frame but not this frame
@@ -122,9 +201,9 @@ public class InputManager implements MouseListener, MouseMotionListener, KeyList
 
 	protected boolean mMouseLeftButtonPressed;
 	protected boolean mMouseLeftButtonHeld;
-	protected boolean mMouseLeftButtonRelease;
+	protected boolean mMouseLeftButtonReleased;
 
 	protected boolean mMouseRightButtonPressed;
 	protected boolean mMouseRightButtonHeld;
-	protected boolean mMouseRightButtonRelease;
+	protected boolean mMouseRightButtonReleased;
 }
