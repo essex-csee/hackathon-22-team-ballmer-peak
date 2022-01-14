@@ -22,6 +22,21 @@ public class Deck
 		return DeckContents;
 	}
 
+	public static void addCard(Card c)
+	{
+		this.DeckContents.add(c);
+	}
+
+	public static Card removeCard(Card c)
+	{
+		// remove card from deck
+		// return removed card
+	}
+
+	public static void shuffleDeck(Deck d)
+	{
+		Collections.shuffle(d.DeckContents);
+	}
 
 	@Override
 	public String toString()
