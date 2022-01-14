@@ -18,17 +18,12 @@ public class ClientWindow implements WindowListener
 		// composition is better than inheritance sometimes?
 		// this way we can use pass-through methods and not have to worry about method name's clashing
 		mWindow        = new JFrame();
-		mGraphicsPanel = new JPanel();
 
 		this.mWidth     = screenSize.width;
 		this.mHeight    = screenSize.height;
 		this.mIsVisible = false;
 
-		// graphics settings
-		mGraphicsPanel.setDoubleBuffered(true);
-
 		// add window components
-		mWindow.add(mGraphicsPanel);
 		mWindow.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
 		mWindow.addWindowListener(this);
 		mWindow.pack();
@@ -46,7 +41,6 @@ public class ClientWindow implements WindowListener
 	{
 		Dimension newSize = new Dimension(width,height);
 		mWindow.setSize(newSize);
-		mGraphicsPanel.setSize(newSize);
 	}
 
 	public void hide()
@@ -99,14 +93,16 @@ public class ClientWindow implements WindowListener
 		return this;
 	}
 
+	public ClientWindow addPanel(JPanel panel)
+	{
+		mWindow.add(panel);
+		mWindow.pack();
+		return this;
+	}
+
 	public boolean isCloseRequested()
 	{
 		return mIsCloseRequested;
-	}
-
-	public Graphics getGraphics()
-	{
-		return mGraphicsPanel.getGraphics();
 	}
 
 	public int getWidth()
@@ -122,11 +118,6 @@ public class ClientWindow implements WindowListener
 	public void close()
 	{
 		mWindow.dispose();
-	}
-
-	public void repaint()
-	{
-		mGraphicsPanel.repaint();
 	}
 
 	//=====================================================================
@@ -178,7 +169,6 @@ public class ClientWindow implements WindowListener
 	// Protected variables
 	//---------------------------------------------------------------------
 	protected final JFrame  mWindow;
-	protected final JPanel  mGraphicsPanel;
 	protected final int     mWidth;
 	protected final int     mHeight;
 

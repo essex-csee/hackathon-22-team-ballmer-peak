@@ -1,17 +1,22 @@
 package Client.Render;
 
+import Client.Window.ClientWindow;
 import Util.IRenderTarget2D;
 
+import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
-public class Renderer
+public class Renderer extends JPanel
 {
 	//=====================================================================
 	// Constructor
 	//---------------------------------------------------------------------
-	public Renderer( Graphics g2d, int x, int y, int width, int height )
+	public Renderer(ClientWindow window, int x, int y, int width, int height )
 	{
+		super();
+		window.add(this);
+
 		this.mRenderTargets2D         = new ArrayList<>();
 		this.mRenderTargets2DToAdd    = new ArrayList<>();
 		this.mRenderTargets2DToRemove = new ArrayList<>();
@@ -20,17 +25,26 @@ public class Renderer
 		this.mY = y;
 		this.mWidth  = width;
 		this.mHeight = height;
-		this.mG = g2d.create(mX, mY, mWidth, mHeight);
 	}
 
 	//=====================================================================
 	// Methods
 	//---------------------------------------------------------------------
-	public void renderTargets()
+
+
+	@Override
+	public void repaint()
 	{
+		super.repaint();
+	}
+
+	@Override
+	public void paintComponent(Graphics g)
+	{
+
 		boolean listHasChanged; // track changes and try to whack-a-mole concurrency errors are they pop up
 
-		mG.clearRect(0,0, mWidth, mHeight);
+		g.clearRect(0,0,mWidth,mHeight);
 
 		if ( !mRenderTargets2DToRemove.isEmpty() )
 		{
@@ -48,7 +62,10 @@ public class Renderer
 			listHasChanged = true;
 		}
 
-		mRenderTargets2D.parallelStream().forEachOrdered( i -> i.draw( (Graphics2D) mG) );
+		for(IRenderTarget2D t : mRenderTargets2D)
+		{
+			t.draw((Graphics2D)  g);
+		}
 	}
 
 	public void addRenderTargets( IRenderTarget2D target )
@@ -67,7 +84,10 @@ public class Renderer
 		}
 	}
 
-	protected final Graphics mG;
+	public void renderTargets()
+	{
+		this.repaint();
+	}
 
 	protected final ArrayList<IRenderTarget2D> mRenderTargets2D;
 	protected final ArrayList<IRenderTarget2D> mRenderTargets2DToAdd;

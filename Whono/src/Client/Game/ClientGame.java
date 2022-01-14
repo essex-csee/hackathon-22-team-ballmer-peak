@@ -166,13 +166,13 @@ public class ClientGame implements Runnable
 		mInputManager = new InputManager(mClientWindow);
 
 		mRenderer     = new Renderer(
+			mClientWindow,
 			0,
 			0,
 			mClientWindow.getWidth(),
 			mClientWindow.getHeight()
 		);
 
-		mClientWindow.add(mRenderer);
 
 		mClientWindow.show();
 	}
@@ -196,6 +196,8 @@ public class ClientGame implements Runnable
 			{
 				t.update(deltaTime);
 			}
+
+			mRenderer.renderTargets();
 
 			// TODO: framesync
 			mIsCloseRequested = mClientWindow.isCloseRequested();

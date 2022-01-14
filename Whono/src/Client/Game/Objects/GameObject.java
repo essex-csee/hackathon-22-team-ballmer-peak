@@ -28,7 +28,7 @@ public abstract class GameObject implements IRenderTarget2D, ILogicTarget
 		this(ID, 0, 0, 0, 0, singleSprite);
 	}
 
-	protected GameObject(long ID, int x, int y, int width, int height, Image sprite)
+	protected GameObject(long ID, float x, float y, int width, int height, Image sprite)
 	{
 		this(   ID,
 			x,
@@ -38,7 +38,7 @@ public abstract class GameObject implements IRenderTarget2D, ILogicTarget
 			(sprite != null)? new ArrayList<Image>( List.of(sprite) ) : null);
 	}
 
-	protected GameObject(long ID, int x, int y, int width, int height, ArrayList<Image> spriteList)
+	protected GameObject(long ID, float x, float y, int width, int height, ArrayList<Image> spriteList)
 	{
 		this.ID         = ID;
 		this.x          = x;
@@ -61,8 +61,8 @@ public abstract class GameObject implements IRenderTarget2D, ILogicTarget
 		   )
 		{
 			g.drawImage(spriteList.get(imageIndex),
-				x,
-				y,
+				(int) x,
+				(int) y,
 				width,
 				height,
 				imageObserver
@@ -80,8 +80,8 @@ public abstract class GameObject implements IRenderTarget2D, ILogicTarget
 	//=====================================================================
 	// Protected variables
 	//---------------------------------------------------------------------
-	protected int x;
-	protected int y;
+	protected float x;
+	protected float y;
 	protected int width;
 	protected int height;
 	protected int imageIndex;

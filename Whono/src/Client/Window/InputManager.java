@@ -4,6 +4,7 @@ import Util.ISubscriber;
 
 import java.awt.event.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 
 public class InputManager implements MouseListener, MouseMotionListener, KeyListener
 {
@@ -16,11 +17,11 @@ public class InputManager implements MouseListener, MouseMotionListener, KeyList
 		w.addMouseMotionListener(this);
 		w.addKeyListener(this);
 
-		mSubscribers  = new ArrayList<>();
+		mSubscribers  = new HashSet<>();
 
-		mPressedKeys  = new ArrayList<>();
-		mHeldKeys     = new ArrayList<>();
-		mReleasedKeys = new ArrayList<>();
+		mPressedKeys  = new HashSet<>();
+		mHeldKeys     = new HashSet<>();
+		mReleasedKeys = new HashSet<>();
 	}
 
 	//=====================================================================
@@ -89,6 +90,7 @@ public class InputManager implements MouseListener, MouseMotionListener, KeyList
 				if(mMouseRightButtonPressed)
 				{
 					mMouseLeftButtonHeld = true;
+					mMouseLeftButtonPressed = false;
 				}
 				else
 				{
@@ -100,6 +102,7 @@ public class InputManager implements MouseListener, MouseMotionListener, KeyList
 				if(mMouseRightButtonPressed)
 				{
 					mMouseRightButtonHeld = true;
+					mMouseRightButtonPressed = false;
 				}
 				else
 				{
@@ -172,6 +175,7 @@ public class InputManager implements MouseListener, MouseMotionListener, KeyList
 		if(mPressedKeys.contains(e.getKeyChar()))
 		{
 			mHeldKeys.add(e.getKeyChar());
+			mPressedKeys.remove(e.getKeyChar());
 		}
 		else
 		{
@@ -184,17 +188,17 @@ public class InputManager implements MouseListener, MouseMotionListener, KeyList
 	@Override
 	public void keyReleased(KeyEvent e)
 	{
-		mPressedKeys.remove(e);
-		mHeldKeys.remove(e);
+		mPressedKeys.remove(e.getKeyChar());
+		mHeldKeys.remove(e.getKeyChar());
 	}
 
 	//=====================================================================
 	// Protected variables
 	//---------------------------------------------------------------------
-	protected final ArrayList<ISubscriber> mSubscribers;
-	protected final ArrayList<Character>   mPressedKeys;  // are pressed this frame
-	protected final ArrayList<Character>   mHeldKeys;     // are pressed this frame and last frame
-	protected final ArrayList<Character>   mReleasedKeys; // where pressed last frame but not this frame
+	protected final HashSet<ISubscriber> mSubscribers;
+	protected final HashSet<Character>   mPressedKeys;  // are pressed this frame
+	protected final HashSet<Character>   mHeldKeys;     // are pressed this frame and last frame
+	protected final HashSet<Character>   mReleasedKeys; // where pressed last frame but not this frame
 
 	protected int     mMouseX;
 	protected int     mMouseY;
