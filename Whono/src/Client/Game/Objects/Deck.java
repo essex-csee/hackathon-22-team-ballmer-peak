@@ -5,8 +5,8 @@ import java.util.List;
 
 public class Deck
 {
-	private int DeckID;
-	private List<Card> DeckContents;
+	private int deckID;
+	private List<Card> deckContents;
 
 	public Deck()
 	{
@@ -14,28 +14,39 @@ public class Deck
 
 	public int DeckID()
 	{
-		return DeckID;
+		return deckID;
 	}
 
 	public List<Card> getDeckContents()
 	{
-		return DeckContents;
+		return deckContents;
 	}
 
-	public static void addCard(Card c)
+	public void addCard(Card c)
 	{
-		this.DeckContents.add(c);
+		deckContents.add(c);
 	}
 
-	public static Card removeCard(Card c)
+	public Card removeCard(Card c)
 	{
 		// remove card from deck
 		// return removed card
+
+		Card toFind = null;
+
+		int i = deckContents.indexOf(c);
+
+		if( i != -1 )
+		{
+			toFind = deckContents.get(i);
+		}
+
+		return toFind;
 	}
 
-	public static void shuffleDeck(Deck d)
+	public void shuffleDeck(Deck d)
 	{
-		Collections.shuffle(d.DeckContents);
+		Collections.shuffle(d.deckContents);
 	}
 
 	@Override
@@ -43,8 +54,8 @@ public class Deck
 	{
 		String out = "";
 		out += "Client.Game.Objects.Deck[";
-		out += "DeckID:'" + DeckID + "',";
-		out += "DeckCards:'" + DeckContents + "',";
+		out += "DeckID:'" + deckID + "',";
+		out += "DeckCards:'" + deckContents + "',";
 		out += "]";
 		return out;
 	}

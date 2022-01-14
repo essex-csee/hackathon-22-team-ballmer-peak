@@ -52,19 +52,40 @@ public class Card implements Comparable<Card>
 		BLACK, RED, GREEN, BLUE, YELLOW;
 	}
 
-	private int CardID;
-	private Type CardType;
-	private Colour CardColour;
+	public int getCardID()
+	{
+		return CardID;
+	}
+
+	public void setCardID(int cardID)
+	{
+		CardID = cardID;
+	}
 
 	public Type getCardType()
 	{
 		return CardType;
 	}
 
+	public void setCardType(Type cardType)
+	{
+		CardType = cardType;
+	}
+
 	public Colour getCardColour()
 	{
-		return CardColour;
+		return cardColour;
 	}
+
+	public void setCardColour(Colour cardColour)
+	{
+		this.cardColour = cardColour;
+	}
+
+	private int CardID;
+	private Type CardType;
+	private Colour cardColour;
+
 
 	public void shuffleCards(List<Card> cards)
 	{
@@ -104,7 +125,7 @@ public class Card implements Comparable<Card>
 		for(int i = 0; i < 4; i++)
 		{
 			Card c = new Card();
-			c.CardColour = Colour.BLACK;
+			c.cardColour = Colour.BLACK;
 
 			c.CardID = id;
 			c.CardType = Type.WILD;
@@ -123,22 +144,22 @@ public class Card implements Comparable<Card>
 			c.CardID = id;
 			c.CardType = Type.values()[i];
 
-			c.CardColour = Colour.RED;
+			c.cardColour = Colour.RED;
 			deck.add(c);
 			id++;
 
 			c.CardID = id;
-			c.CardColour = Colour.GREEN;
+			c.cardColour = Colour.GREEN;
 			deck.add(c);
 			id++;
 
 			c.CardID = id;
-			c.CardColour = Colour.BLUE;
+			c.cardColour = Colour.BLUE;
 			deck.add(c);
 			id++;
 
 			c.CardID = id;
-			c.CardColour = Colour.YELLOW;
+			c.cardColour = Colour.YELLOW;
 			deck.add(c);
 			id++;
 		}
@@ -166,7 +187,7 @@ public class Card implements Comparable<Card>
 	@Override
 	public String toString()
 	{
-		return "Client.Game.Objects.Card [CardID:'" + CardID +"',CardType:'" +  CardType + "',CardColour:'" + CardColour + ']';
+		return "Client.Game.Objects.Card [CardID:'" + CardID +"',CardType:'" +  CardType + "',CardColour:'" + cardColour + ']';
 	}
 
 }
