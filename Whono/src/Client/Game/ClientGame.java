@@ -1,6 +1,7 @@
 package Client.Game;
 
 import Client.Render.Renderer;
+import Client.Window.ClientWindow;
 import Util.ILogicTarget;
 import Util.IRenderTarget2D;
 
@@ -150,6 +151,17 @@ public class ClientGame implements Runnable
 		sClientGameMutex.acquire();
 		mIsCloseRequested = false;
 		sClientGameMutex.release();
+
+		mClientWindow = new ClientWindow();
+		mRenderer     = new Renderer(
+			mClientWindow.getGraphics(),
+			0,
+			0,
+			mClientWindow.getWidth(),
+			mClientWindow.getHeight()
+		);
+
+		mClientWindow.show();
 	}
 
 	/***
@@ -173,9 +185,14 @@ public class ClientGame implements Runnable
 			mLogicTargets.parallelStream().forEachOrdered(i -> i.update(deltaTime) );
 
 			// TODO: framesync
+			mIsCloseRequested = mClientWindow.isCloseRequested();
 
+			System.out.println(deltaTime);
+
+			Thread.sleep(1);
 		}
 		while (!mIsCloseRequested);
+
 	}
 
 	/***
@@ -184,6 +201,7 @@ public class ClientGame implements Runnable
 	protected void cleanUp()
 	{
 		// the window has closed
+		mClientWindow.close();
 		// release resources
 	}
 
@@ -193,6 +211,7 @@ public class ClientGame implements Runnable
 	protected final ArrayList<ILogicTarget> mLogicTargets;
 	protected boolean                       mIsCloseRequested;
 	protected Renderer                      mRenderer;
+	protected ClientWindow                  mClientWindow;
 
 	//=====================================================================
 	// Private variables
