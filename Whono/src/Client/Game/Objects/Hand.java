@@ -1,70 +1,78 @@
-package client.game.objects;
+package Client.Game.Objects;
 
-import java.util.collections;
-import java.util.list;
+import java.util.List;
+import java.util.Collections;
 
 public class Hand
 {
 	private int handID;
-	private list<card> hand;
+	private List<Card> hand;
 	private int handSize;
 	private int handSizeLimit;
 
 	public Hand(int limit)
 	{
-		handsizeLimit = limit;
+		handSizeLimit = limit;
 	}
 
 	public boolean addCard(Card c)
 	{
-		if((handsize + 1) > handlimit)
+		if((handSize + 1) > handSizeLimit)
 		{
 			return false;
 		}
 		hand.add(c);
-		handsize++;
+		handSize++;
 		return true;
 
 	}
 
-	public card removecard(card c)
+	public Card removecard(Card c)
 	{
 
 		hand.remove(c);
-		handsize--;
+		handSize--;
+
+		return c;
 	}
 
-	public card removeRandomCard()
+	public Card removeRandomCard()
 	{
-		int index = (int) ((Math.random() * handsize));
-		hand.remove(index);
-		handsize--;
+		int index = (int) ((Math.random() * handSize));
+		Card removed = hand.remove(index);
+
+		if(removed != null) // check a card has been removed before dec'ing
+		{
+			handSize--;
+		}
+
+		return removed;
 	}
 
 
 	public int gethandid()
 	{
-		return handid;
+		return handID;
 	}
 
-	public list<card> gethand()
+	public List<Card> gethand()
 	{
 		return hand;
 	}
 
 	public int gethandsize()
 	{
-		return handsize;
+		return handSize;
 	}
 
-	@override
-	public string tostring()
+	@Override
+	public String toString()
 	{
-		string out = "";
+		String out = "";
 		out += "client.game.objects.Hand[";
-		out += "deckid:'" + handid + "',";
+		out += "deckid:'" + handID + "',";
 		out += "hand:'" + hand + "',";
-		out += "handsize:'" + handsize + "',";
+		out += "handsize:'" + handSize + "',";
 		out += "]";
 		return out;
 	}
