@@ -95,7 +95,53 @@ public class Card implements Comparable<Card>
 	}
 	*/
 
+	public List<Card> createDeck()
+	{
+		List<Card> deck = new ArrayList<Card>;
+		int id = 0;
+		// Create Wildcards
+		for(int i = 0; i < 4; i++)
+		{
+			Card c = new Card();
+			c.CardColour = Colour.BLACK;
 
+			c.CardID = id
+			c.CardType = Types.WILD;
+			deck.add(c);
+			id++;
+
+			c.CardID = id;
+			c.CardType = Types.WILD4;
+			deck.add(c);
+			id++;
+		}
+		// Create 'Regular' Cards
+		for(int i = 1; i < 13; i++)
+		{
+			Card c = new Card();
+			c.CardID = id;
+			c.CardType = Type[i];
+
+			c.CardColour = RED:
+			deck.add(c);
+			id++;
+
+			c.CardID = id;
+			c.CardColour = GREEN:
+			deck.add(c);
+			id++;
+
+			c.CardID = id;
+			c.CardColour = BLUE:
+			deck.add(c);
+			id++;
+
+			c.CardID = id;
+			c.CardColour = YELLOW:
+			deck.add(c);
+			id++;
+		}
+	}
 
 	@Override
 	public int compareTo(Card other)
