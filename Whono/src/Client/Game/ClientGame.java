@@ -1,5 +1,6 @@
 package Client.Game;
 
+import Client.Render.Renderer;
 import Util.ILogicTarget;
 import Util.IRenderTarget2D;
 
@@ -10,11 +11,27 @@ import java.util.concurrent.locks.ReentrantLock;
 
 public class ClientGame implements Runnable
 {
+	//=====================================================================
+	// Singleton Constructor
+	//---------------------------------------------------------------------
+
+	/***
+	 * ClientGame singleton constructor
+	 */
 	private ClientGame()
 	{
-		logicTargets = new ArrayList<ILogicTarget>();
+		mLogicTargets = new ArrayList<ILogicTarget>();
 	}
 
+	//=====================================================================
+	// Public Methods
+	//---------------------------------------------------------------------
+
+	/***
+	 * Returns the ClientGame singleton creating it if it had not been so
+	 * @return ClientGame singleton
+	 * @throws InterruptedException mutex interrupted
+	 */
 	public static ClientGame get() throws InterruptedException
 	{
 		if(sClientGame == null)
@@ -27,12 +44,16 @@ public class ClientGame implements Runnable
 		return sClientGame;
 	}
 
+	/***
+	 * Adds a logic target to the list to update
+	 * @param logicTarget LogicTarget to add
+	 */
 	public static void addLogicTarget(ILogicTarget logicTarget)
 	{
 		try
 		{
 			sClientGameMutex.acquire();
-			sClientGame.logicTargets.add(logicTarget);
+			sClientGame.mLogicTargets.add(logicTarget);
 			sClientGameMutex.release();
 		}
 		catch (InterruptedException e)
@@ -41,12 +62,16 @@ public class ClientGame implements Runnable
 		}
 	}
 
+	/***
+	 * Removes a logicTarget from the list
+	 * @param logicTarget LogicTarget to remove
+	 */
 	public static void removeLogicTarget(ILogicTarget logicTarget)
 	{
 		try
 		{
 			sClientGameMutex.acquire();
-			sClientGame.logicTargets.remove(logicTarget);
+			sClientGame.mLogicTargets.remove(logicTarget);
 			sClientGameMutex.release();
 		}
 		catch (InterruptedException e)
@@ -55,11 +80,16 @@ public class ClientGame implements Runnable
 		}
 	}
 
+	/***
+	 * Adds a renderTarget2D to the list of render targets
+	 * @param renderTarget2D RenderTarget2D to add
+	 */
 	public static void addRenderTarget(IRenderTarget2D renderTarget2D)
 	{
 		try
 		{
 			sClientGameMutex.acquire();
+			sClientGame.mRenderer.addRenderTargets(renderTarget2D);
 			sClientGameMutex.release();
 		}
 		catch (InterruptedException e)
@@ -68,11 +98,16 @@ public class ClientGame implements Runnable
 		}
 	}
 
+	/***
+	 * Removes a RenderTarget2D from the list of render targets
+	 * @param renderTarget2D RenderTarget to remove
+	 */
 	public static void removeRenderTarget(IRenderTarget2D renderTarget2D)
 	{
 		try
 		{
 			sClientGameMutex.acquire();
+			sClientGame.mRenderer.removeRenderTargets(renderTarget2D);
 			sClientGameMutex.release();
 		}
 		catch (InterruptedException e)
@@ -82,6 +117,9 @@ public class ClientGame implements Runnable
 
 	}
 
+	/***
+	 * Run the ClientGame
+	 */
 	@Override
 	public void run()
 	{
@@ -97,16 +135,28 @@ public class ClientGame implements Runnable
 		}
 	}
 
-	public void startUp() throws InterruptedException
+	//=====================================================================
+	// Protected Methods
+	//---------------------------------------------------------------------
+
+	/***
+	 * Start up the clientGame
+	 * @throws InterruptedException mutex interrupted
+	 */
+	protected void startUp() throws InterruptedException
 	{
 		sClientGameMutex.release(); // release the mutex lock in get
 
 		sClientGameMutex.acquire();
-		isCloseRequested = false;
+		mIsCloseRequested = false;
 		sClientGameMutex.release();
 	}
 
-	public void gameLoop() throws InterruptedException
+	/***
+	 * GameLoop updating targets and rendering targets till the window is closed
+	 * @throws InterruptedException mutex interrupted
+	 */
+	protected void gameLoop() throws InterruptedException
 	{
 		long startTime = System.nanoTime();
 		long priorTime = startTime;
@@ -116,20 +166,37 @@ public class ClientGame implements Runnable
 			startTime = System.currentTimeMillis();
 			long deltaTime = startTime - priorTime;
 
+			// draw renderTargets
+			mRenderer.renderTargets();
+
 			// update logicTargets
-			logicTargets.parallelStream().forEachOrdered(i -> i.update(deltaTime) );
+			mLogicTargets.parallelStream().forEachOrdered(i -> i.update(deltaTime) );
+
+			// TODO: framesync
 
 		}
-		while (!isCloseRequested);
+		while (!mIsCloseRequested);
 	}
 
-	public void cleanUp()
+	/***
+	 * Clean up left over resources after the window closed
+	 */
+	protected void cleanUp()
 	{
+		// the window has closed
+		// release resources
 	}
 
-	protected final ArrayList<ILogicTarget> logicTargets;
-	protected boolean      isCloseRequested;
+	//=====================================================================
+	// Protected variables
+	//---------------------------------------------------------------------
+	protected final ArrayList<ILogicTarget> mLogicTargets;
+	protected boolean                       mIsCloseRequested;
+	protected Renderer                      mRenderer;
 
+	//=====================================================================
+	// Private variables
+	//---------------------------------------------------------------------
 	private static ClientGame sClientGame;
 	private static Semaphore  sClientGameMutex;
 }
