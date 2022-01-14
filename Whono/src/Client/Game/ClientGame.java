@@ -40,6 +40,7 @@ public class ClientGame implements Runnable
 			sClientGameMutex = new Semaphore(1)   ; // we could sync based on the ClientGame
 			sClientGameMutex.acquire();                    // but I think using a mutex here gives more flex
 			sClientGame = new ClientGame();                // we've locked until startup can finish
+			sClientGameMutex.release();
 		}
 
 		return sClientGame;
@@ -126,7 +127,9 @@ public class ClientGame implements Runnable
 	{
 		try
 		{
+			sClientGameMutex.acquire();
 			startUp();
+			sClientGameMutex.release();
 			gameLoop();
 			cleanUp();
 		}
@@ -146,11 +149,7 @@ public class ClientGame implements Runnable
 	 */
 	protected void startUp() throws InterruptedException
 	{
-		sClientGameMutex.release(); // release the mutex lock in get
-
-		sClientGameMutex.acquire();
 		mIsCloseRequested = false;
-		sClientGameMutex.release();
 
 		mClientWindow = new ClientWindow();
 		mRenderer     = new Renderer(
@@ -160,6 +159,7 @@ public class ClientGame implements Runnable
 			mClientWindow.getWidth(),
 			mClientWindow.getHeight()
 		);
+
 
 		mClientWindow.show();
 	}
@@ -186,8 +186,6 @@ public class ClientGame implements Runnable
 
 			// TODO: framesync
 			mIsCloseRequested = mClientWindow.isCloseRequested();
-
-			System.out.println(deltaTime);
 
 			Thread.sleep(1);
 		}
