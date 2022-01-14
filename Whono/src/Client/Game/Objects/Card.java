@@ -1,4 +1,5 @@
-import java.util.ArrayList;
+package Client.Game.Objects;
+
 import java.util.Collections;
 import java.util.List;
 
@@ -78,7 +79,7 @@ public class Card implements Comparable<Card>
 	@Override
 	public String toString()
 	{
-		return "Card";
+		return "Client.Game.Objects.Card";
 	}
 
 }
