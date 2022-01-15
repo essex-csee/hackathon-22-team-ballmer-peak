@@ -1,5 +1,6 @@
 package Client.Game.Objects.GameScreen;
 
+import Client.Game.Objects.Card;
 import Client.Game.Objects.InitObject;
 import Client.Game.Objects.MainMenu.PlayButton;
 
@@ -37,6 +38,13 @@ public class GameScreenInit extends InitObject
 
     public void initHand()
     {
+        int handSize = 5;
+        for(int i = 1; i <= handSize; i++)
+        {
+            Card c = new Card();
+            CardButton cb = new CardButton(i, handSize,c);
+            addGameObject(cb);
+        }
         // Get player Hand
         // ID: 4 - handsize
         //

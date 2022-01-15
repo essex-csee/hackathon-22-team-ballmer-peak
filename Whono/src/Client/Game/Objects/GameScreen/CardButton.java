@@ -19,15 +19,15 @@ public class CardButton extends SquareButton
         );
     }
 
-    CardButton(int index, Card c)
+    CardButton(int index, int handSize, Card c)
     {
         super(0,
-                // x needs to be changed in regards to index parameter
-                ClientGame.getWindowWidth()/2 - CONSTANTS.CARD_WIDTH/2 - CONSTANTS.CARD_WIDTH_PADDING,
-                ClientGame.getWindowHeight() * 0.6f - CONSTANTS.CARD_HEIGHT_PADDING,
+                // TODO: Check CARD_WIDTH_PADDING, offset seems slightly strange
+                ClientGame.getWindowWidth()/2 - (CONSTANTS.CARD_WIDTH/2 * handSize) +( index * CONSTANTS.CARD_WIDTH) - CONSTANTS.CARD_WIDTH_PADDING,
+                ClientGame.getWindowHeight() * 1f - CONSTANTS.CARD_HEIGHT_PADDING,
                 CONSTANTS.CARD_WIDTH,
                 CONSTANTS.CARD_HEIGHT,
-                // Asset needs to be changed based on Card parameter
+                //c.getAsset();
                 "Whono/Assets/Cards/Green/GreenReverse.png"
         );
     }
