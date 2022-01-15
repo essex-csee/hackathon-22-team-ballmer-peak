@@ -1,6 +1,7 @@
 package Client.Game.Objects.GameScreen;
 
 import Client.Game.ClientGame;
+import Client.Game.Objects.MainMenu.MainMenuInit;
 import Client.Game.Objects.SquareButton;
 import Util.CONSTANTS;
 
@@ -29,6 +30,7 @@ public class PauseButton extends SquareButton
 	@Override
 	protected void onMouseRelease()
 	{
-		ClientGame.requestWindowClose();
+		MainMenuInit mm = new MainMenuInit();
+		ClientGame.addLogicTarget(mm);
 	}
 }

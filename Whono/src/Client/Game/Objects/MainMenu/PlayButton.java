@@ -1,6 +1,7 @@
 package Client.Game.Objects.MainMenu;
 
 import Client.Game.ClientGame;
+import Client.Game.Objects.GameScreen.GameScreenInit;
 import Client.Game.Objects.SquareButton;
 import Util.CONSTANTS;
 
@@ -28,6 +29,7 @@ public class PlayButton extends SquareButton
 	@Override
 	protected void onMouseRelease()
 	{
-
+		GameScreenInit gs = new GameScreenInit();
+		ClientGame.addLogicTarget(gs);
 	}
 }

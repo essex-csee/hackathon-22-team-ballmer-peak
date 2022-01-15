@@ -2,6 +2,8 @@ package Client.Game.Objects;
 
 import Client.ClientMain;
 import Client.Game.ClientGame;
+import Client.Game.Objects.GameScreen.GameScreenInit;
+import Client.Game.Objects.MainMenu.MainMenuInit;
 import Client.Render.Renderer;
 import Client.Window.ClientWindow;
 
@@ -14,7 +16,7 @@ public class GameState extends GameObject
     // Possible Game States
 
     public enum State {
-        MAINMENU,PLAYERJOIN,GAMESTART,GAMESTAT,GAMEOVER,LEADERBOARD
+        MAINMENU,GAMESCREEN;
     }
 
     private State currentState;
@@ -69,23 +71,14 @@ public class GameState extends GameObject
         switch(getCurrentState())
         {
             case MAINMENU:
-                // Draw main menu
+                MainMenuInit mm = new MainMenuInit();
+                ClientGame.addLogicTarget(mm);
                 break;
-            case GAMESTART:
-                // Initialise game
+            case GAMESCREEN:
+                GameScreenInit gs = new GameScreenInit();
+                ClientGame.addLogicTarget(gs);
                 break;
-            case LEADERBOARD:
-                // Draw leaderboard
-                break;
-            case PLAYERJOIN:
-                // Player Join Game
-                break;
-            case GAMEOVER:
-                // Game over condition check
-                break;
-            case GAMESTAT:
-                // Game state 'increment'
-                break;
+
             default:
                 System.out.println("Invalid State in GameState.");
         }
