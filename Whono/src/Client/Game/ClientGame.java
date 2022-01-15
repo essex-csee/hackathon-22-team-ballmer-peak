@@ -7,6 +7,7 @@ import Util.ILogicTarget;
 import Util.IRenderTarget2D;
 
 import java.util.ArrayList;
+import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.Semaphore;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
@@ -22,7 +23,7 @@ public class ClientGame implements Runnable
 	 */
 	private ClientGame()
 	{
-		mLogicTargets = new ArrayList<ILogicTarget>();
+		mLogicTargets = new CopyOnWriteArrayList<ILogicTarget>();
 	}
 
 	//=====================================================================
@@ -83,6 +84,20 @@ public class ClientGame implements Runnable
 		}
 	}
 
+	public static void wipeLogicTarget()
+	{
+		try
+		{
+			sClientGame.mLogicTargets.clear();
+			sClientGameMutex.release();
+			sClientGameMutex.acquire();
+		}
+		catch (InterruptedException e)
+		{
+			e.printStackTrace();
+		}
+	}
+
 	/***
 	 * Adds a renderTarget2D to the list of render targets
 	 * @param renderTarget2D RenderTarget2D to add
@@ -111,6 +126,21 @@ public class ClientGame implements Runnable
 		{
 			sClientGameMutex.acquire();
 			sClientGame.mRenderer.removeRenderTargets(renderTarget2D);
+			sClientGameMutex.release();
+		}
+		catch (InterruptedException e)
+		{
+			e.printStackTrace();
+		}
+
+	}
+
+	public static void wipeRenderTarget()
+	{
+		try
+		{
+			sClientGameMutex.acquire();
+			sClientGame.mRenderer.wipeRenderTarget();
 			sClientGameMutex.release();
 		}
 		catch (InterruptedException e)
@@ -221,7 +251,7 @@ public class ClientGame implements Runnable
 	//=====================================================================
 	// Protected variables
 	//---------------------------------------------------------------------
-	protected final ArrayList<ILogicTarget> mLogicTargets;
+	protected final CopyOnWriteArrayList<ILogicTarget> mLogicTargets;
 	protected boolean                       mIsCloseRequested;
 	protected Renderer                      mRenderer;
 	protected ClientWindow                  mClientWindow;
