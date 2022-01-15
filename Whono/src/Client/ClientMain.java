@@ -30,7 +30,6 @@ public class ClientMain
 
 			ClientGame.addRenderTarget(tb);
 
-			System.out.println(tb);
 		}
 		catch (InterruptedException e)
 		{
