@@ -14,7 +14,8 @@ public class PlayButton extends SquareButton
 			120,
 			320,
 			86,
-			new ImageIcon("Whono/Assets/test.png").getImage()
+				"Whono/Assets/test.png"
+				//new ImageIcon("Whono/Assets/test.png").getImage()
 		);
 	}
 
