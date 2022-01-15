@@ -12,10 +12,10 @@ public class PauseButton extends SquareButton
 	{
 		// Change position of exit button
 		super(1,
-			ClientGame.getWindowWidth()/2 - CONSTANTS.CARD_WIDTH/2 + CONSTANTS.CARD_WIDTH_PADDING,
-			ClientGame.getWindowHeight() * 0.4f - CONSTANTS.CARD_HEIGHT_PADDING,
-			CONSTANTS.CARD_WIDTH,
-			CONSTANTS.CARD_HEIGHT,
+			ClientGame.getWindowWidth() * 0.7f - CONSTANTS.CARD_WIDTH/2 + CONSTANTS.CARD_WIDTH_PADDING,
+			ClientGame.getWindowHeight() * 0.45f - CONSTANTS.CARD_HEIGHT_PADDING,
+			CONSTANTS.CARD_WIDTH/2,
+			CONSTANTS.CARD_HEIGHT/2,
 			"Whono/Assets/Cards/Red/Red1.png"
 		);
 	}

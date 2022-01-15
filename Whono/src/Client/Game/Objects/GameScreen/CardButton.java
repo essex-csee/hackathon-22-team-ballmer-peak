@@ -31,6 +31,20 @@ public class CardButton extends SquareButton
                 "Whono/Assets/Cards/Green/GreenReverse.png"
         );
     }
+
+    CardButton(int id)
+    {
+        super(id,
+                ClientGame.getWindowWidth() * (id == 2 ? 0.5f : 0.8f) - CONSTANTS.CARD_WIDTH/2 - CONSTANTS.CARD_WIDTH_PADDING,
+                ClientGame.getWindowHeight() * 0.5f - CONSTANTS.CARD_HEIGHT_PADDING,
+                CONSTANTS.CARD_WIDTH,
+                CONSTANTS.CARD_HEIGHT,
+                //c.getAsset();
+                "Whono/Assets/Cards/Green/GreenReverse.png"
+        );
+        // Type 0: Deck
+        // Type 1: Pile
+    }
     @Override
     protected void onMousePress()
     {

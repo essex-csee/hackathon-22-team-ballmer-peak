@@ -15,6 +15,7 @@ public class GameScreenInit extends InitObject
 
     public void initMenu()
     {
+        // Needs offset + rescaling
         ExitButton quit = new ExitButton();
         addGameObject(quit);
         PauseButton pause = new PauseButton();
@@ -24,14 +25,15 @@ public class GameScreenInit extends InitObject
     public void initDeck()
     {
         // TODO: CardButton needs parameters for the Type/Colour
-        // ID: 2
-        CardButton deck = new CardButton();
+        // Needs offset
+        CardButton deck = new CardButton(2);
         addGameObject(deck);
     }
 
     public void initPile()
     {
-        CardButton pile = new CardButton();
+        // Needs offset
+        CardButton pile = new CardButton(3);
         addGameObject(pile);
         // ID: 3
     }
