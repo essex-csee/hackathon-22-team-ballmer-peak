@@ -46,7 +46,7 @@ public class DeckFactory
 			cardID++;
 
 			c.setCardID( cardID );
-			c.setCardColour( Card.Colour.BLUE );
+			c.setCardColour( Card.Colour.PURPLE );
 			deck.addCard(c);
 			cardID++;
 
