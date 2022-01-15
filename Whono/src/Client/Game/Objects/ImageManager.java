@@ -2,6 +2,8 @@ package Client.Game.Objects;
 
 import javax.swing.*;
 import java.awt.*;
+import java.nio.file.InvalidPathException;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -50,11 +52,36 @@ public class ImageManager
         return imageList;
     }
 
+    public static boolean isValidPath(String path)
+    {
+        try
+        {
+            Paths.get(path);
+        }
+        catch (InvalidPathException | NullPointerException ex)
+        {
+            return false;
+        }
+        return true;
+    }
+
+
     public static Image loadImage(String imageName)
     {
         ImageMeta meta = new ImageMeta();
         Image out = null;
+        if(isValidPath(currentDirectory + "/" + imageName))
+        {
+            String imagePath = currentDirectory + "/" + imageName;
+        }
+        else
+        {
+            String imagePath = currentDirectory + "/" + "Whono/Assets/test.png";
+        }
+
+
         String imagePath = currentDirectory + "/" + imageName;
+
         // Check if image already loaded
         for(int i = 0; i < imageMetaList.size(); i++)
         {
