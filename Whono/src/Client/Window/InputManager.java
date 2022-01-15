@@ -83,6 +83,24 @@ public class InputManager implements MouseListener, MouseMotionListener, KeyList
 		return mReleasedKeys.contains(c);
 	}
 
+	public void clear()
+	{
+		mPressedKeys.clear();  // are pressed this frame
+		mHeldKeys.clear();     // are pressed this frame and last frame
+		mReleasedKeys.clear(); // where pressed last frame but not this frame
+
+		mMouseX = 0;
+		mMouseY = 0;
+
+		mMouseLeftButtonPressed = false;
+		mMouseLeftButtonHeld = false;;
+		mMouseLeftButtonReleased = false;;
+
+		mMouseRightButtonPressed = false;;
+		mMouseRightButtonHeld = false;;
+		mMouseRightButtonReleased = false;;
+	}
+
 	//=====================================================================
 	// Mouse listener methods
 	//---------------------------------------------------------------------

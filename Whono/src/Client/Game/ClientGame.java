@@ -198,6 +198,7 @@ public class ClientGame implements Runnable
 			}
 
 			mRenderer.renderTargets();
+			mInputManager.clear();
 
 			// TODO: framesync
 			mIsCloseRequested = mClientWindow.isCloseRequested();
