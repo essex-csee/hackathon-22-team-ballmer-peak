@@ -1,8 +1,6 @@
 package Client.Game.Objects;
 
 
-import Util.ILogicTarget;
-import Util.IRenderTarget2D;
 import Util.ISubscribable;
 import Util.ISubscriber;
 
@@ -37,7 +35,7 @@ public abstract class Button extends GameObject implements ISubscriber, ISubscri
 	@Override
 	public void subscribe(ISubscriber s) // ISubscribable
 	{
-		subscribers.add(s);
+		mSubscribers.add(s);
 	}
 
 	@Override
@@ -48,7 +46,7 @@ public abstract class Button extends GameObject implements ISubscriber, ISubscri
 
 	public void notifySubscribers()
 	{
-		for(ISubscriber s : subscribers)
+		for(ISubscriber s : mSubscribers)
 		{
 			s.notifiedBySubscription(this);
 		}
@@ -67,9 +65,5 @@ public abstract class Button extends GameObject implements ISubscriber, ISubscri
 	//=====================================================================
 	// Protected variables
 	//---------------------------------------------------------------------
-	protected ArrayList<ISubscriber> subscribers;
-	protected int x;
-	protected int y;
-	protected int width;
-	protected int height;
+	protected ArrayList<ISubscriber> mSubscribers;
 }

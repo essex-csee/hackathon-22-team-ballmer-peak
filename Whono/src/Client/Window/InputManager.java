@@ -86,20 +86,24 @@ public class InputManager implements MouseListener, MouseMotionListener, KeyList
 	public void clear()
 	{
 		mPressedKeys.clear();  // are pressed this frame
-		mHeldKeys.clear();     // are pressed this frame and last frame
 		mReleasedKeys.clear(); // where pressed last frame but not this frame
 		//mSubscribers.clear();
 
-		mMouseX = 0;
-		mMouseY = 0;
+		if(mMouseLeftButtonPressed)
+		{
+			mMouseLeftButtonHeld = true;
+			mMouseLeftButtonPressed = false;
+		}
 
-		mMouseLeftButtonPressed = false;
-		mMouseLeftButtonHeld = false;;
-		mMouseLeftButtonReleased = false;;
+		if(mMouseRightButtonPressed)
+		{
+			mMouseRightButtonHeld = true;
+			mMouseRightButtonPressed = false;
 
-		mMouseRightButtonPressed = false;;
-		mMouseRightButtonHeld = false;;
-		mMouseRightButtonReleased = false;;
+		}
+
+		mMouseLeftButtonReleased = false;
+		mMouseRightButtonReleased = false;
 	}
 
 	//=====================================================================
@@ -117,27 +121,10 @@ public class InputManager implements MouseListener, MouseMotionListener, KeyList
 		switch (e.getButton())
 		{
 			case MouseEvent.BUTTON1:
-				if(mMouseRightButtonPressed)
-				{
-					mMouseLeftButtonHeld = true;
-					mMouseLeftButtonPressed = false;
-				}
-				else
-				{
 					mMouseLeftButtonPressed = true;
-				}
 				break;
 			case MouseEvent.BUTTON2:
-
-				if(mMouseRightButtonPressed)
-				{
-					mMouseRightButtonHeld = true;
-					mMouseRightButtonPressed = false;
-				}
-				else
-				{
 					mMouseRightButtonPressed = true;
-				}
 				break;
 		}
 	}

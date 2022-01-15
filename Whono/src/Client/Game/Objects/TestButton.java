@@ -13,26 +13,26 @@ public class TestButton extends SquareButton
 			0,
 			640,
 			480,
-			((Image) new ImageIcon("Whono/Assets/b00g.png").getImage())
+			new ImageIcon("Whono/Assets/b00g.png").getImage()
 			);
 	}
 
 	@Override
 	protected void onPress()
 	{
-		System.out.printf("pressed \n");
+		System.out.println("Pressed");
 	}
 
 	@Override
 	protected void onRelease()
 	{
-		System.out.printf("released \n");
+		System.out.println("Released");
 	}
 
 	@Override
 	public String toString()
 	{
-		return "Client.Game.Objects.TestButton[x:'" + this.x + "', y:'" + this.y + "','" + this.mSpriteList.toString() + "']";
+		return "Client.Game.Objects.TestButton[x:'" + mX + "', y:'" + mX + "','" + this.mSpriteList.toString() + "']";
 	}
 
 }

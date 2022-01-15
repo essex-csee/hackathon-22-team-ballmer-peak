@@ -47,7 +47,10 @@ public abstract class SquareButton extends Button
 	@Override
 	public boolean isInBounds(int x, int y)
 	{
-		return x > this.x && x < this.x + width && y > this.y && y < this.y + height;
+		return x > mX
+			&& x < mX + mWidth
+			&& y > mY
+			&& y < mY + mHeight;
 	}
 
 }
