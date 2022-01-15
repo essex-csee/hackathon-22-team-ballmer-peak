@@ -41,8 +41,8 @@ public class CardButton extends SquareButton
                 ClientGame.getWindowHeight() * 0.5f - CONSTANTS.CARD_HEIGHT_PADDING,
                 CONSTANTS.CARD_WIDTH,
                 CONSTANTS.CARD_HEIGHT,
-                //c.getAsset();
-                "Whono/Assets/Cards/Green/GreenReverse.png"
+                // This needs to have a method to get the top card of the Pile
+                (id == 2 ? "Whono/Assets/Cards/Green/GreenReverse.png" : "Whono/Assets/Cards/Back.png")
         );
         // Type 0: Deck
         // Type 1: Pile
