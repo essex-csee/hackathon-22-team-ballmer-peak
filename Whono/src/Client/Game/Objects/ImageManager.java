@@ -54,27 +54,24 @@ public class ImageManager
     {
         ImageMeta meta = new ImageMeta();
         Image out = null;
-        String imagePath = currentDirectory + imageName;
-
+        String imagePath = currentDirectory + "/" + imageName;
         // Check if image already loaded
         for(int i = 0; i < imageMetaList.size(); i++)
         {
             if (imageMetaList.get(i).name.equals(imageName))
             {
                 imageMetaList.get(i).usedCount++;
-                return imageMetaList.get(i).image;
-            }
-            else // Load image
-            {
-                meta.usedCount = 1;
-                meta.name = imageName;
-                meta.imagePath = imagePath;
-                meta.image = ((Image) new ImageIcon(meta.imagePath).getImage());
-                imageMetaList.add(meta);
-                return meta.image;
+                out = imageMetaList.get(i).image;
+                return out;
             }
         }
-        return null;
+        meta.usedCount = 1;
+        meta.name = imageName;
+        meta.imagePath = imagePath;
+        meta.image = ((Image) new ImageIcon(meta.imagePath).getImage());
+        imageMetaList.add(meta);
+        out = meta.image;
+        return out;
     }
 
     public static Image removeImage(Image delete)
