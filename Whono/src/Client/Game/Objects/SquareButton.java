@@ -1,8 +1,6 @@
 package Client.Game.Objects;
 
 import Client.Game.ClientGame;
-import Util.ISubscribable;
-import Util.ISubscriber;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -35,13 +33,13 @@ public abstract class SquareButton extends Button
 		if( isInBounds( ClientGame.getInput().getMouseX(), ClientGame.getInput().getMouseY() )
 		    && ClientGame.getInput().getMouseLeftPressed() ) // if the mouse is released in bounds
 		{
-			onPress();
+			onMousePress();
 		}
 
 		if( isInBounds( ClientGame.getInput().getMouseX(), ClientGame.getInput().getMouseY() )
 			&& ClientGame.getInput().getMouseLeftReleased() ) // if the mouse is released in bounds
 		{
-			onRelease();
+			onMouseRelease();
 		}}
 
 	@Override

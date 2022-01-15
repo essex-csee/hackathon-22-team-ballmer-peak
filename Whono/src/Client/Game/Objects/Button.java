@@ -58,9 +58,9 @@ public abstract class Button extends GameObject implements ISubscriber, ISubscri
 	//---------------------------------------------------------------------
 	protected abstract boolean isInBounds( int x, int y );
 
-	protected abstract void onPress();
+	protected abstract void onMousePress();
 
-	protected abstract void onRelease();
+	protected abstract void onMouseRelease();
 
 	//=====================================================================
 	// Protected variables
