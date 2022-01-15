@@ -6,17 +6,22 @@ import Util.ISubscriber;
 
 import java.awt.*;
 
-public class SquareButton extends Button
+public abstract class SquareButton extends Button
 {
 	@Override
 	public void update(long deltaTime)
 	{
 		if( isInBounds( ClientGame.getInput().getMouseX(), ClientGame.getInput().getMouseY() )
-		    && ClientGame.getInput().getMouseLeftReleased() ) // if the mouse is released in bounds
+		    && ClientGame.getInput().getMouseLeftPressed() ) // if the mouse is released in bounds
 		{
-			notifySubscribers();
+			onPress();
 		}
-	}
+
+		if( isInBounds( ClientGame.getInput().getMouseX(), ClientGame.getInput().getMouseY() )
+			&& ClientGame.getInput().getMouseLeftReleased() ) // if the mouse is released in bounds
+		{
+			onRelease();
+		}}
 
 	@Override
 	public boolean isInBounds(int x, int y)

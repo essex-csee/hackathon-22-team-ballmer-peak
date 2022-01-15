@@ -11,30 +11,39 @@ import java.util.ArrayList;
 
 public abstract class Button extends GameObject implements ISubscriber, ISubscribable
 {
+
 	//=====================================================================
-	// Methods
+	// Public Methods
 	//---------------------------------------------------------------------
-	public abstract boolean isInBounds( int x, int y );
-
-	public void notifySubscribers()
-	{
-		for(ISubscriber s : subscribers)
-		{
-			 s.notifiedBySubscription(this);
-		}
-	}
-
 	@Override
-	public void subscribe(ISubscriber s)
+	public void subscribe(ISubscriber s) // ISubscribable
 	{
 		subscribers.add(s);
 	}
 
 	@Override
-	public void notifiedBySubscription(ISubscribable subscription)
+	public void notifiedBySubscription(ISubscribable subscription) // ISubscriber
 	{
 		// dont care
 	}
+
+	public void notifySubscribers()
+	{
+		for(ISubscriber s : subscribers)
+		{
+			s.notifiedBySubscription(this);
+		}
+	}
+
+
+	//=====================================================================
+	// Protected Methods
+	//---------------------------------------------------------------------
+	protected abstract boolean isInBounds( int x, int y );
+
+	protected abstract void onPress();
+
+	protected abstract void onRelease();
 
 	//=====================================================================
 	// Protected variables
