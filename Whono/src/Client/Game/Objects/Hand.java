@@ -10,9 +10,8 @@ public class Hand
 	private int handSize;
 	private int handSizeLimit;
 
-	public Hand(int limit)
+	public Hand()
 	{
-		handSizeLimit = limit;
 	}
 
 	public boolean addCard(Card c)
@@ -27,7 +26,7 @@ public class Hand
 
 	}
 
-	public Card removecard(Card c)
+	public Card removeCard(Card c)
 	{
 
 		hand.remove(c);
@@ -50,19 +49,29 @@ public class Hand
 	}
 
 
-	public int gethandid()
+	public int getHandID()
 	{
 		return handID;
 	}
 
-	public List<Card> gethand()
+	public List<Card> getHand()
 	{
 		return hand;
 	}
 
-	public int gethandsize()
+	public int getHandSize()
 	{
 		return handSize;
+	}
+
+	public void setHandID(int id)
+	{
+		handID = id;
+	}
+
+	public void setHandSizeLimit(int limit)
+	{
+		handSizeLimit = limit;
 	}
 
 	@Override
@@ -70,9 +79,10 @@ public class Hand
 	{
 		String out = "";
 		out += "client.game.objects.Hand[";
-		out += "deckid:'" + handID + "',";
+		out += "deckID:'" + handID + "',";
 		out += "hand:'" + hand + "',";
-		out += "handsize:'" + handSize + "',";
+		out += "handSize:'" + handSize + "',";
+		out += "handSizeLimit:'" + handSizeLimit + "',";
 		out += "]";
 		return out;
 	}

@@ -8,10 +8,6 @@ import java.util.List;
 
 public class DeckFactory
 {
-
-	// TODO:This needs the CardTypes and CardNumbers in order to create the deck of cards
-	// This could be more modular but ...
-
 	public static Deck createDeck(Card.Type type, Card.Colour colour)
 	{
 		Deck deck = new Deck();
