@@ -18,13 +18,13 @@ public class TestButton extends SquareButton
 	}
 
 	@Override
-	protected void onPress()
+	protected void onMousePress()
 	{
 		System.out.println("Pressed");
 	}
 
 	@Override
-	protected void onRelease()
+	protected void onMouseRelease()
 	{
 		System.out.println("Released");
 	}
