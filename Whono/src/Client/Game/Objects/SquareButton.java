@@ -4,12 +4,15 @@ import Client.Game.ClientGame;
 import Util.ISubscribable;
 import Util.ISubscriber;
 
+import java.awt.*;
+
 public class SquareButton extends Button
 {
 	@Override
 	public void update(long deltaTime)
 	{
-		if( isInBounds( ClientGame.getInput().getMouseX(), ClientGame.getInput().getMouseY() ) )
+		if( isInBounds( ClientGame.getInput().getMouseX(), ClientGame.getInput().getMouseY() )
+		    && ClientGame.getInput().getMouseLeftReleased() ) // if the mouse is released in bounds
 		{
 			notifySubscribers();
 		}
@@ -21,9 +24,4 @@ public class SquareButton extends Button
 		return x > this.x && x < this.x + width && y > this.y && y < this.y + height;
 	}
 
-	@Override
-	public void notifiedBySubscription(ISubscribable subscription)
-	{
-		// dont care
-	}
 }

@@ -3,23 +3,38 @@ package Client.Game.Objects;
 
 import Util.ILogicTarget;
 import Util.IRenderTarget2D;
+import Util.ISubscribable;
 import Util.ISubscriber;
 
 import java.awt.*;
 import java.util.ArrayList;
 
-public abstract class Button implements IRenderTarget2D, ILogicTarget, ISubscriber
+public abstract class Button extends GameObject implements ISubscriber, ISubscribable
 {
 	//=====================================================================
 	// Methods
 	//---------------------------------------------------------------------
-	public abstract void draw(Graphics2D g);        // IRenderTarget2D
-
-	public abstract void update(long deltaTime);    // ILogicTarget
-
-	public abstract void notify( Object notifier ); // ISubscriber
-
 	public abstract boolean isInBounds( int x, int y );
+
+	public void notifySubscribers()
+	{
+		for(ISubscriber s : subscribers)
+		{
+			 s.notifiedBySubscription(this);
+		}
+	}
+
+	@Override
+	public void subscribe(ISubscriber s)
+	{
+		subscribers.add(s);
+	}
+
+	@Override
+	public void notifiedBySubscription(ISubscribable subscription)
+	{
+		// dont care
+	}
 
 	//=====================================================================
 	// Protected variables
