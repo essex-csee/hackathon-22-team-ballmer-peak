@@ -1,6 +1,9 @@
 package Client.Game.Objects;
 
+import Client.ClientMain;
 import Client.Game.ClientGame;
+import Client.Render.Renderer;
+import Client.Window.ClientWindow;
 
 import java.awt.*;
 
@@ -57,6 +60,11 @@ public class GameState extends GameObject
     @Override
     public void update(long deltaTime)
     {
+        if(ClientGame.getInput().getKeyPressed('q'))
+        {
+            // Close window
+            // Theres no way to access mIsCloseRequested to close the window
+        }
         // Perform behaviour based on current state
         switch(getCurrentState())
         {
