@@ -155,7 +155,7 @@ public class ClientGame implements Runnable
 		try
 		{
 			sClientGameMutex.acquire();
-			//sClientGame.mRenderer.wipeRenderTarget();
+			sClientGame.mRenderer.wipeRenderTarget();
 			sClientGameMutex.release();
 		}
 		catch (InterruptedException e)
