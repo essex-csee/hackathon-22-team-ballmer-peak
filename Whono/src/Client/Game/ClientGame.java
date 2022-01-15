@@ -98,6 +98,21 @@ public class ClientGame implements Runnable
 		}
 	}
 
+	public static int getWindowWidth()
+	{
+		return sClientGame.mClientWindow.getWidth();
+	}
+
+	public static int getWindowHeight()
+	{
+		return sClientGame.mClientWindow.getHeight();
+	}
+
+	public static void requestWindowClose()
+	{
+		sClientGame.mClientWindow.requestClose();
+	}
+
 	/***
 	 * Adds a renderTarget2D to the list of render targets
 	 * @param renderTarget2D RenderTarget2D to add

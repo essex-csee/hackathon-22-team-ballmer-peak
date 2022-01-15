@@ -28,8 +28,12 @@ public abstract class InitObject extends GameObject
 		renderTarget2DsToSpawn.add(g);
 	}
 
+	protected abstract void setup();
+
 	private void spawn()
 	{
+		setup();
+
 		ClientGame.wipeRenderTarget();
 		ClientGame.wipeLogicTarget();
 

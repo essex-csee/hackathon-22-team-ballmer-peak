@@ -7,7 +7,11 @@ public class MainMenuInit extends InitObject
 	public MainMenuInit()
 	{
 		super();
+	}
 
+	@Override
+	protected void setup()
+	{
 		addGameObject(new PlayButton());
 		addGameObject(new ExitButton());
 	}

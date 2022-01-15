@@ -1,6 +1,9 @@
 package Client.Game.Objects.MainMenu;
 
+import Client.Game.ClientGame;
 import Client.Game.Objects.SquareButton;
+
+import javax.swing.*;
 
 public class ExitButton extends SquareButton
 {
@@ -8,7 +11,13 @@ public class ExitButton extends SquareButton
 
 	public ExitButton()
 	{
-		super(2);
+		super(2,
+			ClientGame.getWindowWidth()/2f  - 320f/2f,
+			120 * 5,
+			320,
+			86,
+			new ImageIcon("Whono/Assets/test.png").getImage()
+		);
 	}
 
 	@Override
@@ -20,6 +29,6 @@ public class ExitButton extends SquareButton
 	@Override
 	protected void onMouseRelease()
 	{
-
+		ClientGame.requestWindowClose();
 	}
 }

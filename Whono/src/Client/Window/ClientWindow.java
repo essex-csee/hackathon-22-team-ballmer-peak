@@ -105,6 +105,11 @@ public class ClientWindow implements WindowListener
 		return mIsCloseRequested;
 	}
 
+	public void requestClose()
+	{
+		mIsCloseRequested = true;
+	}
+
 	public int getWidth()
 	{
 		return mWidth;
