@@ -28,8 +28,6 @@ public class ClientMain
 
 			ClientGame.addLogicTarget(tb);
 
-			ClientGame.addRenderTarget(tb);
-
 		}
 		catch (InterruptedException e)
 		{
