@@ -2,5 +2,5 @@ package Util;
 
 public interface ISubscriber
 {
-	void notify(Object notifier);
+	void notifiedBySubscription(ISubscribable subscription);
 }

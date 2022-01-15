@@ -27,6 +27,17 @@ public class InputManager implements MouseListener, MouseMotionListener, KeyList
 	//=====================================================================
 	// Methods
 	//---------------------------------------------------------------------
+
+	public int getMouseX()
+	{
+		return mMouseX;
+	}
+
+	public int getMouseY()
+	{
+		return mMouseY;
+	}
+
 	public boolean getMouseLeftPressed()
 	{
 		return mMouseLeftButtonPressed;
