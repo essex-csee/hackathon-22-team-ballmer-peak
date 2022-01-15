@@ -9,6 +9,8 @@ import Util.CONSTANTS;
 
 public class CardButton extends SquareButton
 {
+    float scale = 1;
+
     CardButton()
     {
         super(0,
@@ -24,15 +26,37 @@ public class CardButton extends SquareButton
     {
         super(0,
                 // TODO: Check CARD_WIDTH_PADDING, offset seems slightly strange
-                ClientGame.getWindowWidth()/2 - (CONSTANTS.CARD_WIDTH/2 * handSize) +( index * CONSTANTS.CARD_WIDTH) - CONSTANTS.CARD_WIDTH_PADDING,
-                ClientGame.getWindowHeight() * 1f - CONSTANTS.CARD_HEIGHT_PADDING,
-                CONSTANTS.CARD_WIDTH,
-                CONSTANTS.CARD_HEIGHT,
+                (index-1) * cardWidth(handSize),
+                ClientGame.getWindowHeight() - cardHeight(handSize),
+                //(handSize-1) * cardHeight(handSize),
+                //ClientGame.getWindowWidth()/2 - (CONSTANTS.CARD_WIDTH/2 * handSize) +( index * CONSTANTS.CARD_WIDTH) - CONSTANTS.CARD_WIDTH_PADDING,
+                //ClientGame.getWindowHeight() * 1f - CONSTANTS.CARD_HEIGHT_PADDING,
+                cardWidth(handSize),
+                cardHeight(handSize),
                 // Once state is implemented, this should work fine
                 //CardDisplay.getCardImage(c);
                 "Whono/Assets/Cards/Green/GreenReverse.png"
         );
     }
+
+    public static int cardWidth(int handSize)
+    {
+        if(handSize < 7)
+        {
+            return CONSTANTS.CARD_WIDTH;
+        }
+        return (ClientGame.getWindowWidth() / handSize);
+    }
+
+    public static int cardHeight(int handSize)
+    {
+        if(handSize < 7)
+        {
+            return CONSTANTS.CARD_HEIGHT;
+        }
+        return ((CONSTANTS.CARD_HEIGHT / CONSTANTS.CARD_WIDTH) * cardWidth(handSize));
+    }
+
 
     CardButton(int id)
     {
