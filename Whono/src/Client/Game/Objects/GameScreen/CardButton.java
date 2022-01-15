@@ -1,6 +1,8 @@
 package Client.Game.Objects.GameScreen;
 
 import Client.Game.ClientGame;
+import Client.Game.Objects.Card;
+import Client.Game.Objects.Hand;
 import Client.Game.Objects.SquareButton;
 import Util.CONSTANTS;
 
@@ -20,7 +22,9 @@ public class CardButton extends SquareButton
     @Override
     protected void onMousePress()
     {
-
+        // check ID for button pressed
+        // if < 4
+        //      specific function i.e. pause/exit/deck/pile
     }
 
     @Override

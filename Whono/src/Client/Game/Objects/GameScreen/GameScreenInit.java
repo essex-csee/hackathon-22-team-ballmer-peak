@@ -1,7 +1,6 @@
 package Client.Game.Objects.GameScreen;
 
 import Client.Game.Objects.InitObject;
-import Client.Game.Objects.MainMenu.ExitButton;
 import Client.Game.Objects.MainMenu.PlayButton;
 
 public class GameScreenInit extends InitObject
@@ -11,10 +10,40 @@ public class GameScreenInit extends InitObject
         super();
     }
 
+    int cardID = 0;
+
+    public void initMenu()
+    {
+        ExitButton quit = new ExitButton();
+        addGameObject(quit);
+        PauseButton pause = new PauseButton();
+        addGameObject(pause);
+    }
+
+    public void initDeck()
+    {
+        // ID: 2
+    }
+
+    public void initPile()
+    {
+        // ID: 3
+    }
+
+    public void initHand()
+    {
+        // ID: 4 - handsize
+    }
+
     @Override
     protected void setup()
     {
-        addGameObject(new CardButton());
+        // Get GameState
+        initMenu();
+        initDeck();
+        initPile();
+        initHand();
+        //addGameObject(new CardButton());
     }
 
 }
