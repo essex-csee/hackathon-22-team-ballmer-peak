@@ -49,6 +49,18 @@ public class Deck
 		Collections.shuffle(d.deckContents);
 	}
 
+	public Card drawCard()
+	{
+		if(deckContents.size() > 0)
+		{
+			return deckContents.remove(0);
+		}
+		else
+		{
+			return null;
+		}
+	}
+
 	@Override
 	public String toString()
 	{
