@@ -1,4 +1,6 @@
-package Client.Game.Objects.MainMenu;
+package Client.Game.Objects;
+
+import Client.ClientMain;
 
 public class Game {
 
@@ -18,6 +20,5 @@ public class Game {
 
 
     }
-
 
 }
