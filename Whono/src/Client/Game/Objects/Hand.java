@@ -8,7 +8,9 @@ public class Hand
 	private int handID;
 	private List<Card> hand;
 	private int handSize;
-	private int handSizeLimit;
+
+	public static int HAND_STARTING_SIZE;
+	public static int HAND_MAX_SIZE;
 
 	public Hand()
 	{
@@ -16,7 +18,7 @@ public class Hand
 
 	public boolean addCard(Card c)
 	{
-		if((handSize + 1) > handSizeLimit)
+		if((handSize + 1) > HAND_MAX_SIZE)
 		{
 			return false;
 		}
@@ -71,7 +73,7 @@ public class Hand
 
 	public void setHandSizeLimit(int limit)
 	{
-		handSizeLimit = limit;
+		HAND_MAX_SIZE = limit;
 	}
 
 	@Override
@@ -82,7 +84,7 @@ public class Hand
 		out += "deckID:'" + handID + "',";
 		out += "hand:'" + hand + "',";
 		out += "handSize:'" + handSize + "',";
-		out += "handSizeLimit:'" + handSizeLimit + "',";
+		out += "handSizeLimit:'" + HAND_MAX_SIZE + "',";
 		out += "]";
 		return out;
 	}

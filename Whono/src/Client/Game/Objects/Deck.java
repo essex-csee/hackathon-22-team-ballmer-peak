@@ -44,9 +44,9 @@ public class Deck
 		return toFind;
 	}
 
-	public void shuffleDeck(Deck d)
+	public void shuffle()
 	{
-		Collections.shuffle(d.deckContents);
+		Collections.shuffle(deckContents);
 	}
 
 	public Card drawCard()

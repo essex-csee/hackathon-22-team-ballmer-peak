@@ -1,6 +1,5 @@
 package Client.Game.Objects;
 
-import java.util.Collections;
 import java.util.List;
 
 public class HandFactory
@@ -22,6 +21,21 @@ public class HandFactory
 		{
 			hand.addCard(h.get(i));
 		}
+		return hand;
+	}
+
+	public static Hand createHand(Deck d)
+	{
+		Hand hand  = new Hand();
+
+		// without a top peek mechanic maintaining deck structure ain't shit
+		d.shuffle();
+
+		for(int i = 0; i < Hand.HAND_STARTING_SIZE; i++)
+		{
+			hand.addCard(d.drawCard());
+		}
+
 		return hand;
 	}
 
