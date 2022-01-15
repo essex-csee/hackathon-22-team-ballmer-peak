@@ -2,6 +2,7 @@ package Client.Game.Objects.MainMenu;
 
 import Client.Game.ClientGame;
 import Client.Game.Objects.SquareButton;
+import Util.CONSTANTS;
 
 import javax.swing.*;
 
@@ -10,12 +11,11 @@ public class PlayButton extends SquareButton
 	PlayButton()
 	{
 		super(0,
-			ClientGame.getWindowWidth()/2f  - 320f/2f,
-			120,
-			320,
-			86,
-				"Whono/Assets/test.png"
-				//new ImageIcon("Whono/Assets/test.png").getImage()
+			ClientGame.getWindowWidth()/2 - CONSTANTS.CARD_WIDTH/2 - CONSTANTS.CARD_WIDTH_PADDING,
+			ClientGame.getWindowHeight() * 0.6f - CONSTANTS.CARD_HEIGHT_PADDING,
+			CONSTANTS.CARD_WIDTH,
+			CONSTANTS.CARD_HEIGHT,
+				"Whono/Assets/Cards/Green/GreenReverse.png"
 		);
 	}
 
