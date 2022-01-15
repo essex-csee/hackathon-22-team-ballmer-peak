@@ -81,6 +81,13 @@ public class Renderer extends JPanel
 		}
 	}
 
+	public void wipeRenderTarget()
+	{
+		mRenderTargets2DToAdd.clear();
+		mRenderTargets2DToRemove.clear();
+		mRenderTargets2D.clear();
+	}
+
 	public void renderTargets()
 	{
 		this.repaint();

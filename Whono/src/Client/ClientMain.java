@@ -2,6 +2,7 @@ package Client;
 
 import Client.Game.ClientGame;
 import Client.Game.Objects.ImageManager;
+import Client.Game.Objects.MainMenu.MainMenuInit;
 import Client.Game.Objects.StaticImageObject;
 import Client.Game.Objects.TestButton;
 
@@ -20,9 +21,10 @@ public class ClientMain
 			cgThread.setPriority(Thread.MAX_PRIORITY);
 			cgThread.start();
 
+
 			ImageManager imageManager = new ImageManager();
 
-			TestButton tb = new TestButton();
+			MainMenuInit tb = new MainMenuInit();
 
 			ClientGame.addLogicTarget(tb);
 
