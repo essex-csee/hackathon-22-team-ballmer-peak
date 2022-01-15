@@ -24,6 +24,8 @@ public class ClientMain
 			ClientGame.addLogicTarget(tb);
 
 			ClientGame.addRenderTarget(tb);
+
+			System.out.println(tb);
 		}
 		catch (InterruptedException e)
 		{

@@ -28,4 +28,11 @@ public class TestButton extends SquareButton
 	{
 		System.out.printf("released \n");
 	}
+
+	@Override
+	public String toString()
+	{
+		return "Client.Game.Objects.TestButton[x:'" + this.x + "', y:'" + this.y + "','" + this.mSpriteList.toString() + "']";
+	}
+
 }
