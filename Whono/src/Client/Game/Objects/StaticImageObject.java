@@ -16,22 +16,22 @@ public class StaticImageObject extends GameObject
 	{
 		if(ClientGame.getInput().getKeyPressed('a'))
 		{
-			x-= deltaTime;
+			mX -= deltaTime;
 		}
 
 		if(ClientGame.getInput().getKeyPressed('d'))
 		{
-			x+= deltaTime;
+			mX += deltaTime;
 		}
 
 		if(ClientGame.getInput().getKeyPressed('w'))
 		{
-			y+=deltaTime;
+			mY +=deltaTime;
 		}
 
 		if(ClientGame.getInput().getKeyPressed('s'))
 		{
-			y-=deltaTime;
+			mY -=deltaTime;
 		}
 	}
 }

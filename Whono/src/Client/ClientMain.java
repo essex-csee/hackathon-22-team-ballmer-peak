@@ -2,6 +2,7 @@ package Client;
 
 import Client.Game.ClientGame;
 import Client.Game.Objects.StaticImageObject;
+import Client.Game.Objects.TestButton;
 
 import javax.swing.*;
 import java.awt.*;
@@ -18,15 +19,11 @@ public class ClientMain
 			cgThread.setPriority(Thread.MAX_PRIORITY);
 			cgThread.start();
 
-			Image img = new ImageIcon("Whono/Assets/b00g.png").getImage();
+			TestButton tb = new TestButton();
 
-			System.out.printf("%d, %d \n", img.getWidth(null), img.getHeight(null));
+			ClientGame.addLogicTarget(tb);
 
-			StaticImageObject staticImage = new StaticImageObject(0,0,0,640,480,img);
-
-			ClientGame.addLogicTarget(staticImage);
-
-			ClientGame.addRenderTarget(staticImage);
+			ClientGame.addRenderTarget(tb);
 		}
 		catch (InterruptedException e)
 		{

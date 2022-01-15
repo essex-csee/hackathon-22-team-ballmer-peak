@@ -11,6 +11,25 @@ import java.util.ArrayList;
 
 public abstract class Button extends GameObject implements ISubscriber, ISubscribable
 {
+	public Button(long ID)
+	{
+		super(ID);
+	}
+
+	public Button(long ID, Image singleSprite)
+	{
+		super(ID, singleSprite);
+	}
+
+	public Button(long ID, float x, float y, int width, int height, Image sprite)
+	{
+		super(ID, x, y, width, height, sprite);
+	}
+
+	public Button(long ID, float x, float y, int width, int height, ArrayList<Image> spriteList)
+	{
+		super(ID, x, y, width, height, spriteList);
+	}
 
 	//=====================================================================
 	// Public Methods

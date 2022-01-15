@@ -13,22 +13,17 @@ public abstract class GameObject implements IRenderTarget2D, ILogicTarget
 	//=====================================================================
 	// Constructors
 	//---------------------------------------------------------------------
-	protected GameObject()
-	{
-		this(-1); // -1 to flag this object doesn't have a valid id
-	}
-
-	protected GameObject(long ID)
+	public GameObject(long ID)
 	{
 		this(ID, null);
 	}
 
-	protected GameObject(long ID, Image singleSprite)
+	public GameObject(long ID, Image singleSprite)
 	{
 		this(ID, 0, 0, 0, 0, singleSprite);
 	}
 
-	protected GameObject(long ID, float x, float y, int width, int height, Image sprite)
+	public GameObject(long ID, float x, float y, int width, int height, Image sprite)
 	{
 		this(   ID,
 			x,
@@ -38,15 +33,15 @@ public abstract class GameObject implements IRenderTarget2D, ILogicTarget
 			(sprite != null)? new ArrayList<Image>( List.of(sprite) ) : null);
 	}
 
-	protected GameObject(long ID, float x, float y, int width, int height, ArrayList<Image> spriteList)
+	public GameObject(long ID, float x, float y, int width, int height, ArrayList<Image> spriteList)
 	{
 		this.ID         = ID;
-		this.x          = x;
-		this.y          = y;
-		this.width      = width;
-		this.height     = height;
-		this.spriteList = spriteList;
-		this.imageIndex = 0;
+		this.mX = x;
+		this.mY = y;
+		this.mWidth = width;
+		this.mHeight = height;
+		this.mSpriteList = spriteList;
+		this.mImageIndex = 0;
 	}
 
 
@@ -56,16 +51,16 @@ public abstract class GameObject implements IRenderTarget2D, ILogicTarget
 	public void draw(Graphics2D g)
 	{
 		if (
-			spriteList != null       // don't try if we aren't using sprites
-			&& !spriteList.isEmpty() // need an actual image to draw
+			mSpriteList != null       // don't try if we aren't using sprites
+			&& !mSpriteList.isEmpty() // need an actual image to draw
 		   )
 		{
-			g.drawImage(spriteList.get(imageIndex),
-				(int) x,
-				(int) y,
-				width,
-				height,
-				imageObserver
+			g.drawImage(mSpriteList.get(mImageIndex),
+				(int) mX,
+				(int) mY,
+				mWidth,
+				mHeight,
+				mImageObserver
 			);
 		}
 	}
@@ -80,11 +75,11 @@ public abstract class GameObject implements IRenderTarget2D, ILogicTarget
 	//=====================================================================
 	// Protected variables
 	//---------------------------------------------------------------------
-	protected float x;
-	protected float y;
-	protected int width;
-	protected int height;
-	protected int imageIndex;
-	protected ArrayList<Image> spriteList;
-	protected ImageObserver imageObserver = null;
+	protected float mX;
+	protected float mY;
+	protected int mWidth;
+	protected int mHeight;
+	protected int mImageIndex;
+	protected ArrayList<Image> mSpriteList;
+	protected ImageObserver mImageObserver = null;
 }
