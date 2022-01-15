@@ -22,17 +22,28 @@ public class GameScreenInit extends InitObject
 
     public void initDeck()
     {
+        // TODO: CardButton needs parameters for the Type/Colour
         // ID: 2
+        CardButton deck = new CardButton();
+        addGameObject(deck);
     }
 
     public void initPile()
     {
+        CardButton pile = new CardButton();
+        addGameObject(pile);
         // ID: 3
     }
 
     public void initHand()
     {
+        // Get player Hand
         // ID: 4 - handsize
+        //
+        // iterate through player hand
+        //      CardButton offset
+        //      CardButton c = new CardButton();
+        //      addGameObject(c);
     }
 
     @Override
@@ -43,7 +54,6 @@ public class GameScreenInit extends InitObject
         initDeck();
         initPile();
         initHand();
-        //addGameObject(new CardButton());
     }
 
 }

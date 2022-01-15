@@ -19,12 +19,22 @@ public class CardButton extends SquareButton
         );
     }
 
+    CardButton(int index, Card c)
+    {
+        super(0,
+                // x needs to be changed in regards to index parameter
+                ClientGame.getWindowWidth()/2 - CONSTANTS.CARD_WIDTH/2 - CONSTANTS.CARD_WIDTH_PADDING,
+                ClientGame.getWindowHeight() * 0.6f - CONSTANTS.CARD_HEIGHT_PADDING,
+                CONSTANTS.CARD_WIDTH,
+                CONSTANTS.CARD_HEIGHT,
+                // Asset needs to be changed based on Card parameter
+                "Whono/Assets/Cards/Green/GreenReverse.png"
+        );
+    }
     @Override
     protected void onMousePress()
     {
-        // check ID for button pressed
-        // if < 4
-        //      specific function i.e. pause/exit/deck/pile
+        // click on card action
     }
 
     @Override

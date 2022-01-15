@@ -22,7 +22,7 @@ public class PlayButton extends SquareButton
 	@Override
 	protected void onMousePress()
 	{
-
+		// change context to GameScreen
 	}
 
 	@Override
