@@ -9,12 +9,12 @@ public class TestButton extends SquareButton
 	public TestButton()
 	{
 		super(0,
-			0,
-			0,
-			640,
-			480,
-			new ImageIcon("Whono/Assets/b00g.png").getImage()
-			);
+				0,
+				0,
+				640,
+				360,
+				new ImageIcon("Whono/Assets/test.png").getImage()
+		);
 	}
 
 	@Override
