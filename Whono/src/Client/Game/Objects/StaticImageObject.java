@@ -14,24 +14,6 @@ public class StaticImageObject extends GameObject
 	@Override
 	public void update(long deltaTime)
 	{
-		if(ClientGame.getInput().getKeyPressed('a'))
-		{
-			mX -= deltaTime;
-		}
 
-		if(ClientGame.getInput().getKeyPressed('d'))
-		{
-			mX += deltaTime;
-		}
-
-		if(ClientGame.getInput().getKeyPressed('w'))
-		{
-			mY +=deltaTime;
-		}
-
-		if(ClientGame.getInput().getKeyPressed('s'))
-		{
-			mY -=deltaTime;
-		}
 	}
 }
