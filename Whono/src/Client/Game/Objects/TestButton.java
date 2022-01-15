@@ -13,9 +13,10 @@ public class TestButton extends SquareButton
 				0,
 				640,
 				360,
-				new ImageIcon("Whono/Assets/test.png").getImage()
+				"Whono/Assets/test.png"
 		);
 	}
+	//new ImageIcon("Whono/Assets/test.png").getImage()
 
 	@Override
 	protected void onMousePress()
@@ -32,7 +33,7 @@ public class TestButton extends SquareButton
 	@Override
 	public String toString()
 	{
-		return "Client.Game.Objects.TestButton[x:'" + mX + "', y:'" + mX + "','" + this.mSpriteList.toString() + "']";
+		return "Client.Game.Objects.TestButton[x:'" + mX + "', y:'" + mX + "']";
 	}
 
 }

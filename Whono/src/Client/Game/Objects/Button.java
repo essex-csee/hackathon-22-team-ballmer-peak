@@ -29,6 +29,11 @@ public abstract class Button extends GameObject implements ISubscriber, ISubscri
 		super(ID, x, y, width, height, spriteList);
 	}
 
+	public Button(long ID, float x, float y, int width, int height, String name)
+	{
+		super(ID, x, y, width, height, name);
+	}
+
 	//=====================================================================
 	// Public Methods
 	//---------------------------------------------------------------------

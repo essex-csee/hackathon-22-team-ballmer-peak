@@ -27,6 +27,11 @@ public abstract class SquareButton extends Button
 		super(ID, x, y, width, height, spriteList);
 	}
 
+	public SquareButton(long ID, float x, float y, int width, int height, String name)
+	{
+		super(ID, x, y, width, height, name);
+	}
+
 	@Override
 	public void update(long deltaTime)
 	{

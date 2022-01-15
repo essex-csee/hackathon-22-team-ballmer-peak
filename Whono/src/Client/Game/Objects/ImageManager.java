@@ -9,7 +9,7 @@ import java.util.Map;
 
 public class ImageManager
 {
-    private class ImageMeta
+    private static class ImageMeta
     {
         String name;
         int usedCount;
@@ -22,9 +22,9 @@ public class ImageManager
 
     }
 
-    List<ImageMeta> imageMetaList;
+    static List<ImageMeta> imageMetaList;
 
-    String currentDirectory;
+    static String currentDirectory;
     ArrayList<Image> imageList;
     List<String> imageListNames;
 
@@ -50,7 +50,7 @@ public class ImageManager
         return imageList;
     }
 
-    public Image loadImage(String imageName)
+    public static Image loadImage(String imageName)
     {
         ImageMeta meta = new ImageMeta();
         Image out = null;
@@ -77,7 +77,7 @@ public class ImageManager
         return null;
     }
 
-    public Image removeImage(Image delete)
+    public static Image removeImage(Image delete)
     {
         Image out = null;
         // Check if image already loaded
@@ -102,7 +102,9 @@ public class ImageManager
         return out;
     }
 
-    public Image removeImage(String imageName)
+    // TODO: update this in accordance to ImageMeta
+    /*
+    public static Image removeImage(String imageName)
     {
         String imagePath = currentDirectory + imageName;
         Image out = null;
@@ -119,6 +121,7 @@ public class ImageManager
         return out;
 
     }
+    */
 
     public void clear()
     {

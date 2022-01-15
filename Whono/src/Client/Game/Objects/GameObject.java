@@ -33,6 +33,18 @@ public abstract class GameObject implements IRenderTarget2D, ILogicTarget
 			(sprite != null)? new ArrayList<Image>( List.of(sprite) ) : null);
 	}
 
+	public GameObject(long ID, float x, float y, int width, int height, String name)
+	{
+		this(
+				ID,
+				x,
+				y,
+				width,
+				height,
+				ImageManager.loadImage(name)
+		);
+	}
+
 	public GameObject(long ID, float x, float y, int width, int height, ArrayList<Image> spriteList)
 	{
 		this.ID         = ID;
