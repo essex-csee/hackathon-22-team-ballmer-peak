@@ -49,7 +49,7 @@ public class Card implements Comparable<Card>
 
 	public enum Colour
 	{
-		BLACK, RED, GREEN, BLUE, YELLOW;
+		 GREEN, PURPLE, RED, YELLOW, BLACK;
 	}
 
 	public int getCardID()
@@ -154,7 +154,7 @@ public class Card implements Comparable<Card>
 			id++;
 
 			c.CardID = id;
-			c.cardColour = Colour.BLUE;
+			c.cardColour = Colour.PURPLE;
 			deck.add(c);
 			id++;
 
