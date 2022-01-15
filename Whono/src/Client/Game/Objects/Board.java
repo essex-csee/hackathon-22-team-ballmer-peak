@@ -85,6 +85,13 @@ public class Board
 		return removed;
 	}
 
+	public void clearBoard()
+	{
+		decks.clear();
+		hands.clear();
+		pile.clear();
+	}
+
 	@Override
 	public String toString()
 	{

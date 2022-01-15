@@ -11,7 +11,7 @@ public class GameState extends GameObject
     // Possible Game States
 
     public enum State {
-        MAINMENU,GAMESTART,LEADERBOARD
+        MAINMENU,PLAYERJOIN,GAMESTART,GAMESTAT,GAMEOVER,LEADERBOARD
     }
 
     private State currentState;
@@ -31,6 +31,29 @@ public class GameState extends GameObject
         super(ID);
     }
 
+    public void setBoardState(Board b)
+    {
+        boardState.clearBoard();
+
+        for(int i = 0; i < b.getDecks().size(); i++)
+        {
+            boardState.addDeck(b.getDecks().get(i));
+        }
+        for(int i = 0; i < b.getHands().size(); i++)
+        {
+            boardState.addHand(b.getHands().get(i));
+        }
+        for(int i = 0; i < b.getPile().size(); i++)
+        {
+            boardState.addToPile(b.getPile().get(i));
+        }
+    }
+
+    public Board getBoardState()
+    {
+        return boardState;
+    }
+
     @Override
     public void update(long deltaTime)
     {
@@ -45,6 +68,15 @@ public class GameState extends GameObject
                 break;
             case LEADERBOARD:
                 // Draw leaderboard
+                break;
+            case PLAYERJOIN:
+                // Player Join Game
+                break;
+            case GAMEOVER:
+                // Game over condition check
+                break;
+            case GAMESTAT:
+                // Game state 'increment'
                 break;
             default:
                 System.out.println("Invalid State in GameState.");
