@@ -6,6 +6,7 @@ import Util.IRenderTarget2D;
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class Renderer extends JPanel
 {
@@ -17,7 +18,7 @@ public class Renderer extends JPanel
 		super();
 		window.add(this);
 
-		this.mRenderTargets2D         = new ArrayList<>();
+		this.mRenderTargets2D         = new CopyOnWriteArrayList<IRenderTarget2D>();
 		this.mRenderTargets2DToAdd    = new ArrayList<>();
 		this.mRenderTargets2DToRemove = new ArrayList<>();
 
@@ -42,8 +43,6 @@ public class Renderer extends JPanel
 	public void paintComponent(Graphics g)
 	{
 
-		boolean listHasChanged; // track changes and try to whack-a-mole concurrency errors are they pop up
-
 		g.clearRect(0,0,mWidth,mHeight);
 
 		if ( !mRenderTargets2DToRemove.isEmpty() )
@@ -51,7 +50,6 @@ public class Renderer extends JPanel
 			mRenderTargets2D.removeAll(mRenderTargets2DToRemove);
 			mRenderTargets2D.clear();
 
-			listHasChanged = true;
 		}
 
 		if ( !mRenderTargets2DToAdd.isEmpty() )
@@ -59,7 +57,6 @@ public class Renderer extends JPanel
 			mRenderTargets2D.addAll(mRenderTargets2DToAdd);
 			mRenderTargets2DToAdd.clear();
 
-			listHasChanged = true;
 		}
 
 		for(IRenderTarget2D t : mRenderTargets2D)
@@ -89,9 +86,9 @@ public class Renderer extends JPanel
 		this.repaint();
 	}
 
-	protected final ArrayList<IRenderTarget2D> mRenderTargets2D;
-	protected final ArrayList<IRenderTarget2D> mRenderTargets2DToAdd;
-	protected final ArrayList<IRenderTarget2D> mRenderTargets2DToRemove;
+	protected final CopyOnWriteArrayList<IRenderTarget2D> mRenderTargets2D;
+	protected final ArrayList<IRenderTarget2D>            mRenderTargets2DToAdd;
+	protected final ArrayList<IRenderTarget2D>            mRenderTargets2DToRemove;
 
 	protected final int mX;
 	protected final int mY;
