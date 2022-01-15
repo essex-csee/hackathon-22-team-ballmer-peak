@@ -16,7 +16,8 @@ public class ExitButton extends SquareButton
 			120 * 5,
 			320,
 			86,
-			new ImageIcon("Whono/Assets/test.png").getImage()
+				"Whono/Assets/test.png"
+				//new ImageIcon("Whono/Assets/test.png").getImage()
 		);
 	}
 
