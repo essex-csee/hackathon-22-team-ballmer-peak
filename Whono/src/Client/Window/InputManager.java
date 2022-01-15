@@ -88,6 +88,7 @@ public class InputManager implements MouseListener, MouseMotionListener, KeyList
 		mPressedKeys.clear();  // are pressed this frame
 		mHeldKeys.clear();     // are pressed this frame and last frame
 		mReleasedKeys.clear(); // where pressed last frame but not this frame
+		//mSubscribers.clear();
 
 		mMouseX = 0;
 		mMouseY = 0;
