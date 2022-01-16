@@ -8,11 +8,13 @@ import java.util.List;
 
 public class DeckFactory
 {
-	public static Deck createDeck(Card.Type type, Card.Colour colour)
+	public static Deck createDeck()
 	{
 		Deck deck = new Deck();
 
 		int cardID = 0;
+
+		/* put this back after wildcards work!
 		// Create Wildcards
 		for(int i = 0; i < 4; i++)
 		{
@@ -29,6 +31,8 @@ public class DeckFactory
 			deck.addCard(c);
 			cardID++;
 		}
+		*/
+
 		// Create 'Regular' Cards
 		for(int i = 1; i < 13; i++)
 		{

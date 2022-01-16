@@ -33,7 +33,8 @@ public class HandFactory
 
 		for(int i = 0; i < Hand.HAND_STARTING_SIZE; i++)
 		{
-			hand.addCard(d.drawCard());
+			Card c = d.drawCard();
+			hand.addCard(c);
 		}
 
 		return hand;
