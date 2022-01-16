@@ -205,10 +205,6 @@ public class BoardSolo extends GameObject implements ISubscriber
             c.update(deltaTime);
         }
 
-        for(int i = 0; i < mHands.size(); i++)
-        {
-            mHandStatusDisplays.get(i).setHandSize(mHands.get(i).getHandSize()-1);
-        }
     }
 
     @Override

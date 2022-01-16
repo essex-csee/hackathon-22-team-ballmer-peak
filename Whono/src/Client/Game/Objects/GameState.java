@@ -46,9 +46,9 @@ public class GameState extends GameObject
             HandStatus status = new HandStatus(
                     i,
                     50,
-                    i*120 + 62
+                    i*120 + 62,
+                    g.mHands.get(i)
             );
-            status.setHandSize(g.mHands.get(i).getHandSize());
             g.mBoard.addHandStatus(status);
         }
 
