@@ -36,6 +36,8 @@ public class GameState extends GameObject
 
         g.mBoard.addDeck(g.mDeck);
 
+        g.getBoard().addToPile(g.mDeck.drawCard());
+
         return g;
     }
 
