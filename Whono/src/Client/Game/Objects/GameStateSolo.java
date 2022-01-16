@@ -1,7 +1,6 @@
 package Client.Game.Objects;
 
-import Client.Game.Objects.GameScreen.BoardSolo;
-import Client.Game.Objects.GameScreen.HandStatus;
+import Client.Game.Objects.GameScreenSolo.BoardSolo;
 
 import java.util.ArrayList;
 

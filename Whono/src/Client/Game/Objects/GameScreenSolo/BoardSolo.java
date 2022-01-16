@@ -1,7 +1,8 @@
-package Client.Game.Objects.GameScreen;
+package Client.Game.Objects.GameScreenSolo;
 
 import Client.Game.ClientGame;
 import Client.Game.Objects.*;
+import Client.Game.Objects.GameScreen.*;
 import Client.Game.Objects.MainMenu.MainMenuInit;
 import Util.CONSTANTS;
 import Util.ISubscribable;
