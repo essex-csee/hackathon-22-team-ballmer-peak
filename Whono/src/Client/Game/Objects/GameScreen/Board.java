@@ -130,6 +130,38 @@ public class Board extends GameObject implements ISubscriber
 
 	}
 
+	public Card drawCard()
+	{
+		if (mDecks.get(0).getDeckContents().size() == 0)
+		{
+			for(Card c : mPile)
+			{
+				mDecks.get(0).addCard( c );
+			}
+			mPile.clear();
+			mPile.add(mPileCard);
+		}
+
+		return mDecks.get(0).drawCard();
+	}
+
+	public void reportWhono(Hand h)
+	{
+		System.out.println("whono");
+	}
+
+
+	public void checkHands()
+	{
+		for ( Hand h : mHands )
+		{
+			if ( h.getHandSize() == 1 )
+			{
+				reportWhono(h);
+			}
+		}
+	}
+
 	@Override
 	public String toString()
 	{
@@ -186,8 +218,6 @@ public class Board extends GameObject implements ISubscriber
 	{
 		if(subscription instanceof CardButton)
 		{
-			System.out.println("POKED by " + ((CardButton) subscription).getCard() );
-
 			Card c =((CardButton) subscription).getCard();
 			Hand h = getHands().get(0);
 			if( Game.canPlay(mPileCard, c) )
@@ -200,26 +230,14 @@ public class Board extends GameObject implements ISubscriber
 
 		if(subscription instanceof DeckButton)
 		{
-			System.out.println("POKED by " + ((DeckButton) subscription) );
 			Hand h = getHands().get(0);
-			if (mDecks.get(0).getDeckContents().size() == 0)
+			if (h.getHandSize() < Hand.HAND_MAX_SIZE)
 			{
-				for(Card c : mPile)
-				{
-					mDecks.get(0).addCard( c );
-				}
-				mPile.clear();
-				mPile.add(mPileCard);
-			}
-			else
-			{
-				if (h.getHandSize() < Hand.HAND_MAX_SIZE)
-				{
-					System.out.printf("Card added\n");
-					h.addCard(mDecks.get(0).drawCard());
-					refreshDisplay(h);
-				}
+				h.addCard(drawCard());
+				refreshDisplay(h);
 			}
 		}
+
+		checkHands();
 	}
 }
