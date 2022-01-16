@@ -1,10 +1,7 @@
 package Client.Game.Objects.GameScreen;
 
 import Client.Game.ClientGame;
-import Client.Game.Objects.Card;
-import Client.Game.Objects.Deck;
-import Client.Game.Objects.GameObject;
-import Client.Game.Objects.Hand;
+import Client.Game.Objects.*;
 import Util.CONSTANTS;
 import Util.ISubscribable;
 import Util.ISubscriber;
@@ -191,11 +188,14 @@ public class Board extends GameObject implements ISubscriber
 		{
 			System.out.println("POKED by " + ((CardButton) subscription).getCard() );
 
-			addToPile( ((CardButton) subscription).getCard() );
-
+			Card c =((CardButton) subscription).getCard();
 			Hand h = getHands().get(0);
-			h.removeCard(((CardButton) subscription).getCard() );
-			refreshDisplay(h);
+			if( Game.canPlay(mPileCard, c) )
+			{
+				addToPile(c);
+				h.removeCard(c);
+				refreshDisplay(h);
+			}
 		}
 
 		if(subscription instanceof DeckButton)

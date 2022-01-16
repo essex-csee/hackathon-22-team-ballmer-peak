@@ -24,8 +24,7 @@ public class Game extends Deck {
     // Can always be played
 
 
-    public boolean canPlay(Card pileCard, Card toPlay) {
-        pileCard = board.getPileCard();
+    public static boolean canPlay(Card pileCard, Card toPlay) {
 
         if (toPlay.getCardColour() == Card.Colour.GREEN || toPlay.getCardColour() == Card.Colour.RED || toPlay.getCardColour() == Card.Colour.PURPLE || toPlay.getCardColour() == Card.Colour.YELLOW) {
 
@@ -44,9 +43,7 @@ public class Game extends Deck {
             }
         }
 
-        if (toPlay.getCardColour() == Card.Colour.BLACK) { return true; }
-
-        return false;
+        return toPlay.getCardColour() == Card.Colour.BLACK;
     }
 
     /*    public Card Types(){
