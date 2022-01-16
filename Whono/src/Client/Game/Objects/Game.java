@@ -1,18 +1,11 @@
-/*
 package Client.Game.Objects;
 
+import Client.Game.Objects.GameScreen.Board;
 
-import java.util.ArrayList;
-import java.util.List;
 
 public class Game extends Deck {
 
-    public boolean isPlayable;
-
-    // i know this code is disgusting and doesnt work i just dont 100% get the deck code rn
-    // so i  can't simplify it until it works and i am tired
-    // so i'm just giving the vibes of what its meant to do.
-
+    Board board = new Board();
 
     //Get current card
     //Get previous placed card
@@ -30,43 +23,33 @@ public class Game extends Deck {
     // Wildcard applies to all
     // Can always be played
 
-    public void CheckCard(){
 
-        for (Card mDeckContent : mDeckContents) {
+    public boolean canPlay(Card pileCard, Card toPlay) {
+        pileCard = board.getPileCard();
 
-            if (mDeckContent.getCardColour() == GREEN || mDeckContent.getCardColour() == "RED" || mDeckContent.getCardColour() == "PURPLE" || mDeckContent.getCardColour() == "YELLOW") {
+        if (toPlay.getCardColour() == Card.Colour.GREEN || toPlay.getCardColour() == Card.Colour.RED || toPlay.getCardColour() == Card.Colour.PURPLE || toPlay.getCardColour() == Card.Colour.YELLOW) {
 
-               if (previousplayedcardcolour == mDeckContent.getCardColour){
+            if (pileCard.getCardColour() == toPlay.getCardColour()) {
 
-                    isPlayable == true;
-
-               }
-
-
+                return true;
             }
-
-            if (mDeckContent.getCardColour() == "BlACK"){
-
-                isPlayable == true;
-            }
-
-            if (mDeckContent.getCardID() == ZERO || mDeckContent.getCardID() == TWO || mDeckContent.getCardID() == THREE || mDeckContent.getCardID() == FOUR || mDeckContent.getCardID() == FIVE || mDeckContent.getCardID() == SIX
-            mDeckContent.getCardID() == SEVEN || mDeckContent.getCardID() == EIGHT || mDeckContent.getCardID() == NINE){
-
-                if (previousplayedcardID == mDeckContent.getCardID){
-
-                    isPlayable == true;
-
-               }
-
-
-            }
-
         }
 
+        if (toPlay.getCardType() == Card.Type.ZERO || toPlay.getCardType() == Card.Type.ONE || toPlay.getCardType() == Card.Type.TWO || toPlay.getCardType() == Card.Type.THREE || toPlay.getCardType() == Card.Type.FOUR ||
+                toPlay.getCardType() == Card.Type.FIVE || toPlay.getCardType() == Card.Type.SIX || toPlay.getCardType() == Card.Type.SEVEN || toPlay.getCardType() == Card.Type.EIGHT || toPlay.getCardType() == Card.Type.NINE) {
 
+            if (pileCard.getCardType() == toPlay.getCardType()) {
 
+                return true;
+            }
+        }
+
+        if (toPlay.getCardColour() == Card.Colour.BLACK) { return true; }
+
+        return false;
     }
 
+    /*    public Card Types(){
+        return Card.Type.ZERO || Card.Type.ONE || Card.Type.TWO || Card.Type.THREE || Card.Type.FOUR || Card.Type.FIVE || Card.Type.SIX || Card.Type.SEVEN || Card.Type.EIGHT || Card.Type.NINE;
+    } */
 }
-*/
