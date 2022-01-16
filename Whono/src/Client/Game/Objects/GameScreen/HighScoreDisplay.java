@@ -6,6 +6,8 @@ import Util.CONSTANTS;
 
 import java.awt.*;
 
+import static Client.Game.Objects.GameScreen.Board.getPlayerDrawCount;
+
 public class HighScoreDisplay extends SquareButton
 {
 	private boolean con;
@@ -48,7 +50,7 @@ public class HighScoreDisplay extends SquareButton
 			g.setFont(font);
 			g.setColor(Color.WHITE);
 			// TODO:Need score value here
-			int score = 255;
+			int score = getPlayerDrawCount();
 
 			if(con)
 			{
