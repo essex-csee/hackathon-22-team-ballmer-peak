@@ -36,6 +36,7 @@ public class MainMenuInit extends InitObject
 
 		addGameObject(background);
 		addGameObject(logo);
+		addGameObject(new PlaySoloButton());
 		addGameObject(new PlayButton());
 		addGameObject(new ExitButton());
 

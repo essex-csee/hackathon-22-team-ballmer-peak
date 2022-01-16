@@ -2,6 +2,7 @@ package Client.Game.Objects;
 
 import Client.Game.Objects.GameScreen.AIPlayer;
 import Client.Game.Objects.GameScreen.Board;
+import Client.Game.Objects.GameScreen.BoardSolo;
 import Client.Game.Objects.GameScreen.HandStatus;
 import Util.CONSTANTS;
 
@@ -20,9 +21,9 @@ public class GameState extends GameObject
 
     public State getCurrentState(){ return  currentState;}
 
-    public static GameState createGameState(int numberOfPlayers)
+    public static GameState createGameState(int numberOfPlayers, boolean solo)
     {
-        GameState g = new GameState(numberOfPlayers);
+        GameState g = new GameState(numberOfPlayers,solo);
 
         g.mDeck = DeckFactory.createDeck();
         g.mHands = new ArrayList<Hand>();
@@ -60,11 +61,17 @@ public class GameState extends GameObject
         return g;
     }
 
-    public GameState(int numberOfPlayers)
+    public GameState(int numberOfPlayers, boolean solo)
     {
         super(-1);
-        mBoard = new Board();
+        if(solo) {
+            mBoard = new Board();
+        }
+        else {
+            mBoard = new Board();
+        }
     }
+
 
     public Board getBoard()
     {

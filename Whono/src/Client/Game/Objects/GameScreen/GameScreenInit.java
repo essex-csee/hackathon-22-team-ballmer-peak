@@ -14,6 +14,13 @@ public class GameScreenInit extends InitObject
     }
 
     int cardID = 0;
+    boolean solo = false;
+
+    public void setSolo(boolean b)
+    {
+        solo = b;
+    }
+
 
     public void initMenu()
     {
@@ -61,7 +68,7 @@ public class GameScreenInit extends InitObject
     @Override
     protected void setup()
     {
-        GameState g = GameState.createGameState(4);
+        GameState g = GameState.createGameState(4,solo);
 
         StaticImageObject background = new StaticImageObject(
                 1,
