@@ -40,22 +40,30 @@ public class DeckFactory
 			c.setCardID( cardID );
 			c.setCardType( Card.Type.values()[i] );
 
+			c = new Card();
 			c.setCardColour( Card.Colour.RED );
+			c.setCardType( Card.Type.values()[i] );
 			deck.addCard(c);
 			cardID++;
 
+			c = new Card();
 			c.setCardID( cardID );
 			c.setCardColour( Card.Colour.GREEN );
+			c.setCardType( Card.Type.values()[i] );
 			deck.addCard(c);
 			cardID++;
 
+			c = new Card();
 			c.setCardID( cardID );
 			c.setCardColour( Card.Colour.PURPLE );
+			c.setCardType( Card.Type.values()[i] );
 			deck.addCard(c);
 			cardID++;
 
+			c = new Card();
 			c.setCardID( cardID );
 			c.setCardColour(Card.Colour.YELLOW );
+			c.setCardType( Card.Type.values()[i] );
 			deck.addCard(c);
 			cardID++;
 		}
