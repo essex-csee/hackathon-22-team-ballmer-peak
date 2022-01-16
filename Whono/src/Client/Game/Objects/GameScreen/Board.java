@@ -211,11 +211,6 @@ public class Board extends GameObject implements ISubscriber
 		{
 			c.update(deltaTime);
 		}
-
-		for(int i = 0; i < mHands.size(); i++)
-		{
-			mHandStatusDisplays.get(i).setHandSize(mHands.get(i).getHandSize()-1);
-		}
 	}
 
 	@Override
@@ -263,13 +258,34 @@ public class Board extends GameObject implements ISubscriber
 					Card card = p.playCard(this);
 					if( card != null ) // AI has played a successful card
 					{
+						try
+						{	// dont have animations
+							// dont have time to make animations
+							// se we sleep
+							// thats a kind of animation
+							Thread.sleep(200);
 
+							for(CardButton cb : mPileDisplays)
+							{
+								cb.update(0);
+							}
+
+							ClientGame.forceRender();
+
+							Thread.sleep(200);
+
+						}
+						catch (InterruptedException e)
+						{
+							e.printStackTrace();
+						}
+
+						addToPile(card);
 					}
 					else
 					{
 						int index = AIPlayers.indexOf(p);
 						AIPlayers.remove(p);
-						mHandStatusDisplays.remove(index+1); // player is index zero so AI starts at 1
 					}
 				}
 			}

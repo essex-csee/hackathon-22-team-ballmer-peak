@@ -125,6 +125,10 @@ public class ClientWindow implements WindowListener
 		mWindow.dispose();
 	}
 
+	public void repaint()
+	{
+		mWindow.repaint();
+	}
 	//=====================================================================
 	// WindowListener Methods
 	//---------------------------------------------------------------------
