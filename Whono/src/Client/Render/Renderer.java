@@ -8,6 +8,7 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.Semaphore;
 
 public class Renderer extends JPanel
 {
@@ -22,6 +23,8 @@ public class Renderer extends JPanel
 		this.mRenderTargets2D         = new ArrayList<IRenderTarget2D>();
 		this.mRenderTargets2DToAdd    = new ArrayList<>();
 		this.mRenderTargets2DToRemove = new ArrayList<>();
+		this.listMutex                = new Semaphore(1);
+
 
 		this.mX = x;
 		this.mY = y;
@@ -44,39 +47,68 @@ public class Renderer extends JPanel
 	public void paintComponent(Graphics g)
 	{
 
-		g.clearRect(0,0,mWidth,mHeight);
+		g.clearRect(0, 0, mWidth, mHeight);
 
-		if ( !mRenderTargets2DToRemove.isEmpty() )
+		try
 		{
-			mRenderTargets2D.removeAll(mRenderTargets2DToRemove);
-			mRenderTargets2D.clear();
+			listMutex.acquire();
 
+			if (!mRenderTargets2DToRemove.isEmpty())
+			{
+				mRenderTargets2D.removeAll(mRenderTargets2DToRemove);
+				mRenderTargets2D.clear();
+
+			}
+
+			if (!mRenderTargets2DToAdd.isEmpty())
+			{
+				mRenderTargets2D.addAll(mRenderTargets2DToAdd);
+				mRenderTargets2DToAdd.clear();
+
+			}
+
+			listMutex.release();
+		}
+		catch (InterruptedException e)
+		{
+			e.printStackTrace();
 		}
 
-		if ( !mRenderTargets2DToAdd.isEmpty() )
-		{
-			mRenderTargets2D.addAll(mRenderTargets2DToAdd);
-			mRenderTargets2DToAdd.clear();
-
-		}
-
-		((ArrayList<IRenderTarget2D>) mRenderTargets2D.clone() ).parallelStream().forEachOrdered(t -> t.draw((Graphics2D) g));
+		((ArrayList<IRenderTarget2D>) mRenderTargets2D.clone()).parallelStream().forEachOrdered(t -> t.draw((Graphics2D) g));
 
 	}
 
 	public void addRenderTargets( IRenderTarget2D target )
 	{
-		if ( target != null )
+		try
 		{
-			mRenderTargets2DToAdd.add(target);
+			listMutex.acquire();
+			if (target != null)
+			{
+				mRenderTargets2DToAdd.add(target);
+			}
+			listMutex.release();
+		}
+		catch (InterruptedException e)
+		{
+			e.printStackTrace();
 		}
 	}
 
 	public void removeRenderTargets( IRenderTarget2D target )
 	{
-		if ( target != null )
+		try
 		{
-			mRenderTargets2DToRemove.add(target);
+			listMutex.acquire();
+			if (target != null)
+			{
+				mRenderTargets2DToRemove.add(target);
+			}
+			listMutex.release();
+		}
+		catch (InterruptedException e)
+		{
+			e.printStackTrace();
 		}
 	}
 
@@ -92,9 +124,10 @@ public class Renderer extends JPanel
 		this.repaint();
 	}
 
-	protected final ArrayList<IRenderTarget2D>                 mRenderTargets2D;
+	protected final ArrayList<IRenderTarget2D>            mRenderTargets2D;
 	protected final ArrayList<IRenderTarget2D>            mRenderTargets2DToAdd;
 	protected final ArrayList<IRenderTarget2D>            mRenderTargets2DToRemove;
+	protected final Semaphore                             listMutex;
 
 	protected final int mX;
 	protected final int mY;
