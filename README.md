@@ -34,6 +34,8 @@ the Whono jar file can be downloaded from releases and ran as along-side it's Wh
 To run and play Whono with an IntelliJ build jar, open and run the file "hackathon-team-ballmer-peak.jar".
 It can be found in the folder structure at out -> artifacts - > hackathon-team-ballmer-peak_jar -> hackathon-team-ballmer-peak.jar
 
+If the JAR does not run as expected, run it in the IDE.
+
 --- --- 
 ### how to play
 When it is your turn, you can click a card (at the bottom of the screen) to place it. If the card is eligible to be placed, it will be added to the pile. The pile is the stack with the cards facing upwards.
