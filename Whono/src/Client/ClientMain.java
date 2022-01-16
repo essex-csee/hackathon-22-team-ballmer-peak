@@ -22,7 +22,6 @@ public class ClientMain
 			cgThread.setPriority(Thread.MAX_PRIORITY);
 			cgThread.start();
 
-
 			ImageManager imageManager = new ImageManager();
 
 			MainMenuInit mm = new MainMenuInit();

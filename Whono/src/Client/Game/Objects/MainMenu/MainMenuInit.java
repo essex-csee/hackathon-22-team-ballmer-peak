@@ -1,8 +1,6 @@
 package Client.Game.Objects.MainMenu;
 
 import Client.Game.ClientGame;
-import Client.Game.Objects.Card;
-import Client.Game.Objects.Display.CardDisplay;
 import Client.Game.Objects.ImageManager;
 import Client.Game.Objects.InitObject;
 import Client.Game.Objects.StaticImageObject;

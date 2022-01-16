@@ -2,8 +2,6 @@ package Client.Game.Objects.GameScreen;
 
 import Client.Game.ClientGame;
 import Client.Game.Objects.Card;
-import Client.Game.Objects.Display.CardDisplay;
-import Client.Game.Objects.Hand;
 import Client.Game.Objects.SquareButton;
 import Util.CONSTANTS;
 
@@ -34,8 +32,7 @@ public class CardButton extends SquareButton
                 cardWidth(handSize),
                 cardHeight(handSize),
                 // Once state is implemented, this should work fine
-                //CardDisplay.getCardImage(c);
-                "Whono/Assets/Cards/Green/GreenReverse.png"
+                CardDisplay.getCardImage(c)
         );
     }
 

@@ -1,7 +1,6 @@
 package Client.Game.Objects.GameScreen;
 
-import Client.Game.Objects.Card;
-import Client.Game.Objects.InitObject;
+import Client.Game.Objects.*;
 import Client.Game.Objects.MainMenu.PlayButton;
 
 public class GameScreenInit extends InitObject
@@ -59,11 +58,13 @@ public class GameScreenInit extends InitObject
     @Override
     protected void setup()
     {
-        // Get GameState
-        initMenu();
-        initDeck();
-        initPile();
-        initHand();
+        GameState g = GameState.createGameState(4);
+        addGameObject(g);
+
+        for(Hand h : g.getBoard().getHands() )
+        {
+            addGameObject( CardDisplay.CreateHandDisplay(h) );
+        }
     }
 
 }

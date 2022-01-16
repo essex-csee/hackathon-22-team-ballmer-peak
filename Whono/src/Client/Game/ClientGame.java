@@ -7,10 +7,9 @@ import Util.ILogicTarget;
 import Util.IRenderTarget2D;
 
 import java.util.ArrayList;
-import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.concurrent.Semaphore;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
 
 public class ClientGame implements Runnable
 {
@@ -23,7 +22,7 @@ public class ClientGame implements Runnable
 	 */
 	private ClientGame()
 	{
-		mLogicTargets = new CopyOnWriteArrayList<ILogicTarget>();
+		mLogicTargets = Collections.synchronizedList( new ArrayList<ILogicTarget>() );
 	}
 
 	//=====================================================================
@@ -266,7 +265,7 @@ public class ClientGame implements Runnable
 	//=====================================================================
 	// Protected variables
 	//---------------------------------------------------------------------
-	protected final CopyOnWriteArrayList<ILogicTarget> mLogicTargets;
+	protected final List<ILogicTarget>      mLogicTargets;
 	protected boolean                       mIsCloseRequested;
 	protected Renderer                      mRenderer;
 	protected ClientWindow                  mClientWindow;

@@ -1,5 +1,6 @@
 package Client.Game.Objects;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Collections;
 
@@ -9,11 +10,13 @@ public class Hand
 	private List<Card> hand;
 	private int handSize;
 
-	public static int HAND_STARTING_SIZE;
-	public static int HAND_MAX_SIZE;
+	public static int HAND_STARTING_SIZE = 7;
+	public static int HAND_MAX_SIZE      = 16;
 
 	public Hand()
 	{
+		hand = new ArrayList<>();
+		handSize = 0;
 	}
 
 	public boolean addCard(Card c)

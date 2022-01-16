@@ -1,5 +1,6 @@
 package Client.Game.Objects;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -12,6 +13,9 @@ public class Board
 
 	public Board()
 	{
+		decks = new ArrayList<>();
+		hands = new ArrayList<>();
+		pile  = new ArrayList<>();
 	}
 
 	public void addDeck(Deck d)
@@ -33,7 +37,6 @@ public class Board
 	{
 		return boardID;
 	}
-
 
 	public List<Deck> getDecks()
 	{

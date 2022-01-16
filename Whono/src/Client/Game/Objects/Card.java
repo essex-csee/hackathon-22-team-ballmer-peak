@@ -35,7 +35,7 @@ public class Card implements Comparable<Card>
 
 	public enum Type
 	{
-		ONE(1),TWO(2),THREE(3),FOUR(4),FIVE(5),SIX(6),SEVEN(7),EIGHT(8),NINE(9),REVERSE(10),SKIP(11),DRAW2(12),WILD(13),WILD4(14);
+		ZERO(0), ONE(1),TWO(2),THREE(3),FOUR(4),FIVE(5),SIX(6),SEVEN(7),EIGHT(8),NINE(9),REVERSE(10),SKIP(11),DRAW2(12),WILD(13),WILD4(14);
 		private int order;
 		private Type(int i)
 		{
@@ -85,87 +85,6 @@ public class Card implements Comparable<Card>
 	private int CardID;
 	private Type CardType;
 	private Colour cardColour;
-
-
-	public void shuffleCards(List<Card> cards)
-	{
-		Collections.shuffle(cards);
-	}
-
-	/*
-
-	Create a basic deck of cards using Suits and Numbers
-
-	public List<Card> createDeck()
-	{
-		List<Card> out = new ArrayList<Card>();
-
-		int id = 0;
-		for(Number n : Number.values())
-		{
-			for(Suit s : Suit.values())
-			{
-				Card c = new Card();
-				c.CardID = id;
-				c.CardType = n;
-				c.CardColour = s;
-				out.add(c);
-				i++;
-			}
-		}
-		return out;
-	}
-	*/
-
-	public List<Card> createDeck()
-	{
-		List<Card> deck = new ArrayList<Card>();
-		int id = 0;
-		// Create Wildcards
-		for(int i = 0; i < 4; i++)
-		{
-			Card c = new Card();
-			c.cardColour = Colour.BLACK;
-
-			c.CardID = id;
-			c.CardType = Type.WILD;
-			deck.add(c);
-			id++;
-
-			c.CardID = id;
-			c.CardType = Type.WILD4;
-			deck.add(c);
-			id++;
-		}
-		// Create 'Regular' Cards
-		for(int i = 1; i < 13; i++)
-		{
-			Card c = new Card();
-			c.CardID = id;
-			c.CardType = Type.values()[i];
-
-			c.cardColour = Colour.RED;
-			deck.add(c);
-			id++;
-
-			c.CardID = id;
-			c.cardColour = Colour.GREEN;
-			deck.add(c);
-			id++;
-
-			c.CardID = id;
-			c.cardColour = Colour.PURPLE;
-			deck.add(c);
-			id++;
-
-			c.CardID = id;
-			c.cardColour = Colour.YELLOW;
-			deck.add(c);
-			id++;
-		}
-
-		return deck;
-	}
 
 	@Override
 	public int compareTo(Card other)
