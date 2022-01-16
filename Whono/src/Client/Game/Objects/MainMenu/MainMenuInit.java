@@ -18,8 +18,24 @@ public class MainMenuInit extends InitObject
 		// title
 		int titleWidth  = (int) (362f * 1.4f);
 		int titleHeight = (int) (242f * 1.4f);
-		addGameObject( new StaticImageObject(0, ClientGame.getWindowWidth()/2 - titleWidth/2, 0, titleWidth, titleHeight, ImageManager.loadImage("Whono/Assets/whonoTilt.png") ) );
+		StaticImageObject logo = new StaticImageObject(
+				0,
+				ClientGame.getWindowWidth()/2 - titleWidth/2,
+				0,
+				titleWidth,
+				titleHeight,
+				ImageManager.loadImage("Whono/Assets/whonoTilt.png"));
 
+		StaticImageObject background = new StaticImageObject(
+				1,
+				0,
+				0,
+				ClientGame.getWindowWidth(),
+				ClientGame.getWindowHeight(),
+				ImageManager.loadImage("Whono/Assets/BackgroundTile.png"));
+
+		addGameObject(background);
+		addGameObject(logo);
 		addGameObject(new PlayButton());
 		addGameObject(new ExitButton());
 
