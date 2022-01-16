@@ -1,26 +1,19 @@
-package Client.Game.Objects.GameScreen;
+package Client.Game.Objects.GameScreenSolo;
 
 import Client.Game.ClientGame;
 import Client.Game.Objects.*;
+import Client.Game.Objects.GameScreen.CardButton;
+import Client.Game.Objects.GameScreen.PauseButton;
+import Client.Game.Objects.GameScreen.SmallExitButton;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class GameScreenInit extends InitObject
+public class GameScreenInitSolo extends InitObject
 {
-    public GameScreenInit()
+    public GameScreenInitSolo()
     {
         super();
     }
 
     int cardID = 0;
-    boolean solo = false;
-
-    public void setSolo(boolean b)
-    {
-        solo = b;
-    }
-
 
     public void initMenu()
     {
@@ -68,7 +61,7 @@ public class GameScreenInit extends InitObject
     @Override
     protected void setup()
     {
-        GameState g = GameState.createGameState(4,solo);
+        GameStateSolo g = GameStateSolo.createGameState(1);
 
         StaticImageObject background = new StaticImageObject(
                 1,

@@ -12,7 +12,7 @@ public class CardButton extends SquareButton
 
     // these should probably be made into factories
 
-    CardButton()
+    public CardButton()
     {
         super(0,
                 ClientGame.getWindowWidth()/2 - CONSTANTS.CARD_WIDTH/2 - CONSTANTS.CARD_WIDTH_PADDING,
@@ -23,7 +23,7 @@ public class CardButton extends SquareButton
         );
     }
 
-    CardButton(int id)
+    public CardButton(int id)
     {
         super(id,
                 ClientGame.getWindowWidth() * (id == 2 ? 0.5f : 0.8f) - CONSTANTS.CARD_WIDTH/2 - CONSTANTS.CARD_WIDTH_PADDING,
@@ -37,7 +37,7 @@ public class CardButton extends SquareButton
         // Type 1: Pile
     }
 
-    CardButton(int index, int handSize, Card c)
+    public CardButton(int index, int handSize, Card c)
     {
         super(0,
                 // TODO: Check CARD_WIDTH_PADDING, offset seems slightly strange
@@ -50,7 +50,7 @@ public class CardButton extends SquareButton
         this.card = c;
     }
 
-    CardButton(float x, float y, Card c)
+    public CardButton(float x, float y, Card c)
     {
         super(0,
                   x,
