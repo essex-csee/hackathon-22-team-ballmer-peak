@@ -23,6 +23,8 @@ public class Board extends GameObject implements ISubscriber
 
 	private final ArrayList<HandStatus>  mHandStatusDisplays;
 
+	private static int playerDrawCount = 0;
+
 	private Card mPileCard;
 	private int playerID = 0;
 
@@ -81,6 +83,11 @@ public class Board extends GameObject implements ISubscriber
 	public List<Deck> getDecks()
 	{
 		return mDecks;
+	}
+
+	public static int getPlayerDrawCount()
+	{
+		return playerDrawCount;
 	}
 
 	public List<Hand> getHands()
@@ -262,6 +269,8 @@ public class Board extends GameObject implements ISubscriber
 				h.removeCard(c);
 				refreshDisplay(h);
 
+				mHandStatusDisplays.get(0).active(false);
+
 				for(AIPlayer p : ((ArrayList<AIPlayer>) AIPlayers.clone() ) )
 				{
 					HandStatus hs = mHandStatusDisplays.get( 1 + AIPlayers.indexOf(p) );
@@ -315,12 +324,15 @@ public class Board extends GameObject implements ISubscriber
 			{
 				h.addCard(drawCard());
 				refreshDisplay(h);
+				playerDrawCount++;
 			}
 			else
 			{
 				reportOhno(h);
 			}
 		}
+
+		mHandStatusDisplays.get(0).active(true);
 
 		checkHands();
 	}
