@@ -1,15 +1,14 @@
 package Client.Game.Objects;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 public class Deck
 {
-	private int deckID;
-	private List<Card> deckContents;
-
 	public Deck()
 	{
+		mDeckContents = new ArrayList<>();
 	}
 
 	public int DeckID()
@@ -19,12 +18,12 @@ public class Deck
 
 	public List<Card> getDeckContents()
 	{
-		return deckContents;
+		return mDeckContents;
 	}
 
 	public void addCard(Card c)
 	{
-		deckContents.add(c);
+		mDeckContents.add(c);
 	}
 
 	public Card removeCard(Card c)
@@ -34,11 +33,11 @@ public class Deck
 
 		Card toFind = null;
 
-		int i = deckContents.indexOf(c);
+		int i = mDeckContents.indexOf(c);
 
 		if( i != -1 )
 		{
-			toFind = deckContents.get(i);
+			toFind = mDeckContents.get(i);
 		}
 
 		return toFind;
@@ -46,14 +45,14 @@ public class Deck
 
 	public void shuffle()
 	{
-		Collections.shuffle(deckContents);
+		Collections.shuffle(mDeckContents);
 	}
 
 	public Card drawCard()
 	{
-		if(deckContents.size() > 0)
+		if(mDeckContents.size() > 0)
 		{
-			return deckContents.remove(0);
+			return mDeckContents.remove(0);
 		}
 		else
 		{
@@ -67,9 +66,12 @@ public class Deck
 		String out = "";
 		out += "Client.Game.Objects.Deck[";
 		out += "DeckID:'" + deckID + "',";
-		out += "DeckCards:'" + deckContents + "',";
+		out += "DeckCards:'" + mDeckContents + "',";
 		out += "]";
 		return out;
 	}
+
+	private int deckID;
+	private final List<Card> mDeckContents;
 
 }

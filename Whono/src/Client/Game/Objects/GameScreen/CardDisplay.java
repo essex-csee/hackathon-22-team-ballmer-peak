@@ -1,14 +1,17 @@
-package Client.Game.Objects.Display;
+package Client.Game.Objects.GameScreen;
 
 import Client.Game.Objects.Card;
 import Client.Game.Objects.GameObject;
+import Client.Game.Objects.GameScreen.CardButton;
+import Client.Game.Objects.Hand;
 import Client.Game.Objects.ImageManager;
 import Util.ISubscribable;
 import Util.ISubscriber;
 
 import java.awt.*;
+import java.util.ArrayList;
 
-public class CardDisplay
+public class CardDisplay extends GameObject
 {
 	public static Image getCardImage(Card c)
 	{
@@ -53,4 +56,40 @@ public class CardDisplay
 
 		return ImageManager.loadImage(path);
 	}
+
+	public static CardDisplay CreateHandDisplay(Hand h)
+	{
+		CardDisplay c = new CardDisplay();
+
+		int handSize = h.getHandSize();
+		for(int i = 0; i < handSize; i++)
+		{
+			c.mHandButtons.add( new CardButton(i, handSize, h.getHand().get(i) ) );
+		}
+
+		return c;
+	}
+
+	public CardDisplay()
+	{
+		super(-1);
+		mHandButtons = new ArrayList<>();
+	}
+
+	@Override
+	public void draw(Graphics2D g)
+	{
+		for( CardButton c : mHandButtons )
+		{
+			c.draw(g);
+		}
+	}
+
+	@Override
+	public void update(long deltaTime)
+	{
+
+	}
+
+	protected ArrayList<CardButton> mHandButtons;
 }

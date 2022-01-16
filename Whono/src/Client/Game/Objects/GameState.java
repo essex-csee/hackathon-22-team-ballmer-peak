@@ -41,6 +41,11 @@ public class GameState extends GameObject
         mBoard = new Board();
     }
 
+    public Board getBoard()
+    {
+        return mBoard;
+    }
+
     @Override
     public void update(long deltaTime)
     {
