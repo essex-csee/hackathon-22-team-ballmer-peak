@@ -19,7 +19,7 @@ public class Renderer extends JPanel
 		super();
 		window.add(this);
 
-		this.mRenderTargets2D         = Collections.synchronizedList( new ArrayList<IRenderTarget2D>() );
+		this.mRenderTargets2D         = new ArrayList<IRenderTarget2D>();
 		this.mRenderTargets2DToAdd    = new ArrayList<>();
 		this.mRenderTargets2DToRemove = new ArrayList<>();
 
@@ -60,10 +60,8 @@ public class Renderer extends JPanel
 
 		}
 
-		for(IRenderTarget2D t : mRenderTargets2D)
-		{
-			t.draw((Graphics2D)  g);
-		}
+		((ArrayList<IRenderTarget2D>) mRenderTargets2D.clone() ).parallelStream().forEachOrdered(t -> t.draw((Graphics2D) g));
+
 	}
 
 	public void addRenderTargets( IRenderTarget2D target )
@@ -94,7 +92,7 @@ public class Renderer extends JPanel
 		this.repaint();
 	}
 
-	protected final List<IRenderTarget2D>                 mRenderTargets2D;
+	protected final ArrayList<IRenderTarget2D>                 mRenderTargets2D;
 	protected final ArrayList<IRenderTarget2D>            mRenderTargets2DToAdd;
 	protected final ArrayList<IRenderTarget2D>            mRenderTargets2DToRemove;
 

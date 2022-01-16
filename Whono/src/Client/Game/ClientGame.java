@@ -23,6 +23,8 @@ public class ClientGame implements Runnable
 	private ClientGame()
 	{
 		mLogicTargets = Collections.synchronizedList( new ArrayList<ILogicTarget>() );
+		mLogicTargetsToAdd = new ArrayList<>();
+		mLogicTargetsToRemove = new ArrayList<>();
 	}
 
 	//=====================================================================
@@ -56,7 +58,7 @@ public class ClientGame implements Runnable
 		try
 		{
 			sClientGameMutex.acquire();
-			sClientGame.mLogicTargets.add(logicTarget);
+			sClientGame.mLogicTargetsToAdd.add(logicTarget);
 			sClientGameMutex.release();
 		}
 		catch (InterruptedException e)
@@ -74,7 +76,7 @@ public class ClientGame implements Runnable
 		try
 		{
 			sClientGameMutex.acquire();
-			sClientGame.mLogicTargets.remove(logicTarget);
+			sClientGame.mLogicTargetsToRemove.add(logicTarget);
 			sClientGameMutex.release();
 		}
 		catch (InterruptedException e)
@@ -87,8 +89,8 @@ public class ClientGame implements Runnable
 	{
 		try
 		{
-			sClientGame.mLogicTargets.clear();
 			sClientGameMutex.release();
+			sClientGame.mLogicTargetsToRemove.addAll(sClientGame.mLogicTargets);
 			sClientGameMutex.acquire();
 		}
 		catch (InterruptedException e)
@@ -235,6 +237,18 @@ public class ClientGame implements Runnable
 			startTime = System.currentTimeMillis();
 			long deltaTime = startTime - priorTime;
 
+			if(mLogicTargetsToAdd.size() > 0)
+			{
+				mLogicTargets.addAll(mLogicTargetsToAdd);
+				mLogicTargetsToAdd.clear();
+			}
+
+			if(mLogicTargetsToRemove.size() > 0 )
+			{
+				mLogicTargets.removeAll(mLogicTargetsToRemove);
+				mLogicTargetsToRemove.clear();
+			}
+
 			// update logicTargets
 			for(ILogicTarget t : mLogicTargets)
 			{
@@ -266,6 +280,9 @@ public class ClientGame implements Runnable
 	// Protected variables
 	//---------------------------------------------------------------------
 	protected final List<ILogicTarget>      mLogicTargets;
+	protected final ArrayList<ILogicTarget> mLogicTargetsToAdd;
+	protected final ArrayList<ILogicTarget> mLogicTargetsToRemove;
+
 	protected boolean                       mIsCloseRequested;
 	protected Renderer                      mRenderer;
 	protected ClientWindow                  mClientWindow;
