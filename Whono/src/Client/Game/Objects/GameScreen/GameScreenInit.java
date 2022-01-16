@@ -60,11 +60,7 @@ public class GameScreenInit extends InitObject
     {
         GameState g = GameState.createGameState(4);
         addGameObject(g);
-
-        for(Hand h : g.getBoard().getHands() )
-        {
-            addGameObject( CardDisplay.CreateHandDisplay(h) );
-        }
+        addGameObject(g.getBoard());
     }
 
 }

@@ -70,5 +70,5 @@ public abstract class Button extends GameObject implements ISubscriber, ISubscri
 	//=====================================================================
 	// Protected variables
 	//---------------------------------------------------------------------
-	protected ArrayList<ISubscriber> mSubscribers;
+	protected ArrayList<ISubscriber> mSubscribers = new ArrayList<>();
 }

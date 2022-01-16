@@ -11,7 +11,7 @@ import Util.ISubscriber;
 import java.awt.*;
 import java.util.ArrayList;
 
-public class CardDisplay extends GameObject
+public class CardDisplay extends GameObject implements ISubscriber, ISubscribable
 {
 	public static Image getCardImage(Card c)
 	{
@@ -65,6 +65,7 @@ public class CardDisplay extends GameObject
 		for(int i = 0; i < handSize; i++)
 		{
 			c.mHandButtons.add( new CardButton(i, handSize, h.getHand().get(i) ) );
+			c.mHandButtons.get(i).subscribe(c);
 		}
 
 		return c;
@@ -74,6 +75,7 @@ public class CardDisplay extends GameObject
 	{
 		super(-1);
 		mHandButtons = new ArrayList<>();
+		mSubscribers = new ArrayList<>();
 	}
 
 	@Override
@@ -88,8 +90,28 @@ public class CardDisplay extends GameObject
 	@Override
 	public void update(long deltaTime)
 	{
-
+		for( CardButton c : mHandButtons )
+		{
+			c.update(deltaTime);
+		}
 	}
 
-	protected ArrayList<CardButton> mHandButtons;
+	@Override
+	public void notifiedBySubscription(ISubscribable subscription)
+	{
+		for(ISubscriber s : mSubscribers)
+		{
+			s.notifiedBySubscription(subscription);
+		}
+	}
+
+	@Override
+	public void subscribe(ISubscriber s)
+	{
+		mSubscribers.add(s);
+	}
+
+	protected ArrayList<ISubscriber> mSubscribers;
+	protected ArrayList<CardButton>  mHandButtons;
+
 }

@@ -19,7 +19,7 @@ public class GameState extends GameObject
 
     private State currentState;
 
-    public State getCurrentState()
+    public State getCurrentState(){ return  currentState;}
 
     public static GameState createGameState(int numberOfPlayers)
     {
@@ -28,7 +28,7 @@ public class GameState extends GameObject
         g.mDeck = DeckFactory.createDeck();
         g.mHands = new ArrayList<Hand>();
 
-        for(int i = 0; i < numberOfPlayers; i++)
+        for(int i = 0; i < 1; i++)
         {
             g.mHands.add(HandFactory.createHand(g.mDeck));
         }

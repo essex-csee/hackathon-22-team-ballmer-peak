@@ -7,7 +7,8 @@ import Util.CONSTANTS;
 
 public class CardButton extends SquareButton
 {
-    float scale = 1;
+    protected float scale = 1;
+    protected Card card;
 
     CardButton()
     {
@@ -19,41 +20,6 @@ public class CardButton extends SquareButton
                 "Whono/Assets/Cards/Green/GreenReverse.png"
         );
     }
-
-    CardButton(int index, int handSize, Card c)
-    {
-        super(0,
-                // TODO: Check CARD_WIDTH_PADDING, offset seems slightly strange
-                (index-1) * cardWidth(handSize),
-                ClientGame.getWindowHeight() - cardHeight(handSize),
-                //(handSize-1) * cardHeight(handSize),
-                //ClientGame.getWindowWidth()/2 - (CONSTANTS.CARD_WIDTH/2 * handSize) +( index * CONSTANTS.CARD_WIDTH) - CONSTANTS.CARD_WIDTH_PADDING,
-                //ClientGame.getWindowHeight() * 1f - CONSTANTS.CARD_HEIGHT_PADDING,
-                cardWidth(handSize),
-                cardHeight(handSize),
-                // Once state is implemented, this should work fine
-                CardDisplay.getCardImage(c)
-        );
-    }
-
-    public static int cardWidth(int handSize)
-    {
-        if(handSize < 7)
-        {
-            return CONSTANTS.CARD_WIDTH;
-        }
-        return (ClientGame.getWindowWidth() / handSize);
-    }
-
-    public static int cardHeight(int handSize)
-    {
-        if(handSize < 7)
-        {
-            return CONSTANTS.CARD_HEIGHT;
-        }
-        return ((CONSTANTS.CARD_HEIGHT / CONSTANTS.CARD_WIDTH) * cardWidth(handSize));
-    }
-
 
     CardButton(int id)
     {
@@ -68,6 +34,43 @@ public class CardButton extends SquareButton
         // Type 0: Deck
         // Type 1: Pile
     }
+
+    CardButton(int index, int handSize, Card c)
+    {
+        super(0,
+                // TODO: Check CARD_WIDTH_PADDING, offset seems slightly strange
+                (index-1) * cardWidth(handSize),
+                ClientGame.getWindowHeight() - cardHeight(handSize),
+                cardWidth(handSize),
+                cardHeight(handSize),
+                CardDisplay.getCardImage(c)
+        );
+        this.card = c;
+    }
+
+    public Card getCard()
+    {
+        return card;
+    }
+
+    private static int cardWidth(int handSize)
+    {
+        if(handSize < 7)
+        {
+            return CONSTANTS.CARD_WIDTH;
+        }
+        return (ClientGame.getWindowWidth() / handSize);
+    }
+
+    private static int cardHeight(int handSize)
+    {
+        if(handSize < 7)
+        {
+            return CONSTANTS.CARD_HEIGHT;
+        }
+        return ((CONSTANTS.CARD_HEIGHT / CONSTANTS.CARD_WIDTH) * cardWidth(handSize));
+    }
+
     @Override
     protected void onMousePress()
     {
@@ -77,6 +80,6 @@ public class CardButton extends SquareButton
     @Override
     protected void onMouseRelease()
     {
-
+        notifySubscribers();
     }
 }

@@ -1,65 +1,70 @@
 package Client.Game.Objects;
 
+import Client.Game.Objects.GameScreen.CardButton;
+import Client.Game.Objects.GameScreen.CardDisplay;
+import Util.ISubscribable;
+import Util.ISubscriber;
+
+import java.awt.*;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
-public class Board
+public class Board extends GameObject implements ISubscriber
 {
-	private int boardID;
-	private List<Deck> decks;
-	private List<Hand> hands;
-	private List<Card> pile;
+	private ArrayList<Deck> mDecks;
+	private ArrayList<Hand> mHands;
+	private ArrayList<CardDisplay> mCardDisplays;
+	private ArrayList<Card> mPile;
 
 	public Board()
 	{
-		decks = new ArrayList<>();
-		hands = new ArrayList<>();
-		pile  = new ArrayList<>();
+		super(-1);
+		mDecks = new ArrayList<>();
+		mHands = new ArrayList<>();
+		mPile = new ArrayList<>();
+		mCardDisplays = new ArrayList<>();
 	}
 
 	public void addDeck(Deck d)
 	{
-		decks.add(d);
+		mDecks.add(d);
 	}
 
 	public void addHand(Hand h)
 	{
-		hands.add(h);
+		mHands.add(h);
+		CardDisplay cd = CardDisplay.CreateHandDisplay(h);
+		mCardDisplays.add( cd );
+		cd.subscribe(this);
 	}
 
 	public void addToPile(Card c)
 	{
-		pile.add(c);
-	}
-
-	public int getBoardID()
-	{
-		return boardID;
+		mPile.add(c);
 	}
 
 	public List<Deck> getDecks()
 	{
-		return decks;
+		return mDecks;
 	}
 
 	public List<Hand> getHands()
 	{
-		return hands;
+		return mHands;
 	}
 
 	public List<Card> getPile()
 	{
-		return pile;
+		return mPile;
 	}
 
 	public Deck removeDeck(Deck d)
 	{
 		Deck removed = null;
-		int index = decks.indexOf(d);
+		int index = mDecks.indexOf(d);
 		if(index != 1)
 		{
-			removed = decks.get(index);
+			removed = mDecks.get(index);
 		}
 
 		return removed;
@@ -67,10 +72,10 @@ public class Board
 	public Hand removeHand(Hand h)
 	{
 		Hand removed = null;
-		int index = pile.indexOf(h);
+		int index = mPile.indexOf(h);
 		if(index != 1)
 		{
-			removed = hands.get(index);
+			removed = mHands.get(index);
 		}
 
 		return removed;
@@ -79,10 +84,10 @@ public class Board
 	public Card removeCard(Card c)
 	{
 		Card removed = null;
-		int index = pile.indexOf(c);
+		int index = mPile.indexOf(c);
 		if(index != 1)
 		{
-			removed = pile.get(index);
+			removed = mPile.get(index);
 		}
 
 		return removed;
@@ -90,9 +95,9 @@ public class Board
 
 	public void clearBoard()
 	{
-		decks.clear();
-		hands.clear();
-		pile.clear();
+		mDecks.clear();
+		mHands.clear();
+		mPile.clear();
 	}
 
 	@Override
@@ -100,11 +105,37 @@ public class Board
 	{
 		String out = "";
 		out += "Client.Game.Object.Board[";
-		out += "boardID:'" + boardID + "',";
-		out += "decks:'" + decks + "',";
-		out += "hands:'" + hands + "',";
-		out += "pile:'" + pile + "',";
+		out += "boardID:'" + ID     + "',";
+		out += "decks:'"   + mDecks + "',";
+		out += "hands:'"   + mHands + "',";
+		out += "pile:'"    + mPile  + "',";
 		return out;
 	}
 
+	@Override
+	public void update(long deltaTime)
+	{
+		for(CardDisplay c : mCardDisplays)
+		{
+			c.update(deltaTime);
+		}
+	}
+
+	@Override
+	public void draw(Graphics2D g)
+	{
+		for(CardDisplay c : mCardDisplays)
+		{
+			c.draw(g);
+		}
+	}
+
+	@Override
+	public void notifiedBySubscription(ISubscribable subscription)
+	{
+		if(subscription instanceof CardButton)
+		{
+			System.out.println("POKED by " + ((CardButton) subscription).getCard() );
+		}
+	}
 }
