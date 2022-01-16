@@ -40,7 +40,7 @@ public class GameScreenInit extends InitObject
 
     public void initHand()
     {
-        int handSize = 5;
+        int handSize = 16;
         for(int i = 1; i <= handSize; i++)
         {
             Card c = new Card();
