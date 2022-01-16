@@ -15,6 +15,10 @@ public class PlayerController {
         this.players = new ArrayList<>();
 
     }
+
+    public PlayerController() {
+    }
+
     public int getTurn()
     {
         return players.get(turn);
