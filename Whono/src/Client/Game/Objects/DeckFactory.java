@@ -34,7 +34,8 @@ public class DeckFactory
 		*/
 
 		// Create 'Regular' Cards
-		for(int i = 1; i < 13; i++)
+		// 14 card types normally temp reduced to 10 as effect cards are currently un implemented
+		for(int i = 0; i < 10; i++)
 		{
 			Card c = new Card();
 			c.setCardID( cardID );

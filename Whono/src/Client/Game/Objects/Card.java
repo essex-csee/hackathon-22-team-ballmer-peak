@@ -35,7 +35,7 @@ public class Card implements Comparable<Card>
 
 	public enum Type
 	{
-		ONE(1),TWO(2),THREE(3),FOUR(4),FIVE(5),SIX(6),SEVEN(7),EIGHT(8),NINE(9),REVERSE(10),SKIP(11),DRAW2(12),WILD(13),WILD4(14);
+		ZERO(0), ONE(1),TWO(2),THREE(3),FOUR(4),FIVE(5),SIX(6),SEVEN(7),EIGHT(8),NINE(9),REVERSE(10),SKIP(11),DRAW2(12),WILD(13),WILD4(14);
 		private int order;
 		private Type(int i)
 		{
