@@ -1,7 +1,11 @@
-package Client.Game.Objects;
+package Client.Game.Objects.GameScreen;
 
-import Client.Game.Objects.GameScreen.CardButton;
-import Client.Game.Objects.GameScreen.CardDisplay;
+import Client.Game.ClientGame;
+import Client.Game.Objects.Card;
+import Client.Game.Objects.Deck;
+import Client.Game.Objects.GameObject;
+import Client.Game.Objects.Hand;
+import Util.CONSTANTS;
 import Util.ISubscribable;
 import Util.ISubscriber;
 
@@ -11,23 +15,33 @@ import java.util.List;
 
 public class Board extends GameObject implements ISubscriber
 {
-	private ArrayList<Deck> mDecks;
-	private ArrayList<Hand> mHands;
-	private ArrayList<CardDisplay> mCardDisplays;
-	private ArrayList<Card> mPile;
+	private final ArrayList<Deck> mDecks;
+	private final ArrayList<DeckButton>  mDeckDisplays;
+	private final ArrayList<Hand> mHands;
+	private final ArrayList<CardDisplay> mCardDisplays;
+	private final ArrayList<Card> mPile;
+	private final ArrayList<CardButton>  mPileDisplays;
+
+	private Card mPileCard;
+	private int playerID = 0;
 
 	public Board()
 	{
 		super(-1);
-		mDecks = new ArrayList<>();
-		mHands = new ArrayList<>();
-		mPile = new ArrayList<>();
+		mDecks        = new ArrayList<>();
+		mDeckDisplays = new ArrayList<>();
+		mHands        = new ArrayList<>();
 		mCardDisplays = new ArrayList<>();
+		mPile         = new ArrayList<>();
+		mPileDisplays = new ArrayList<>();
 	}
 
 	public void addDeck(Deck d)
 	{
 		mDecks.add(d);
+		DeckButton db = new DeckButton(-1);
+		mDeckDisplays.add( db );
+		db.subscribe(this);
 	}
 
 	public void addHand(Hand h)
@@ -41,6 +55,11 @@ public class Board extends GameObject implements ISubscriber
 	public void addToPile(Card c)
 	{
 		mPile.add(c);
+		mPileDisplays.clear();
+		mPileDisplays.add( new CardButton(
+			ClientGame.getWindowWidth()  / 2f,
+			ClientGame.getWindowHeight() / 2f - CONSTANTS.CARD_HEIGHT_PADDING, c ) );
+		mPileCard = c;
 	}
 
 	public List<Deck> getDecks()
@@ -56,6 +75,11 @@ public class Board extends GameObject implements ISubscriber
 	public List<Card> getPile()
 	{
 		return mPile;
+	}
+
+	public Card getPileCard()
+	{
+		return mPileCard;
 	}
 
 	public Deck removeDeck(Deck d)
@@ -119,12 +143,33 @@ public class Board extends GameObject implements ISubscriber
 		{
 			c.update(deltaTime);
 		}
+
+		for(DeckButton d : mDeckDisplays)
+		{
+			d.update(deltaTime);
+		}
+
+		for(CardButton c : mPileDisplays)
+		{
+			c.update(deltaTime);
+		}
 	}
 
 	@Override
 	public void draw(Graphics2D g)
 	{
 		for(CardDisplay c : mCardDisplays)
+		{
+			c.draw(g);
+		}
+
+
+		for(DeckButton d : mDeckDisplays)
+		{
+			d.draw(g);
+		}
+
+		for(CardButton c : mPileDisplays)
 		{
 			c.draw(g);
 		}
@@ -136,6 +181,20 @@ public class Board extends GameObject implements ISubscriber
 		if(subscription instanceof CardButton)
 		{
 			System.out.println("POKED by " + ((CardButton) subscription).getCard() );
+
+		}
+
+		if(subscription instanceof DeckButton)
+		{
+			System.out.println("POKED by " + ((DeckButton) subscription) );
+			Hand h = getHands().get(0);
+			if(h.getHandSize() < Hand.HAND_MAX_SIZE)
+			{
+				System.out.printf("Card added\n");
+				mCardDisplays.clear();
+				h.addCard(mDecks.get(0).drawCard());
+				mCardDisplays.add(CardDisplay.CreateHandDisplay(h));
+			}
 		}
 	}
 }

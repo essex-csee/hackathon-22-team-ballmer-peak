@@ -10,6 +10,8 @@ public class CardButton extends SquareButton
     protected float scale = 1;
     protected Card card;
 
+    // these should probably be made into factories
+
     CardButton()
     {
         super(0,
@@ -43,6 +45,18 @@ public class CardButton extends SquareButton
                 ClientGame.getWindowHeight() - cardHeight(handSize),
                 cardWidth(handSize),
                 cardHeight(handSize),
+                CardDisplay.getCardImage(c)
+        );
+        this.card = c;
+    }
+
+    CardButton(float x, float y, Card c)
+    {
+        super(0,
+                  x,
+                  y,
+                  CONSTANTS.CARD_WIDTH,
+                   CONSTANTS.CARD_HEIGHT,
                 CardDisplay.getCardImage(c)
         );
         this.card = c;
