@@ -25,12 +25,24 @@ public class HandStatus extends StaticImageObject
 		);
 
 		this.mHand = h;
+		this.active = false;
+		this.dead =  false;
 	}
 
 	@Override
 	public void update(long deltaTime)
 	{
 
+	}
+
+	public void active(boolean active)
+	{
+		this.active = active;
+	}
+
+	public void dead(boolean dead)
+	{
+		this.dead = dead;
 	}
 
 	@Override
@@ -51,13 +63,28 @@ public class HandStatus extends StaticImageObject
 			g.setRenderingHint(
 					RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
+			if(active)
+			{
+				g.setColor(Color.RED);
+			}
+			else
+			{
+				g.setColor(Color.WHITE);
+			}
+
+			if(dead)
+			{
+				g.setColor(Color.DARK_GRAY);
+			}
+
 			Font font = new Font("Serif", Font.PLAIN, 24);
 			g.setFont(font);
-			g.setColor(Color.WHITE);
 			String cardsInHand = "Cards: " + (mHand.getHandSize()-1);
 			g.drawString(cardsInHand, mX+mWidth+20, mY+mHeight/2+10);
 		}
 	}
 
 	protected Hand mHand;
+	protected boolean active;
+	protected boolean dead;
 }

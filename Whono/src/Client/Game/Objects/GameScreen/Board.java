@@ -172,6 +172,10 @@ public class Board extends GameObject implements ISubscriber
 		System.out.println("whono");
 	}
 
+	public void reportOhno(Hand h)
+	{
+		System.out.println("ohno");
+	}
 
 	public void checkHands()
 	{
@@ -256,8 +260,12 @@ public class Board extends GameObject implements ISubscriber
 				h.removeCard(c);
 				refreshDisplay(h);
 
-				for(AIPlayer p : AIPlayers)
+				for(AIPlayer p : ((ArrayList<AIPlayer>) AIPlayers.clone() ) )
 				{
+					HandStatus hs = mHandStatusDisplays.get( 1 + AIPlayers.indexOf(p) );
+
+					hs.active(true);
+
 					Card card = p.playCard(this);
 					if( card != null ) // AI has played a successful card
 					{
@@ -288,8 +296,11 @@ public class Board extends GameObject implements ISubscriber
 					else
 					{
 						int index = AIPlayers.indexOf(p);
+						hs.dead(true);
 						AIPlayers.remove(p);
 					}
+
+					hs.active(false);
 				}
 			}
 
@@ -302,6 +313,10 @@ public class Board extends GameObject implements ISubscriber
 			{
 				h.addCard(drawCard());
 				refreshDisplay(h);
+			}
+			else
+			{
+				reportOhno(h);
 			}
 		}
 
