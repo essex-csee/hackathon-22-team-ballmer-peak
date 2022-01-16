@@ -6,7 +6,8 @@ import Util.IRenderTarget2D;
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class Renderer extends JPanel
 {
@@ -18,7 +19,7 @@ public class Renderer extends JPanel
 		super();
 		window.add(this);
 
-		this.mRenderTargets2D         = new CopyOnWriteArrayList<IRenderTarget2D>();
+		this.mRenderTargets2D         = Collections.synchronizedList( new ArrayList<IRenderTarget2D>() );
 		this.mRenderTargets2DToAdd    = new ArrayList<>();
 		this.mRenderTargets2DToRemove = new ArrayList<>();
 
@@ -93,7 +94,7 @@ public class Renderer extends JPanel
 		this.repaint();
 	}
 
-	protected final CopyOnWriteArrayList<IRenderTarget2D> mRenderTargets2D;
+	protected final List<IRenderTarget2D>                 mRenderTargets2D;
 	protected final ArrayList<IRenderTarget2D>            mRenderTargets2DToAdd;
 	protected final ArrayList<IRenderTarget2D>            mRenderTargets2DToRemove;
 
