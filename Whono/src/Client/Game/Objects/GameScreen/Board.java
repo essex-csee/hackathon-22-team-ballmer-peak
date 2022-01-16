@@ -23,6 +23,7 @@ public class Board extends GameObject implements ISubscriber
 	private final ArrayList<CardButton>  mPileDisplays;
 
 	private Card mPileCard;
+	private int playerID = 0;
 
 	public Board()
 	{
@@ -162,6 +163,7 @@ public class Board extends GameObject implements ISubscriber
 			c.draw(g);
 		}
 
+
 		for(DeckButton d : mDeckDisplays)
 		{
 			d.draw(g);
@@ -179,11 +181,20 @@ public class Board extends GameObject implements ISubscriber
 		if(subscription instanceof CardButton)
 		{
 			System.out.println("POKED by " + ((CardButton) subscription).getCard() );
+
 		}
 
 		if(subscription instanceof DeckButton)
 		{
 			System.out.println("POKED by " + ((DeckButton) subscription) );
+			Hand h = getHands().get(0);
+			if(h.getHandSize() < Hand.HAND_MAX_SIZE)
+			{
+				System.out.printf("Card added\n");
+				mCardDisplays.clear();
+				h.addCard(mDecks.get(0).drawCard());
+				mCardDisplays.add(CardDisplay.CreateHandDisplay(h));
+			}
 		}
 	}
 }
