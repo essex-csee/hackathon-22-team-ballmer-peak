@@ -14,24 +14,19 @@ public class AIPlayer
 
 	public Card playCard(Board b)
 	{
-		boolean hasPlayed = false;
 
-		while(!hasPlayed)
+		while(mHand.getHandSize() < Hand.HAND_MAX_SIZE)
 		{
 
 			for (Card c : mHand.getHand())
 			{
 				if (Game.canPlay(b.getPileCard(), c))
 				{
-					mHand.removeCard(c);
-					hasPlayed = true;
+					mHand.removeCard(c);;
 					return c;
 				}
 			}
-			if(mHand.getHandSize() < Hand.HAND_MAX_SIZE)
-			{
-				mHand.addCard(b.drawCard());
-			}
+			mHand.addCard(b.drawCard());
 		}
 
 		return null;

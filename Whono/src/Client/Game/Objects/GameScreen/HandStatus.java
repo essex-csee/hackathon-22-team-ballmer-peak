@@ -59,7 +59,7 @@ public class HandStatus extends StaticImageObject
 			Font font = new Font("Serif", Font.PLAIN, 24);
 			g.setFont(font);
 			g.setColor(Color.WHITE);
-			String cardsInHand = "Cards: " + handSize;
+			String cardsInHand = "Cards: " + (handSize-1);
 			g.drawString(cardsInHand, mX+mWidth+20, mY+mHeight/2+10);
 		}
 	}
