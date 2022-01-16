@@ -2,6 +2,7 @@ package Client.Game.Objects.GameScreen;
 
 import Client.Game.ClientGame;
 import Client.Game.Objects.*;
+import Client.Game.Objects.MainMenu.MainMenuInit;
 import Util.CONSTANTS;
 import Util.ISubscribable;
 import Util.ISubscriber;
@@ -12,29 +13,30 @@ import java.util.List;
 
 public class BoardSolo extends GameObject implements ISubscriber
 {
-    private final ArrayList<Deck> mDecks;
+    private final ArrayList<Deck>        mDecks;
     private final ArrayList<DeckButton>  mDeckDisplays;
-    private final ArrayList<Hand> mHands;
+    private final ArrayList<Hand>        mHands;
     private final ArrayList<CardDisplay> mCardDisplays;
-    private final ArrayList<Card> mPile;
+    private final ArrayList<AIPlayer>    AIPlayers;
+    private final ArrayList<Card>        mPile;
     private final ArrayList<CardButton>  mPileDisplays;
 
-    private final ArrayList<HandStatus> mHandStatusDisplays;
+    private static int playerDrawCount = 0;
 
     private Card mPileCard;
     private int playerID = 0;
-    private int cardsDrawn = Hand.HAND_STARTING_SIZE;
 
     public BoardSolo()
     {
         super(-1);
-        mDecks        = new ArrayList<>();
-        mDeckDisplays = new ArrayList<>();
-        mHands        = new ArrayList<>();
-        mCardDisplays = new ArrayList<>();
-        mPile         = new ArrayList<>();
-        mPileDisplays = new ArrayList<>();
-        mHandStatusDisplays = new ArrayList<>();
+        mDecks              = new ArrayList<>();
+        mDeckDisplays       = new ArrayList<>();
+        mHands              = new ArrayList<>();
+        mCardDisplays       = new ArrayList<>();
+        AIPlayers           = new ArrayList<>();
+        mPile               = new ArrayList<>();
+        mPileDisplays       = new ArrayList<>();
+
     }
 
     public void addDeck(Deck d)
@@ -53,6 +55,12 @@ public class BoardSolo extends GameObject implements ISubscriber
         cd.subscribe(this);
     }
 
+    public void addAIHand(Hand h, AIPlayer p)
+    {
+        mHands.add(h);
+        AIPlayers.add(p);
+    }
+
     public void addToPile(Card c)
     {
         mPile.add(c);
@@ -63,15 +71,14 @@ public class BoardSolo extends GameObject implements ISubscriber
         mPileCard = c;
     }
 
-    public void addHandStatus(HandStatus hs)
-    {
-        mHandStatusDisplays.add(hs);
-    }
-
-
     public List<Deck> getDecks()
     {
         return mDecks;
+    }
+
+    public static int getPlayerDrawCount()
+    {
+        return playerDrawCount;
     }
 
     public List<Hand> getHands()
@@ -129,7 +136,6 @@ public class BoardSolo extends GameObject implements ISubscriber
         mDecks.clear();
         mHands.clear();
         mPile.clear();
-        mHandStatusDisplays.clear();
     }
 
     public void refreshDisplay(Hand h)
@@ -152,8 +158,7 @@ public class BoardSolo extends GameObject implements ISubscriber
             mPile.clear();
             mPile.add(mPileCard);
         }
-        cardsDrawn ++;
-        System.out.println("Cards Drawn" + cardsDrawn);
+
         return mDecks.get(0).drawCard();
     }
 
@@ -164,6 +169,10 @@ public class BoardSolo extends GameObject implements ISubscriber
         System.out.println("whono");
     }
 
+    public void reportOhno(Hand h)
+    {
+        System.out.println("ohno");
+    }
 
     public void checkHands()
     {
@@ -185,7 +194,6 @@ public class BoardSolo extends GameObject implements ISubscriber
         out += "decks:'"   + mDecks + "',";
         out += "hands:'"   + mHands + "',";
         out += "pile:'"    + mPile  + "',";
-        out += "handStatus:'" + mHandStatusDisplays + "']";
         return out;
     }
 
@@ -206,7 +214,6 @@ public class BoardSolo extends GameObject implements ISubscriber
         {
             c.update(deltaTime);
         }
-
     }
 
     @Override
@@ -228,16 +235,12 @@ public class BoardSolo extends GameObject implements ISubscriber
             c.draw(g);
         }
 
-        for(HandStatus hs : mHandStatusDisplays)
-        {
-            hs.draw(g);
-        }
-
     }
 
     @Override
     public void notifiedBySubscription(ISubscribable subscription)
     {
+
         if(subscription instanceof CardButton)
         {
             Card c =((CardButton) subscription).getCard();
@@ -247,7 +250,9 @@ public class BoardSolo extends GameObject implements ISubscriber
                 addToPile(c);
                 h.removeCard(c);
                 refreshDisplay(h);
+
             }
+
         }
 
         if(subscription instanceof DeckButton)
@@ -257,6 +262,11 @@ public class BoardSolo extends GameObject implements ISubscriber
             {
                 h.addCard(drawCard());
                 refreshDisplay(h);
+                playerDrawCount++;
+            }
+            else
+            {
+                reportOhno(h);
             }
         }
 
