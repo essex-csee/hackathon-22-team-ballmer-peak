@@ -1,5 +1,7 @@
 package Client.Game.Objects;
 
+import Client.Game.Objects.GameScreen.Board;
+
 import java.util.List;
 
 public class BoardFactory

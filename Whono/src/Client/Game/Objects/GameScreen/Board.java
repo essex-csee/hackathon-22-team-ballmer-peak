@@ -1,7 +1,11 @@
-package Client.Game.Objects;
+package Client.Game.Objects.GameScreen;
 
+import Client.Game.Objects.Card;
+import Client.Game.Objects.Deck;
+import Client.Game.Objects.GameObject;
 import Client.Game.Objects.GameScreen.CardButton;
 import Client.Game.Objects.GameScreen.CardDisplay;
+import Client.Game.Objects.Hand;
 import Util.ISubscribable;
 import Util.ISubscriber;
 
@@ -12,6 +16,7 @@ import java.util.List;
 public class Board extends GameObject implements ISubscriber
 {
 	private ArrayList<Deck> mDecks;
+	private ArrayList<DeckButton>  mDeckDisplays;
 	private ArrayList<Hand> mHands;
 	private ArrayList<CardDisplay> mCardDisplays;
 	private ArrayList<Card> mPile;
@@ -20,6 +25,7 @@ public class Board extends GameObject implements ISubscriber
 	{
 		super(-1);
 		mDecks = new ArrayList<>();
+		mDeckDisplays = new ArrayList<>();
 		mHands = new ArrayList<>();
 		mPile = new ArrayList<>();
 		mCardDisplays = new ArrayList<>();
@@ -28,6 +34,9 @@ public class Board extends GameObject implements ISubscriber
 	public void addDeck(Deck d)
 	{
 		mDecks.add(d);
+		DeckButton db = new DeckButton(-1);
+		mDeckDisplays.add( db );
+		db.subscribe(this);
 	}
 
 	public void addHand(Hand h)
@@ -119,6 +128,11 @@ public class Board extends GameObject implements ISubscriber
 		{
 			c.update(deltaTime);
 		}
+
+		for(DeckButton d : mDeckDisplays)
+		{
+			d.update(deltaTime);
+		}
 	}
 
 	@Override
@@ -128,6 +142,11 @@ public class Board extends GameObject implements ISubscriber
 		{
 			c.draw(g);
 		}
+
+		for(DeckButton d : mDeckDisplays)
+		{
+			d.draw(g);
+		}
 	}
 
 	@Override
@@ -136,6 +155,11 @@ public class Board extends GameObject implements ISubscriber
 		if(subscription instanceof CardButton)
 		{
 			System.out.println("POKED by " + ((CardButton) subscription).getCard() );
+		}
+
+		if(subscription instanceof DeckButton)
+		{
+			System.out.println("POKED by " + ((DeckButton) subscription) );
 		}
 	}
 }

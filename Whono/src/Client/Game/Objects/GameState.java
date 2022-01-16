@@ -1,11 +1,7 @@
 package Client.Game.Objects;
 
-import Client.ClientMain;
-import Client.Game.ClientGame;
-import Client.Render.Renderer;
-import Client.Window.ClientWindow;
+import Client.Game.Objects.GameScreen.Board;
 
-import java.awt.*;
 import java.util.ArrayList;
 
 public class GameState extends GameObject
@@ -57,6 +53,7 @@ public class GameState extends GameObject
     @Override
     public void update(long deltaTime)
     {
+        /*
         if(ClientGame.getInput().getKeyPressed('q'))
         {
             // Close window
@@ -86,6 +83,7 @@ public class GameState extends GameObject
             default:
                 System.out.println("Invalid State in GameState.");
         }
+         */
     }
 
     protected Deck mDeck;
