@@ -124,6 +124,15 @@ public class Board extends GameObject implements ISubscriber
 		mPile.clear();
 	}
 
+	public void refreshDisplay(Hand h)
+	{
+		mCardDisplays.clear();
+		CardDisplay cd = CardDisplay.CreateHandDisplay(h);
+		mCardDisplays.add(cd);
+		cd.subscribe(this);
+
+	}
+
 	@Override
 	public String toString()
 	{
@@ -182,18 +191,34 @@ public class Board extends GameObject implements ISubscriber
 		{
 			System.out.println("POKED by " + ((CardButton) subscription).getCard() );
 
+			addToPile( ((CardButton) subscription).getCard() );
+
+			Hand h = getHands().get(0);
+			h.removeCard(((CardButton) subscription).getCard() );
+			refreshDisplay(h);
 		}
 
 		if(subscription instanceof DeckButton)
 		{
 			System.out.println("POKED by " + ((DeckButton) subscription) );
 			Hand h = getHands().get(0);
-			if(h.getHandSize() < Hand.HAND_MAX_SIZE)
+			if (mDecks.get(0).getDeckContents().size() == 0)
 			{
-				System.out.printf("Card added\n");
-				mCardDisplays.clear();
-				h.addCard(mDecks.get(0).drawCard());
-				mCardDisplays.add(CardDisplay.CreateHandDisplay(h));
+				for(Card c : mPile)
+				{
+					mDecks.get(0).addCard( c );
+				}
+				mPile.clear();
+				mPile.add(mPileCard);
+			}
+			else
+			{
+				if (h.getHandSize() < Hand.HAND_MAX_SIZE)
+				{
+					System.out.printf("Card added\n");
+					h.addCard(mDecks.get(0).drawCard());
+					refreshDisplay(h);
+				}
 			}
 		}
 	}
