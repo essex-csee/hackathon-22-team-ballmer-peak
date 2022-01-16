@@ -46,6 +46,7 @@ public class LoseScreenInit extends InitObject
         addGameObject(logo);
         addGameObject(new ExitButton());
         addGameObject(new PlayButton());
+        addGameObject(new PlayButton());
         HighScoreDisplay hs = new HighScoreDisplay();
         hs.setCon(false);
         addGameObject(hs);

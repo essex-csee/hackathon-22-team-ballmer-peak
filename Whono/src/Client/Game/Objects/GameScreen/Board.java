@@ -174,12 +174,14 @@ public class Board extends GameObject implements ISubscriber
 
 	public void reportWhono(Hand h)
 	{
+		playerDrawCount = 0;
 		WinScreenInit ws = new WinScreenInit();
 		ClientGame.addLogicTarget(ws);
 	}
 
 	public void reportOhno(Hand h)
 	{
+		playerDrawCount = 0;
 		LoseScreenInit ls = new LoseScreenInit();
 		ClientGame.addLogicTarget(ls);
 	}

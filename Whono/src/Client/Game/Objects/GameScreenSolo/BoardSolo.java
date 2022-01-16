@@ -165,13 +165,15 @@ public class BoardSolo extends GameObject implements ISubscriber
 
     public void reportWhono(Hand h)
     {
-        WinScreenInit ws = new WinScreenInit();
+        playerDrawCount = 0;
+        WinScreenInitSolo ws = new WinScreenInitSolo();
         ClientGame.addLogicTarget(ws);
     }
 
     public void reportOhno(Hand h)
     {
-        LoseScreenInit ls = new LoseScreenInit();
+        playerDrawCount = 0;
+        LoseScreenInitSolo ls = new LoseScreenInitSolo();
         ClientGame.addLogicTarget(ls);
     }
 
