@@ -23,7 +23,7 @@ public class Board extends GameObject implements ISubscriber
 
 	private final ArrayList<HandStatus>  mHandStatusDisplays;
 
-	private int playerDrawCount = 0;
+	private static int playerDrawCount = 0;
 
 	private Card mPileCard;
 	private int playerID = 0;
@@ -85,7 +85,7 @@ public class Board extends GameObject implements ISubscriber
 		return mDecks;
 	}
 
-	public int getPlayerDrawCount()
+	public static int getPlayerDrawCount()
 	{
 		return playerDrawCount;
 	}
