@@ -77,27 +77,7 @@ public class GameScreenInit extends InitObject
         List<Hand> hands = g.getBoard().getHands();
         List<StaticImageObject> statusList = new ArrayList<>();
 
-        for(int i = 0; i < hands.size(); i++)
-        {
-
-            HandStatus status = new HandStatus(
-                    i,
-                    50,
-                    i*50 + 50,
-                    CONSTANTS.CARD_WIDTH/4,
-                    CONSTANTS.CARD_HEIGHT/4,
-                    ImageManager.loadImage("Whono/Assets/whonoBack.png")
-            );
-            status.setHandSize(hands.get(i).getHandSize());
-            statusList.add(status);
-        }
-
         addGameObject(background);
-
-        for(int i = 0; i < statusList.size(); i++)
-        {
-            //addGameObject(statusList.get(i));
-        }
 
         addGameObject(g);
         addGameObject(g.getBoard());

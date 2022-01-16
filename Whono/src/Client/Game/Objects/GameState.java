@@ -37,10 +37,7 @@ public class GameState extends GameObject
             HandStatus status = new HandStatus(
                     i,
                     50,
-                    i*50 + 50,
-                    CONSTANTS.CARD_WIDTH/4,
-                    CONSTANTS.CARD_HEIGHT/4,
-                    ImageManager.loadImage("Whono/Assets/whonoBack.png")
+                    i*50 + 50
             );
             status.setHandSize(g.mHands.get(i).getHandSize());
             g.mBoard.addHandStatus(status);

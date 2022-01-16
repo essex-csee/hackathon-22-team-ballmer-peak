@@ -2,6 +2,7 @@ package Client.Game.Objects.GameScreen;
 
 import Client.Game.ClientGame;
 import Client.Game.Objects.Hand;
+import Client.Game.Objects.ImageManager;
 import Client.Game.Objects.SquareButton;
 import Client.Game.Objects.StaticImageObject;
 import java.util.List;
@@ -14,15 +15,15 @@ public class HandStatus extends StaticImageObject
 {
 	int handSize;
 
-	public HandStatus(long ID, float x, float y, int width, int height, Image image)
+	public HandStatus(long ID, float x, float y)
 	{
 		super(
 				ID,
 				x,
 				y,
-				width,
-				height,
-				image
+			CONSTANTS.CARD_WIDTH/4,
+			CONSTANTS.CARD_HEIGHT/4,
+			ImageManager.loadImage("Whono/Assets/whonoBack.png")
 		);
 	}
 
