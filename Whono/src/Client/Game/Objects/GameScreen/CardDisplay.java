@@ -38,6 +38,7 @@ public class CardDisplay extends GameObject implements ISubscriber, ISubscribabl
 
 		switch (c.getCardType())
 		{
+			case ZERO 	 -> path+="0.png";
 			case ONE     -> path+="1.png";
 			case TWO     -> path+="2.png";
 			case THREE   -> path+="3.png";

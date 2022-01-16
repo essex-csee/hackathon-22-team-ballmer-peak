@@ -17,7 +17,7 @@ public class GameState extends GameObject
         MAINMENU,PLAYERJOIN,GAMESTART,GAMESTAT,GAMEOVER,LEADERBOARD
     }
 
-    private State currentState;
+    private State currentState = State.MAINMENU;
 
     public State getCurrentState(){ return  currentState;}
 
