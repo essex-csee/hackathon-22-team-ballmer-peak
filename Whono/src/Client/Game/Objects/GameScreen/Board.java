@@ -2,6 +2,7 @@ package Client.Game.Objects.GameScreen;
 
 import Client.Game.ClientGame;
 import Client.Game.Objects.*;
+import Client.Game.Objects.MainMenu.MainMenuInit;
 import Util.CONSTANTS;
 import Util.ISubscribable;
 import Util.ISubscriber;
@@ -157,6 +158,8 @@ public class Board extends GameObject implements ISubscriber
 
 	public void reportWhono(Hand h)
 	{
+		WinScreenInit ws = new WinScreenInit();
+		ClientGame.addLogicTarget(ws);
 		System.out.println("whono");
 	}
 

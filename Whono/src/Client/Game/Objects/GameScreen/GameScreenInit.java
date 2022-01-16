@@ -2,8 +2,6 @@ package Client.Game.Objects.GameScreen;
 
 import Client.Game.ClientGame;
 import Client.Game.Objects.*;
-import Client.Game.Objects.MainMenu.PlayButton;
-import Util.CONSTANTS;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +18,7 @@ public class GameScreenInit extends InitObject
     public void initMenu()
     {
         // Needs offset + rescaling
-        ExitButton quit = new ExitButton();
+        SmallExitButton quit = new SmallExitButton();
         addGameObject(quit);
         PauseButton pause = new PauseButton();
         addGameObject(pause);

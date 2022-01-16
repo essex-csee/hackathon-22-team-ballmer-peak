@@ -10,7 +10,7 @@ import java.awt.*;
 
 public class PlayButton extends SquareButton
 {
-	PlayButton()
+	public PlayButton()
 	{
 		super(0,
 			ClientGame.getWindowWidth()/2 - CONSTANTS.CARD_WIDTH/2 - CONSTANTS.CARD_WIDTH_PADDING,
