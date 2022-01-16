@@ -14,7 +14,7 @@ public class HandStatus extends StaticImageObject
 {
 	int handSize;
 
-	HandStatus(long ID, float x, float y, int width, int height, Image image)
+	public HandStatus(long ID, float x, float y, int width, int height, Image image)
 	{
 		super(
 				ID,
@@ -31,6 +31,11 @@ public class HandStatus extends StaticImageObject
 		handSize = size;
 	}
 
+
+	public void update(Hand h)
+	{
+		handSize = h.getHandSize();
+	}
 
 	@Override
 	public void draw(Graphics2D g)

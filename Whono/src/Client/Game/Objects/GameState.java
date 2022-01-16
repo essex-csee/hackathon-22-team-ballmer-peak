@@ -1,6 +1,8 @@
 package Client.Game.Objects;
 
 import Client.Game.Objects.GameScreen.Board;
+import Client.Game.Objects.GameScreen.HandStatus;
+import Util.CONSTANTS;
 
 import java.util.ArrayList;
 
@@ -29,14 +31,25 @@ public class GameState extends GameObject
             g.mHands.add(HandFactory.createHand(g.mDeck));
         }
 
-        for(Hand h : g.mHands)
+        for(int i = 0; i <  g.mHands.size(); i++)
         {
-            g.mBoard.addHand(h);
+            g.mBoard.addHand(g.mHands.get(i));
+            HandStatus status = new HandStatus(
+                    i,
+                    50,
+                    i*50 + 50,
+                    CONSTANTS.CARD_WIDTH/4,
+                    CONSTANTS.CARD_HEIGHT/4,
+                    ImageManager.loadImage("Whono/Assets/whonoBack.png")
+            );
+            status.setHandSize(g.mHands.get(i).getHandSize());
+            g.mBoard.addHandStatus(status);
         }
 
         g.mBoard.addDeck(g.mDeck);
 
         g.getBoard().addToPile(g.mDeck.drawCard());
+
 
         return g;
     }

@@ -96,7 +96,7 @@ public class GameScreenInit extends InitObject
 
         for(int i = 0; i < statusList.size(); i++)
         {
-            addGameObject(statusList.get(i));
+            //addGameObject(statusList.get(i));
         }
 
         addGameObject(g);

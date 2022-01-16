@@ -19,6 +19,8 @@ public class Board extends GameObject implements ISubscriber
 	private final ArrayList<Card> mPile;
 	private final ArrayList<CardButton>  mPileDisplays;
 
+	private final ArrayList<HandStatus> mHandStatusDisplays;
+
 	private Card mPileCard;
 	private int playerID = 0;
 
@@ -31,6 +33,7 @@ public class Board extends GameObject implements ISubscriber
 		mCardDisplays = new ArrayList<>();
 		mPile         = new ArrayList<>();
 		mPileDisplays = new ArrayList<>();
+		mHandStatusDisplays = new ArrayList<>();
 	}
 
 	public void addDeck(Deck d)
@@ -58,6 +61,12 @@ public class Board extends GameObject implements ISubscriber
 			ClientGame.getWindowHeight() / 2f - CONSTANTS.CARD_HEIGHT_PADDING, c ) );
 		mPileCard = c;
 	}
+
+	public void addHandStatus(HandStatus hs)
+	{
+		mHandStatusDisplays.add(hs);
+	}
+
 
 	public List<Deck> getDecks()
 	{
@@ -119,6 +128,7 @@ public class Board extends GameObject implements ISubscriber
 		mDecks.clear();
 		mHands.clear();
 		mPile.clear();
+		mHandStatusDisplays.clear();
 	}
 
 	public void refreshDisplay(Hand h)
@@ -139,6 +149,7 @@ public class Board extends GameObject implements ISubscriber
 		out += "decks:'"   + mDecks + "',";
 		out += "hands:'"   + mHands + "',";
 		out += "pile:'"    + mPile  + "',";
+		out += "handStatus:'" + mHandStatusDisplays + "']";
 		return out;
 	}
 
@@ -159,6 +170,11 @@ public class Board extends GameObject implements ISubscriber
 		{
 			c.update(deltaTime);
 		}
+
+		for(int i = 0; i < mHands.size(); i++)
+		{
+			mHandStatusDisplays.get(i).setHandSize(mHands.get(i).getHandSize());
+		}
 	}
 
 	@Override
@@ -178,6 +194,11 @@ public class Board extends GameObject implements ISubscriber
 		for(CardButton c : mPileDisplays)
 		{
 			c.draw(g);
+		}
+
+		for(HandStatus hs : mHandStatusDisplays)
+		{
+			hs.draw(g);
 		}
 
 	}
