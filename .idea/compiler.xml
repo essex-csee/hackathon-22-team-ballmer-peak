@@ -3,6 +3,7 @@
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="Whono" options="--add-modules java.base" />
+      <module name="hackathon-team-ballmer-peak" options="--add-modules java.base" />
     </option>
   </component>
 </project>

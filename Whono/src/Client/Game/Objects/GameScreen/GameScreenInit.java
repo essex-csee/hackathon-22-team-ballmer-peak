@@ -55,6 +55,14 @@ public class GameScreenInit extends InitObject
         //      CardButton c = new CardButton();
         //      addGameObject(c);
     }
+    /*public void initWin()
+    {
+        // Needs offset + rescaling
+        ExitButton quit = new ExitButton();
+        addGameObject(quit);
+        PauseButton pause = new PauseButton();
+        addGameObject(pause);
+    }*/
 
     @Override
     protected void setup()
