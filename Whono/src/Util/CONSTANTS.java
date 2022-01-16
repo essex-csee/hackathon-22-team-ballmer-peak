@@ -7,4 +7,6 @@ public class CONSTANTS
 
 	public static final int CARD_HEIGHT = 362;
 	public static final int CARD_HEIGHT_PADDING = CARD_HEIGHT + CARD_HEIGHT / 10;
+
+	public static final int PLAYER_LIMIT = 4;
 }
