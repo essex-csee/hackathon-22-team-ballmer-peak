@@ -214,7 +214,7 @@ public class Board extends GameObject implements ISubscriber
 
 		for(int i = 0; i < mHands.size(); i++)
 		{
-			mHandStatusDisplays.get(i).setHandSize(mHands.get(i).getHandSize());
+			mHandStatusDisplays.get(i).setHandSize(mHands.get(i).getHandSize()-1);
 		}
 	}
 
