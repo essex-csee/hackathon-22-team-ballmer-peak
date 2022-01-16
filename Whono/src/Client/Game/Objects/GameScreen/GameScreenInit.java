@@ -1,5 +1,6 @@
 package Client.Game.Objects.GameScreen;
 
+import Client.Game.ClientGame;
 import Client.Game.Objects.*;
 import Client.Game.Objects.MainMenu.PlayButton;
 
@@ -59,8 +60,21 @@ public class GameScreenInit extends InitObject
     protected void setup()
     {
         GameState g = GameState.createGameState(4);
+
+        StaticImageObject background = new StaticImageObject(
+                1,
+                0,
+                0,
+                ClientGame.getWindowWidth(),
+                ClientGame.getWindowHeight(),
+                ImageManager.loadImage("Whono/Assets/BackgroundTile.png"));
+
+        addGameObject(background);
         addGameObject(g);
         addGameObject(g.getBoard());
+
+
+
     }
 
 }
