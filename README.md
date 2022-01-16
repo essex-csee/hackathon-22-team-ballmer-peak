@@ -1,9 +1,9 @@
 # hackathon-team-ballmer-peak
 
-## whono
+## whono  
 Whono is a 2+ player card game where you draw and place cards continually, with the goal of being the first player to put all their cards down and thus have an empty hand.
 --- ---
-### about
+### about 
 In Whono, there are several types of cards. These are number cards, with a number from 1 to 9.
 
 Number cards can only be placed when the previous card place matches either their colour or their number.
@@ -22,8 +22,10 @@ If using Intellij:
 - Click the jar hackathon-team-ballmer-peak.jar and select build.
 - The jar file will now be in your artifacts folder
 --- ---
-### running
-To run and play Whono, open and run the file "hackathon-team-ballmer-peak.jar".
+### running 
+the Whono jar file can be downloaded from releases and ran as along-side it's Whono asset folder
+
+To run and play Whono with an IntelliJ build jar, open and run the file "hackathon-team-ballmer-peak.jar".
 It can be found in the folder structure at out -> artifacts - > hackathon-team-ballmer-peak_jar -> hackathon-team-ballmer-peak.jar
 
 --- --- 
@@ -32,4 +34,4 @@ When it is your turn, you can click a card (at the bottom of the screen) to plac
 
 If you run out of cards that can be placed, click the deck to add another card to your hand. The deck is the stack with the cards facing downwards.
 
-You win when you place all the cards in your hand on to the pile. You lose if someone does this before you.
+You win when you place all the cards in your hand on to the pile. You lose if someone does this before you or you reach the maximum hand size (15).
