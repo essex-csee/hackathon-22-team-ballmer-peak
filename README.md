@@ -21,6 +21,12 @@ If using Intellij:
 - Go to Build -> Build Artifacts
 - Click the jar hackathon-team-ballmer-peak.jar and select build.
 - The jar file will now be in your artifacts folder
+
+for unix systems 
+
+`make build` will create a jar file which can be ran with the
+`make run` command
+
 --- ---
 ### running 
 the Whono jar file can be downloaded from releases and ran as along-side it's Whono asset folder
