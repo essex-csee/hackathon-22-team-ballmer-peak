@@ -1,6 +1,7 @@
 package Client;
 
 import Client.Game.ClientGame;
+import Client.Game.Objects.GameScreen.GameScreenInit;
 import Client.Game.Objects.ImageManager;
 import Client.Game.Objects.MainMenu.MainMenuInit;
 import Client.Game.Objects.StaticImageObject;
@@ -24,9 +25,8 @@ public class ClientMain
 
 			ImageManager imageManager = new ImageManager();
 
-			MainMenuInit tb = new MainMenuInit();
-
-			ClientGame.addLogicTarget(tb);
+			MainMenuInit mm = new MainMenuInit();
+			ClientGame.addLogicTarget(mm);
 
 		}
 		catch (InterruptedException e)
