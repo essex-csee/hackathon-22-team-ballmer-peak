@@ -2,6 +2,7 @@ package Client.Game.Objects.MainMenu;
 
 import Client.Game.ClientGame;
 import Client.Game.Objects.GameScreen.GameScreenInit;
+import Client.Game.Objects.GameScreenSolo.GameScreenInitSolo;
 import Client.Game.Objects.SquareButton;
 import Util.CONSTANTS;
 
@@ -54,8 +55,7 @@ public class PlaySoloButton extends SquareButton
 	@Override
 	protected void onMouseRelease()
 	{
-		GameScreenInit gs = new GameScreenInit();
-		gs.setSolo(true);
+		GameScreenInitSolo gs = new GameScreenInitSolo();
 		ClientGame.addLogicTarget(gs);
 	}
 }

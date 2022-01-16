@@ -2,7 +2,6 @@ package Client.Game.Objects;
 
 import Client.Game.Objects.GameScreen.AIPlayer;
 import Client.Game.Objects.GameScreen.Board;
-import Client.Game.Objects.GameScreen.BoardSolo;
 import Client.Game.Objects.GameScreen.HandStatus;
 import Util.CONSTANTS;
 
