@@ -166,6 +166,21 @@ public class ClientGame implements Runnable
 
 	}
 
+	public static void forceRender()
+	{
+		try
+		{
+			sClientGameMutex.acquire();
+			sClientGame.mRenderer.renderTargets();
+			sClientGame.mClientWindow.repaint();
+			sClientGameMutex.release();
+		}
+		catch (InterruptedException e)
+		{
+			e.printStackTrace();
+		}
+	}
+
 	public static InputManager getInput()
 	{
 		return sClientGame.mInputManager;

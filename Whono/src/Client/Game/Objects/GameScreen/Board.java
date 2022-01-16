@@ -13,14 +13,15 @@ import java.util.List;
 
 public class Board extends GameObject implements ISubscriber
 {
-	private final ArrayList<Deck> mDecks;
+	private final ArrayList<Deck>        mDecks;
 	private final ArrayList<DeckButton>  mDeckDisplays;
-	private final ArrayList<Hand> mHands;
+	private final ArrayList<Hand>        mHands;
 	private final ArrayList<CardDisplay> mCardDisplays;
-	private final ArrayList<Card> mPile;
+	private final ArrayList<AIPlayer>    AIPlayers;
+	private final ArrayList<Card>        mPile;
 	private final ArrayList<CardButton>  mPileDisplays;
 
-	private final ArrayList<HandStatus> mHandStatusDisplays;
+	private final ArrayList<HandStatus>  mHandStatusDisplays;
 
 	private Card mPileCard;
 	private int playerID = 0;
@@ -28,13 +29,15 @@ public class Board extends GameObject implements ISubscriber
 	public Board()
 	{
 		super(-1);
-		mDecks        = new ArrayList<>();
-		mDeckDisplays = new ArrayList<>();
-		mHands        = new ArrayList<>();
-		mCardDisplays = new ArrayList<>();
-		mPile         = new ArrayList<>();
-		mPileDisplays = new ArrayList<>();
+		mDecks              = new ArrayList<>();
+		mDeckDisplays       = new ArrayList<>();
+		mHands              = new ArrayList<>();
+		mCardDisplays       = new ArrayList<>();
+		AIPlayers           = new ArrayList<>();
+		mPile               = new ArrayList<>();
+		mPileDisplays       = new ArrayList<>();
 		mHandStatusDisplays = new ArrayList<>();
+
 	}
 
 	public void addDeck(Deck d)
@@ -51,6 +54,12 @@ public class Board extends GameObject implements ISubscriber
 		CardDisplay cd = CardDisplay.CreateHandDisplay(h);
 		mCardDisplays.add( cd );
 		cd.subscribe(this);
+	}
+
+	public void addAIHand(Hand h, AIPlayer p)
+	{
+		mHands.add(h);
+		AIPlayers.add(p);
 	}
 
 	public void addToPile(Card c)
@@ -205,11 +214,6 @@ public class Board extends GameObject implements ISubscriber
 		{
 			c.update(deltaTime);
 		}
-
-		for(int i = 0; i < mHands.size(); i++)
-		{
-			mHandStatusDisplays.get(i).setHandSize(mHands.get(i).getHandSize()-1);
-		}
 	}
 
 	@Override
@@ -241,6 +245,7 @@ public class Board extends GameObject implements ISubscriber
 	@Override
 	public void notifiedBySubscription(ISubscribable subscription)
 	{
+
 		if(subscription instanceof CardButton)
 		{
 			Card c =((CardButton) subscription).getCard();
@@ -250,7 +255,44 @@ public class Board extends GameObject implements ISubscriber
 				addToPile(c);
 				h.removeCard(c);
 				refreshDisplay(h);
+
+				for(AIPlayer p : AIPlayers)
+				{
+					Card card = p.playCard(this);
+					if( card != null ) // AI has played a successful card
+					{
+						try
+						{	// dont have animations
+							// dont have time to make animations
+							// se we sleep
+							// thats a kind of animation
+							Thread.sleep(200);
+
+							for(CardButton cb : mPileDisplays)
+							{
+								cb.update(0);
+							}
+
+							ClientGame.forceRender();
+
+							Thread.sleep(200);
+
+						}
+						catch (InterruptedException e)
+						{
+							e.printStackTrace();
+						}
+
+						addToPile(card);
+					}
+					else
+					{
+						int index = AIPlayers.indexOf(p);
+						AIPlayers.remove(p);
+					}
+				}
 			}
+
 		}
 
 		if(subscription instanceof DeckButton)

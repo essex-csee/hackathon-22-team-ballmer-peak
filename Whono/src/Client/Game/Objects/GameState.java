@@ -1,5 +1,6 @@
 package Client.Game.Objects;
 
+import Client.Game.Objects.GameScreen.AIPlayer;
 import Client.Game.Objects.GameScreen.Board;
 import Client.Game.Objects.GameScreen.HandStatus;
 import Util.CONSTANTS;
@@ -29,17 +30,25 @@ public class GameState extends GameObject
         for(int i = 0; i < 1; i++)
         {
             g.mHands.add(HandFactory.createHand(g.mDeck));
+            g.mBoard.addHand(g.mHands.get(i));
+        }
+
+        for(int i = 1; i < CONSTANTS.PLAYER_LIMIT; i++)
+        {
+            Hand h = HandFactory.createHand(g.mDeck);
+            g.mHands.add(h);
+            g.mBoard.addAIHand( h, new AIPlayer(h) );
         }
 
         for(int i = 0; i <  g.mHands.size(); i++)
         {
-            g.mBoard.addHand(g.mHands.get(i));
+
             HandStatus status = new HandStatus(
                     i,
                     50,
-                    i*50 + 50
+                    i*120 + 62,
+                    g.mHands.get(i)
             );
-            status.setHandSize(g.mHands.get(i).getHandSize());
             g.mBoard.addHandStatus(status);
         }
 
