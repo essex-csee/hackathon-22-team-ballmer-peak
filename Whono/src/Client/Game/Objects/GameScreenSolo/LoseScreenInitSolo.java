@@ -1,16 +1,18 @@
-package Client.Game.Objects.GameScreen;
+package Client.Game.Objects.GameScreenSolo;
 
 import Client.Game.ClientGame;
+import Client.Game.Objects.GameScreen.ExitButton;
+import Client.Game.Objects.GameScreen.HighScoreDisplay;
 import Client.Game.Objects.ImageManager;
 import Client.Game.Objects.InitObject;
 import Client.Game.Objects.MainMenu.PlayButton;
 import Client.Game.Objects.MainMenu.PlaySoloButton;
 import Client.Game.Objects.StaticImageObject;
 
-public class WinScreenInit extends InitObject
+public class LoseScreenInitSolo extends InitObject
 {
     private boolean win;
-    public WinScreenInit()
+    public LoseScreenInitSolo()
     {
     }
 
@@ -40,8 +42,7 @@ public class WinScreenInit extends InitObject
                 0,
                 titleWidth,
                 titleHeight,
-                ImageManager.loadImage("Whono/Assets/whonoTilt.png")
-        );
+                ImageManager.loadImage("Whono/Assets/whonoTilt.png"));
 
 
         addGameObject(background);
@@ -49,8 +50,8 @@ public class WinScreenInit extends InitObject
         addGameObject(new ExitButton());
         addGameObject(new PlayButton());
         addGameObject(new PlaySoloButton());
-        HighScoreDisplay hs = new HighScoreDisplay();
-        hs.setCon(true);
+        HighScoreDisplaySolo hs = new HighScoreDisplaySolo();
+        hs.setCon(false);
         addGameObject(hs);
         //Leaderboard
         //panel.setBounds(40, 80, ClientGame.getWindowWidth(), ClientGame.getWindowHeight());

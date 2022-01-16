@@ -6,6 +6,7 @@ import Client.Game.Objects.GameScreen.HighScoreDisplay;
 import Client.Game.Objects.ImageManager;
 import Client.Game.Objects.InitObject;
 import Client.Game.Objects.MainMenu.PlayButton;
+import Client.Game.Objects.MainMenu.PlaySoloButton;
 import Client.Game.Objects.StaticImageObject;
 
 public class WinScreenInitSolo extends InitObject
@@ -49,6 +50,7 @@ public class WinScreenInitSolo extends InitObject
         addGameObject(logo);
         addGameObject(new ExitButton());
         addGameObject(new PlayButton());
+        addGameObject(new PlaySoloButton());
         HighScoreDisplay hs = new HighScoreDisplay();
         hs.setCon(true);
         addGameObject(hs);

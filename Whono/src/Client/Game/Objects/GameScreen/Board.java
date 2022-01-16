@@ -176,14 +176,12 @@ public class Board extends GameObject implements ISubscriber
 	{
 		WinScreenInit ws = new WinScreenInit();
 		ClientGame.addLogicTarget(ws);
-		System.out.println("whono");
 	}
 
 	public void reportOhno(Hand h)
 	{
 		LoseScreenInit ls = new LoseScreenInit();
 		ClientGame.addLogicTarget(ls);
-		System.out.println("ohno");
 	}
 
 	public void checkHands()
