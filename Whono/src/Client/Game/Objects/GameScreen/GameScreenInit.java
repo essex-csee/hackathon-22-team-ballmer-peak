@@ -72,9 +72,6 @@ public class GameScreenInit extends InitObject
                 ImageManager.loadImage("Whono/Assets/BackgroundTile.png")
         );
 
-        List<Hand> hands = g.getBoard().getHands();
-        List<StaticImageObject> statusList = new ArrayList<>();
-
         addGameObject(background);
 
         addGameObject(g);
