@@ -179,6 +179,7 @@ public class Board extends GameObject implements ISubscriber
 		{
 			c.draw(g);
 		}
+
 	}
 
 	@Override

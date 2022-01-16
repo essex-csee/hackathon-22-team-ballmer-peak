@@ -3,6 +3,10 @@ package Client.Game.Objects.GameScreen;
 import Client.Game.ClientGame;
 import Client.Game.Objects.*;
 import Client.Game.Objects.MainMenu.PlayButton;
+import Util.CONSTANTS;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class GameScreenInit extends InitObject
 {
@@ -67,9 +71,34 @@ public class GameScreenInit extends InitObject
                 0,
                 ClientGame.getWindowWidth(),
                 ClientGame.getWindowHeight(),
-                ImageManager.loadImage("Whono/Assets/BackgroundTile.png"));
+                ImageManager.loadImage("Whono/Assets/BackgroundTile.png")
+        );
+
+        List<Hand> hands = g.getBoard().getHands();
+        List<StaticImageObject> statusList = new ArrayList<>();
+
+        for(int i = 0; i < hands.size(); i++)
+        {
+
+            HandStatus status = new HandStatus(
+                    i,
+                    50,
+                    i*50 + 50,
+                    CONSTANTS.CARD_WIDTH/4,
+                    CONSTANTS.CARD_HEIGHT/4,
+                    ImageManager.loadImage("Whono/Assets/whonoBack.png")
+            );
+            status.setHandSize(hands.get(i).getHandSize());
+            statusList.add(status);
+        }
 
         addGameObject(background);
+
+        for(int i = 0; i < statusList.size(); i++)
+        {
+            addGameObject(statusList.get(i));
+        }
+
         addGameObject(g);
         addGameObject(g.getBoard());
 
