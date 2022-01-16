@@ -260,6 +260,8 @@ public class Board extends GameObject implements ISubscriber
 				h.removeCard(c);
 				refreshDisplay(h);
 
+				mHandStatusDisplays.get(0).active(false);
+
 				for(AIPlayer p : ((ArrayList<AIPlayer>) AIPlayers.clone() ) )
 				{
 					HandStatus hs = mHandStatusDisplays.get( 1 + AIPlayers.indexOf(p) );
@@ -319,6 +321,8 @@ public class Board extends GameObject implements ISubscriber
 				reportOhno(h);
 			}
 		}
+
+		mHandStatusDisplays.get(0).active(true);
 
 		checkHands();
 	}
