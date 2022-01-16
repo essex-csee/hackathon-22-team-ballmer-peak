@@ -8,6 +8,13 @@ import java.awt.*;
 
 public class HighScoreDisplay extends SquareButton
 {
+	private boolean con;
+
+	public void setCon(boolean c)
+	{
+		con = c;
+	}
+
 	public HighScoreDisplay()
 	{
 		super(0,
@@ -42,7 +49,14 @@ public class HighScoreDisplay extends SquareButton
 			g.setColor(Color.WHITE);
 			// TODO:Need score value here
 			int score = 255;
-			g.drawString("Congratulations!", mX+mHeight-130, mY+mHeight-50);
+
+			if(con)
+			{
+				g.drawString("Winner!", mX+mHeight-50, mY+mHeight-50);
+			}
+			else {
+				g.drawString("Loser!", mX + mHeight - 50, mY + mHeight - 50);
+			}
 			g.drawString("Score: " + score, mX+mHeight-75, mY+mHeight);
 		}
 	}
